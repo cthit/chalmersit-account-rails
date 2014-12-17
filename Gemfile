@@ -36,6 +36,9 @@ group :test do
   gem 'guard-rspec'
 end
 
+gem 'devise'
+gem 'devise_ldap_authenticatable'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
