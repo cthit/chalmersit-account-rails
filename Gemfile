@@ -5,6 +5,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+
+# ActiveLdap for communication with LDAP
+gem 'activeldap', require: 'active_ldap/railtie'
+gem 'net-ldap', '~> 0.9.0'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
@@ -37,7 +42,6 @@ group :test do
 end
 
 gem 'devise'
-gem 'devise_ldap_authenticatable', git: 'git://github.com/cschiewek/devise_ldap_authenticatable.git'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

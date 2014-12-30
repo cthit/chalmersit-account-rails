@@ -1,18 +1,6 @@
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
-  # ==> LDAP Configuration
-  config.ldap_logger = true
-  config.ldap_create_user = true
-  config.ldap_update_password = false
-  # config.ldap_config = "#{Rails.root}/config/ldap.yml"
-  # config.ldap_check_group_membership = true
-  config.ldap_check_attributes = false
-  config.ldap_use_admin_to_bind = true
-  config.ldap_ad_group_check = false
-  # config.ldap_auth_username_builder = Proc.new() {|attribute, login, ldap| "#{attribute}=#{login},cn=users,#{ldap.base}" }
-  # config.ldap_auth_password_build = Proc.new() {|new_password| Net::LDAP::Password.generate(:ssha, new_password) }
-
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
@@ -250,10 +238,11 @@ Devise.setup do |config|
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.
   #
-  # config.warden do |manager|
-  #   manager.intercept_401 = false
-  #   manager.default_strategies(scope: :user).unshift :some_external_strategy
-  # end
+  config.warden do |manager|
+    # manager.intercept_401 = false
+    manager.strategies.add(:it_ldap, Devise::Strategies::ItLdap)
+    manager.default_strategies(scope: :user) << :it_ldap
+  end
 
   # ==> Mountable engine configurations
   # When using Devise inside an engine, let's call it `MyEngine`, and this engine
