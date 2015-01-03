@@ -240,7 +240,7 @@ Devise.setup do |config|
   #
   config.warden do |manager|
     # manager.intercept_401 = false
-    manager.strategies.add(:it_ldap, Devise::Strategies::ItLdap)
+    manager.strategies.add(:it_ldap, Devise::Strategies::ItLdapAuthenticatable)
     manager.default_strategies(scope: :user) << :it_ldap
   end
 
