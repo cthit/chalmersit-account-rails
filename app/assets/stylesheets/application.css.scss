@@ -13,3 +13,35 @@
  *= require_tree .
  *= require_self
  */
+
+@import "foundation/components/grid";
+@import "foundation/components/buttons";
+@import "foundation/components/forms";
+@import "foundation/components/alert-boxes";
+@import "foundation/components/labels";
+
+body {
+  background: #f1f1f1;
+}
+
+@mixin box {
+  background-color: #fff;
+  box-shadow: rgba(#000, .3) 0 1px 3px;
+}
+
+.centered {
+	text-align: center;
+}
+
+.notice-box {
+  margin: 40px 0 0;
+}
+
+.login-box {
+  transition: all 1s ease;
+  @include box;
+  margin-top: 50px;
+  padding: 25px;
+  padding-top: 250px;
+  background: white url(itlogo.svg) no-repeat center 50px;
+}

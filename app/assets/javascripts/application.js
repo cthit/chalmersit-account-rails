@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require vendor/modernizr
+//= require foundation/foundation
+//= require foundation/foundation.alert
 //= require_tree .
+
+$(document).foundation();
