@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  before_action :set_locale
+
   def layout_by_resource
     if devise_controller?
       'small_box'
@@ -19,6 +21,10 @@ class ApplicationController < ActionController::Base
 
   def session_path(scope)
     user_session_path
+  end
+
+  def set_locale
+    I18n.locale = current_user.preferredLanguage if current_user.preferredLanguage.present?
   end
 
   helper_method :session_path, :new_session_path
