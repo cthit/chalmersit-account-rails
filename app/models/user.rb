@@ -5,8 +5,6 @@ class User < ActiveRecord::Base
   # for later: :registerable,
   devise :recoverable, :rememberable, :trackable
 
-  delegate :full_name, :nickname, :mail, to: :ldap_user
-
   def ldap_user
     @ldap_user ||= LdapUser.find(cid)
   end
@@ -16,6 +14,4 @@ class User < ActiveRecord::Base
   end
 
   attr_accessor :email, :password
-
-  alias_method :email, :mail
 end
