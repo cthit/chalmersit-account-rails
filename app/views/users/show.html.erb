@@ -1,3 +1,18 @@
-<h1><%= @user.full_name %></h1>
+<% content_for :title, @user.nickname %>
 
-<%= link_to "Sign out", destroy_user_session_path, method: :delete %>
+<section class="user-details">
+  <table>
+    <% user_attrs.each do |a| %>
+      <tr>
+        <td>
+          <strong><%= User.human_attribute_name(a) %></strong>
+        </td>
+        <td>
+          <%= @user.send(a) || content_tag(:em, t('not_entered'), class: 'not-entered') %><br>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</section>
+
+<%= link_to t('logout'), destroy_user_session_path, method: :delete %>

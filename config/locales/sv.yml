@@ -19,27 +19,27 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  login: Log in
-  logout: Log out
-  mail: E-mail
-  password: Password
-  not_entered: Not entered
-  remember_me: Remember me
-  forgot_password: Forgot your password?
-  send_instructions: Send me reset password instructions
+sv:
+  login: Logga in
+  logout: Logga ut
+  mail: E-post
+  password: Lösenord
+  not_entered: Ej angivet
+  remember_me: Kom ihåg mig
+  forgot_password: Glömt ditt lösenord?
+  send_instructions: Återställ
   activerecord:
     models:
-      user: User
+      user: Användare
     attributes:
       user:
-        mail: E-mail
+        mail: E-post
         uid: CID
         nickname: Nick
-        gn: First name
-        sn: Last name
-        preferredLanguage: Language
-        admissionYear: Admission year
-        nollanPhoto: Nollan Photo
-        homeDirectory: Home directory
-        loginShell: Login shell
+        gn: Förnamn
+        sn: Efternamn
+        preferredLanguage: Språk
+        admissionYear: Antagningsår
+        nollanPhoto: Nollanfoto
+        homeDirectory: Hemmapp
+        loginShell: Loginskal

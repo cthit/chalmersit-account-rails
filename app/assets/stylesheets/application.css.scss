@@ -17,6 +17,7 @@
 @import "foundation/components/grid";
 @import "foundation/components/buttons";
 @import "foundation/components/forms";
+@import "foundation/components/tables";
 @import "foundation/components/alert-boxes";
 @import "foundation/components/labels";
 
@@ -37,11 +38,31 @@ body {
   margin: 40px 0 0;
 }
 
+@-webkit-keyframes rotating {
+  from { -webkit-transform: rotateY(0deg); }
+  to { -webkit-transform: rotateY(360deg); }
+}
+@keyframes rotating {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+.itlogo {
+  margin: 16px auto 0;
+  width: 75%;
+  min-height: 200px;
+  background: url(itlogo.svg) no-repeat center;
+  background-size: contain;
+  &.animating {
+    -webkit-animation: rotating 2s ease-out infinite;
+    animation: rotating 2s ease-out infinite;
+  }
+}
+
 .login-box {
-  transition: all 1s ease;
+  // transition: all 1s ease;
   @include box;
-  margin-top: 50px;
+  margin: 16px 0;
   padding: 25px;
-  padding-top: 250px;
-  background: white url(itlogo.svg) no-repeat center 50px;
+  background: white;
 }

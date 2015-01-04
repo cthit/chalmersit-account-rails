@@ -15,9 +15,9 @@ module Devise
           user = ldap_user.db_user
           remember_me(ldap_user)
         rescue ActiveLdap::EntryNotFound
-          return fail! 'No user exists'
+          return fail!(:not_found_in_database)
         rescue ActiveLdap::AuthenticationError
-          return fail! 'Invalid password'
+          return fail!(:invalid)
         end
         success!(user)
       end
