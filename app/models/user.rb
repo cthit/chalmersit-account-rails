@@ -5,11 +5,17 @@ class User < ActiveRecord::Base
   # for later: :registerable,
   devise :recoverable, :rememberable, :trackable
 
-  delegate :full_name, to: :ldap_user
+  delegate :full_name, :nickname, :mail, to: :ldap_user
 
   def ldap_user
     @ldap_user ||= LdapUser.find(cid)
   end
 
-  attr_accessor :password
+  def method_missing(meth)
+    ldap_user.send(meth)
+  end
+
+  attr_accessor :email, :password
+
+  alias_method :email, :mail
 end

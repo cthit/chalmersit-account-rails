@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   private
   def find_model
-    @user = current_user
+    @db_user = current_user
+    @user = @db_user.ldap_user
   end
 end
