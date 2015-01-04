@@ -16,30 +16,35 @@
     <%= f.email_field :mail %>
   <% end %>
 
-  <%= f.label :gn do %>
-    <%= User.human_attribute_name(:gn) %>
-    <%= f.text_field :gn %>
-  <% end %>
+  <div class="row">
+    <div class="small-12 large-6 columns">
+      <%= f.label :gn do %>
+        <%= User.human_attribute_name(:gn) %>
+        <%= f.text_field :gn %>
+      <% end %>
+    </div>
+    <div class="small-12 large-6 columns">
+      <%= f.label :sn do %>
+        <%= User.human_attribute_name(:sn) %>
+        <%= f.text_field :sn %>
+      <% end %>
+    </div>
+  </div>
 
-  <%= f.label :sn do %>
-    <%= User.human_attribute_name(:sn) %>
-    <%= f.text_field :sn %>
-  <% end %>
-
-  <%= f.label :preferredLanguage do %>
-    <%= User.human_attribute_name(:preferredLanguage) %>
-    <%= f.select :preferredLanguage, options_for_select([[t('swedish'), :sv], [t('english'), :en]], f.object.preferredLanguage) %>
-  <% end %>
-
-  <%= f.label :admissionYear do %>
-    <%= User.human_attribute_name(:admissionYear) %>
-    <%= f.text_field :admissionYear, maxlength: 4 %>
-  <% end %>
-
-  <%= f.label :loginShell do %>
-    <%= User.human_attribute_name(:loginShell) %>
-    <%= f.select :loginShell, options_for_select(['/bin/bash', '/bin/zsh']) %>
-  <% end %>
+  <div class="row">
+    <div class="small-12 medium-6 columns">
+      <%= f.label :preferredLanguage do %>
+        <%= User.human_attribute_name(:preferredLanguage) %>
+        <%= f.select :preferredLanguage, options_for_select([[t('swedish'), :sv], [t('english'), :en]], f.object.preferredLanguage) %>
+      <% end %>
+    </div>
+    <div class="small-12 medium-6 columns">
+      <%= f.label :loginShell do %>
+        <%= User.human_attribute_name(:loginShell) %>
+        <%= f.select :loginShell, options_for_select(['/bin/bash', '/bin/zsh']) %>
+      <% end %>
+    </div>
+  </div>
 
   <%= f.submit t('save'), class: 'button' %>
 <% end %>
