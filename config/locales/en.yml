@@ -20,9 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  login: Log in
-  logout: Log out
+  login: Sign in
+  logout: Sign out
   mail: E-mail
+  edit: Edit
+  logged_in_as: Signed in as
+  edit_your_info: Edit your information
+  back: Back
+  save: Save
+  swedish: Swedish
+  english: English
   password: Password
   not_entered: Not entered
   remember_me: Remember me

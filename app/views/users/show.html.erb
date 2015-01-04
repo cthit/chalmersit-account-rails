@@ -1,4 +1,4 @@
-<% content_for :title, @user.nickname %>
+<% content_for :title, t('logged_in_as') + ' ' + @user.nickname %>
 
 <section class="user-details">
   <table>
@@ -14,5 +14,5 @@
     <% end %>
   </table>
 </section>
-
+<%= link_to t('edit'), edit_me_path %> |
 <%= link_to t('logout'), destroy_user_session_path, method: :delete %>

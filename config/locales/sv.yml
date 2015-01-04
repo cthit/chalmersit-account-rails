@@ -23,6 +23,13 @@ sv:
   login: Logga in
   logout: Logga ut
   mail: E-post
+  edit: Ändra
+  logged_in_as: Inloggad som
+  edit_your_info: Ändra dina uppgifter
+  back: Tillbaka
+  save: Spara
+  swedish: svenska
+  english: engelska
   password: Lösenord
   not_entered: Ej angivet
   remember_me: Kom ihåg mig
