@@ -1,0 +1,48 @@
+<% content_for :title, t('edit_your_info') %>
+
+<%= form_for(@user, url: update_me_path) do |f| %>
+  <%= f.label :uid do %>
+    <%= User.human_attribute_name(:uid) %>
+    <%= f.text_field :uid, disabled: true %>
+  <% end %>
+
+  <%= f.label :nickname do %>
+    <%= User.human_attribute_name(:nickname) %>
+    <%= f.text_field :nickname %>
+  <% end %>
+
+  <%= f.label :mail do %>
+    <%= User.human_attribute_name(:mail) %>
+    <%= f.email_field :mail %>
+  <% end %>
+
+  <%= f.label :gn do %>
+    <%= User.human_attribute_name(:gn) %>
+    <%= f.text_field :gn %>
+  <% end %>
+
+  <%= f.label :sn do %>
+    <%= User.human_attribute_name(:sn) %>
+    <%= f.text_field :sn %>
+  <% end %>
+
+  <%= f.label :preferredLanguage do %>
+    <%= User.human_attribute_name(:preferredLanguage) %>
+    <%= f.select :preferredLanguage, options_for_select([[t('swedish'), :sv], [t('english'), :en]], f.object.preferredLanguage) %>
+  <% end %>
+
+  <%= f.label :admissionYear do %>
+    <%= User.human_attribute_name(:admissionYear) %>
+    <%= f.text_field :admissionYear, maxlength: 4 %>
+  <% end %>
+
+  <%= f.label :loginShell do %>
+    <%= User.human_attribute_name(:loginShell) %>
+    <%= f.select :loginShell, options_for_select(['/bin/bash', '/bin/zsh']) %>
+  <% end %>
+
+  <%= f.submit t('save'), class: 'button' %>
+<% end %>
+
+<%= link_to t('back'), me_path %> |
+<%= link_to t('logout'), destroy_user_session_path, method: :delete %>
