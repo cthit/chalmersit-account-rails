@@ -18,7 +18,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  get '/me' => 'users#show', as: :me
+  get '/me/edit' => 'users#edit', as: :edit_me
+  patch '/me' => 'users#update', as: :update_me
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
