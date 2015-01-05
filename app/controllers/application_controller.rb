@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = current_user.preferredLanguage if current_user.preferredLanguage.present?
+    I18n.locale = current_user.preferredLanguage if current_user && current_user.preferredLanguage
   end
 
   helper_method :session_path, :new_session_path
