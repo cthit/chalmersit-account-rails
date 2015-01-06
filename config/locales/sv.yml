@@ -54,4 +54,4 @@ sv:
         loginShell: Loginskal
         telephonenumber: Telefonnummer
         notifyBy: Notifiera via
-        pushService: Push-notifikation
+        push_services: Push-notifikation
