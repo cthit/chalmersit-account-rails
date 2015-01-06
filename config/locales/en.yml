@@ -45,8 +45,10 @@ en:
         mail: E-mail
         uid: CID
         nickname: Nick
+        full_name: Name
         gn: First name
         sn: Last name
+        cn: Display format
         preferredLanguage: Language
         admissionYear: Admission year
         nollanPhoto: Nollan Photo
