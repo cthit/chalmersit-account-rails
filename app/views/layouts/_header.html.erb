@@ -9,7 +9,7 @@
 <body>
 <% flash.each do |name, msg| %>
   <% if msg.is_a?(String) %>
-    <div data-alert class="small-10 small-centered notice-box columns alert-box round <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
+    <div data-alert class="small-10 small-centered notice-box columns alert-box <%= name.to_s == 'notice' ? 'success' : 'alert' %>">
       <%= content_tag :div, msg %>
       <a href="#" class="close">&times;</a>
     </div>

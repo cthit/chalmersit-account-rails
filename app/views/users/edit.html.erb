@@ -1,5 +1,16 @@
 <% content_for :title, t('edit_your_info') %>
 
+<% if @user.errors.any? %>
+  <div id="error_explanation" data-alert class="alert-box warning">
+    <h3><%= t('error') %></h3>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_for(@user, url: update_me_path) do |f| %>
   <%= f.label :uid do %>
     <%= User.human_attribute_name(:uid) %>

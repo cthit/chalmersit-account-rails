@@ -2,6 +2,9 @@ class LdapUser < ActiveLdap::Base
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=it,ou=people'
 
+  validates :mail, presence: true
+  validates :nickname, presence: true
+
 
   def full_name
     @full_name ||= "#{gn} #{sn}"
