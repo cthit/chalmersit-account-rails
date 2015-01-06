@@ -15,7 +15,7 @@ module Devise
           end
 
           user = ldap_user.db_user
-          remember_me(ldap_user)
+          remember_me(user)
         rescue ActiveLdap::EntryNotFound
           return fail!(:not_found_in_database)
         rescue ActiveLdap::AuthenticationError
