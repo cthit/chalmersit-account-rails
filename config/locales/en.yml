@@ -52,3 +52,6 @@ en:
         nollanPhoto: Nollan Photo
         homeDirectory: Home directory
         loginShell: Login shell
+        telephonenumber: Telephone number
+        notifyBy: Notify by
+        pushService: Push notification
