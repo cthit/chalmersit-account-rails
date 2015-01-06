@@ -53,3 +53,5 @@ sv:
         homeDirectory: Hemmapp
         loginShell: Loginskal
         telephonenumber: Telefonnummer
+        notifyBy: Notifiera via
+        pushService: Push-notifikation
