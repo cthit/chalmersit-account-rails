@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(ldap_user_params)
-      redirect_to me_path, notice: 'Ändringarna sparades'
+      redirect_to me_path, notice: I18n.translate('info_changed')
     else
       render :edit
     end

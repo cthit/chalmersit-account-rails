@@ -35,6 +35,8 @@ sv:
   remember_me: Kom ihåg mig
   forgot_password: Glömt ditt lösenord?
   send_instructions: Återställ
+  info_changed: Ändringarna sparades
+  all_model: "Alla %{model}"
   activerecord:
     models:
       user: Användare
@@ -50,3 +52,4 @@ sv:
         nollanPhoto: Nollanfoto
         homeDirectory: Hemmapp
         loginShell: Loginskal
+        telephonenumber: Telefonnummer

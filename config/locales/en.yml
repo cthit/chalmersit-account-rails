@@ -35,6 +35,8 @@ en:
   remember_me: Remember me
   forgot_password: Forgot your password?
   send_instructions: Send me reset password instructions
+  info_changed: The changes were saved
+  all_model: "All %{model}"
   activerecord:
     models:
       user: User
