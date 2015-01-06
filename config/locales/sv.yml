@@ -45,8 +45,10 @@ sv:
         mail: E-post
         uid: CID
         nickname: Nick
+        full_name: Namn
         gn: Förnamn
         sn: Efternamn
+        cn: Visningsformat
         preferredLanguage: Språk
         admissionYear: Antagningsår
         nollanPhoto: Nollanfoto
@@ -54,4 +56,4 @@ sv:
         loginShell: Loginskal
         telephonenumber: Telefonnummer
         notifyBy: Notifiera via
-        pushService: Push-notifikation
+        push_services: Push-notifikation
