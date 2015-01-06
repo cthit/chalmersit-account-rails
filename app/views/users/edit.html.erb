@@ -35,7 +35,7 @@
     <div class="small-12 medium-6 columns">
       <%= f.label :preferredLanguage do %>
         <%= User.human_attribute_name(:preferredLanguage) %>
-        <%= f.select :preferredLanguage, options_for_select([[t('swedish'), :sv], [t('english'), :en]], f.object.preferredLanguage) %>
+        <%= f.select :preferredLanguage, options_for_select([[t('sv'), :sv], [t('en'), :en]], f.object.preferredLanguage) %>
       <% end %>
     </div>
     <div class="small-12 medium-6 columns">
