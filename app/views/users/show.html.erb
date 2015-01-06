@@ -8,7 +8,7 @@
           <strong><%= User.human_attribute_name(a) %></strong>
         </td>
         <td>
-          <%= @user.send(a) || content_tag(:em, t('not_entered'), class: 'not-entered') %><br>
+          <%= attr_or_not_entered(@user, a) %><br>
         </td>
       </tr>
     <% end %>
