@@ -10,7 +10,9 @@ module Devise
       def authenticate!
         begin
           ldap_user = LdapUser.find(params_auth_hash[:cid])
-          ldap_user.bind(params_auth_hash[:password])
+          if ldap_user.bind(params_auth_hash[:password])
+            ldap_user.remove_connection
+          end
 
           user = ldap_user.db_user
           remember_me(ldap_user)
