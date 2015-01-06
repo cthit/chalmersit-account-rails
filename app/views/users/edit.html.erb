@@ -6,11 +6,6 @@
     <%= f.text_field :uid, disabled: true %>
   <% end %>
 
-  <%= f.label :nickname do %>
-    <%= User.human_attribute_name(:nickname) %>
-    <%= f.text_field :nickname %>
-  <% end %>
-
   <%= f.label :mail do %>
     <%= User.human_attribute_name(:mail) %>
     <%= f.email_field :mail %>
@@ -30,6 +25,16 @@
       <% end %>
     </div>
   </div>
+
+  <%= f.label :nickname do %>
+    <%= User.human_attribute_name(:nickname) %>
+    <%= f.text_field :nickname %>
+  <% end %>
+
+  <%= f.label :cn do %>
+    <%= User.human_attribute_name(:cn) %>
+    <%= f.select :cn, options_for_select(["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"], f.object.cn) %>
+  <% end %>
 
   <div class="row">
     <div class="small-12 medium-6 columns">

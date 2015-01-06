@@ -24,6 +24,7 @@ en:
   logout: Sign out
   mail: E-mail
   edit: Edit
+  error: Error
   logged_in_as: Signed in as
   edit_your_info: Edit your information
   back: Back
@@ -49,6 +50,7 @@ en:
         gn: First name
         sn: Last name
         cn: Display format
+        display_name: Display format
         preferredLanguage: Language
         admissionYear: Admission year
         nollanPhoto: Nollan Photo

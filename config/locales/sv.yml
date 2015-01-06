@@ -24,6 +24,7 @@ sv:
   logout: Logga ut
   mail: E-post
   edit: Ändra
+  error: Fel
   logged_in_as: Inloggad som
   edit_your_info: Ändra dina uppgifter
   back: Tillbaka
@@ -49,6 +50,7 @@ sv:
         gn: Förnamn
         sn: Efternamn
         cn: Visningsformat
+        display_name: Visningsformat
         preferredLanguage: Språk
         admissionYear: Antagningsår
         nollanPhoto: Nollanfoto

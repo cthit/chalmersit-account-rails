@@ -28,6 +28,6 @@ class UsersController < ApplicationController
     end
 
     def ldap_user_params
-      params.require(:ldap_user).permit(:nickname, :mail, :gn, :sn, :preferredLanguage, :loginShell)
+      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn, :preferredLanguage, :loginShell)
     end
 end
