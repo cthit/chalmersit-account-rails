@@ -4,6 +4,7 @@ class LdapUser < ActiveLdap::Base
 
   validates :mail, presence: true
   validates :nickname, presence: true
+  validate :has_valid_display_format
 
 
   def full_name
@@ -11,7 +12,11 @@ class LdapUser < ActiveLdap::Base
   end
 
   def display_name
-    @display_name ||= cn % {firstname: gn, lastname: sn, nickname: nickname}
+    begin
+      @display_name ||= cn % {firstname: gn, lastname: sn, nickname: nickname}
+    rescue
+      nil
+    end
   end
 
   def push_services
@@ -24,5 +29,13 @@ class LdapUser < ActiveLdap::Base
 
   def db_user
     @db_user ||= User.find_or_create_by(cid: uid)
+  end
+
+  def has_valid_display_format
+    errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
+  end
+
+  def self.display_formats
+    ["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"]
   end
 end

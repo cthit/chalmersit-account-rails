@@ -59,3 +59,10 @@ sv:
         telephonenumber: Telefonnummer
         notifyBy: Notifiera via
         push_services: Push-notifikation
+  activemodel:
+    errors:
+      models:
+        ldap_user:
+          attributes:
+            display_name:
+              not_valid_format: har ett felaktigt format

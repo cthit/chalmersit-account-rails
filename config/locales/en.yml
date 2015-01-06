@@ -59,3 +59,10 @@ en:
         telephonenumber: Telephone number
         notifyBy: Notify by
         push_services: Push notification
+  activemodel:
+    errors:
+      models:
+        ldap_user:
+          attributes:
+            display_name:
+              not_valid_format: has invalid format

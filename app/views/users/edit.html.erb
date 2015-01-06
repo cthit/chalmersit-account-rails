@@ -44,7 +44,7 @@
 
   <%= f.label :cn do %>
     <%= User.human_attribute_name(:cn) %>
-    <%= f.select :cn, options_for_select(["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"], f.object.cn) %>
+    <%= f.select :cn, options_for_select(LdapUser.display_formats, f.object.cn) %>
   <% end %>
 
   <div class="row">
