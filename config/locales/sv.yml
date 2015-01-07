@@ -31,6 +31,9 @@ sv:
   save: Spara
   sv: svenska
   en: engelska
+  notification:
+    one: Avisering
+    other: Aviseringar
   password: Lösenord
   not_entered: Ej angivet
   remember_me: Kom ihåg mig
@@ -59,8 +62,10 @@ sv:
         homeDirectory: Hemmapp
         loginShell: Loginskal
         telephonenumber: Telefonnummer
-        notifyBy: Notifiera via
-        push_services: Push-notifikation
+        notifyBy: Meddela mig via
+        push_services:
+          one: Push-avisering
+          other: Push-aviseringar
   activemodel:
     errors:
       models:

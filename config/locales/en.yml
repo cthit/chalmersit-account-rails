@@ -31,6 +31,9 @@ en:
   save: Save
   sv: Swedish
   en: English
+  notification:
+    one: Notification
+    other: Notifications
   password: Password
   not_entered: Not entered
   remember_me: Remember me
@@ -60,7 +63,9 @@ en:
         loginShell: Login shell
         telephonenumber: Telephone number
         notifyBy: Notify by
-        push_services: Push notification
+        push_services:
+          one: Push notification
+          other: Push notifications
   activemodel:
     errors:
       models:

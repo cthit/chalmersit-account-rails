@@ -62,8 +62,12 @@
     </div>
   </div>
 
-  <%= f.label :push_services do %>
-    <%= User.human_attribute_name(:push_services, count: 2) %>
+  <fieldset>
+    <legend><%= t('notification', count: 2) %></legend>
+    <%= f.label :notifyBy  do %>
+      <%= User.human_attribute_name(:notifyBy) %><br>
+      <%= f.collection_radio_buttons :notifyBy, ['mail', 'pushover', 'pushbullet'], :to_s, -> (s) { service_to_image(s) } %>
+    <% end %>
     <table>
       <% push_services.each do |s| %>
         <tr>
@@ -73,7 +77,7 @@
         </tr>
       <% end %>
     </table>
-  <% end %>
+  </fieldset>
 
   <%= f.submit t('save'), class: 'button' %>
 <% end %>
