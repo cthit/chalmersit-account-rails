@@ -9,7 +9,18 @@ class LdapUser < ActiveLdap::Base
 
   # The groups the user is a member of
   def member_of
+    #TODO: reduce number of queries
     memberof ||= self.groups.collect{|group| group }
+    all ||= LdapGroup.find(:all).collect{|g| g}
+    maybe ||= all - memberof
+
+    maybe.each do |g|
+      if g.is_member?(self) then
+        memberof << g
+      end
+    end
+
+    return memberof.map{|g| g }
   end
 
   def full_name
