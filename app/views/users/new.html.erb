@@ -1,0 +1,21 @@
+<% content_for :title, 'Register user' %>
+
+<% if @chuser.errors.any? %>
+  <div id="error_explanation" data-alert class="alert-box warning">
+    <h3><%= t('error') %></h3>
+    <ul>
+    <% @chuser.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= form_tag(lookup_me_path) do %>
+
+  <%= text_field_tag 'user[cid]', '', placeholder: 'CID' %>
+  <%= password_field_tag 'user[password]', '', placeholder: 'Password' %>
+
+  <%= submit_tag 'Register', class: 'button' %>
+
+<% end %>

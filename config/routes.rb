@@ -22,6 +22,18 @@ Rails.application.routes.draw do
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
 
+  # new = login to chalmers
+  get '/new' => 'users#new', as: :new_me
+
+  # lookup = check chalmers ldap and verify, redirect to register if successful, else new
+  post '/lookup' => 'users#lookup', as: :lookup_me
+
+  # register = allow user to edit chalmers data before creation
+  get '/register' => 'users#register', as: :register_me
+
+  # create = actually create user, check chalmers ldap again!
+  post '/create' => 'users#create', as: :create_me
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

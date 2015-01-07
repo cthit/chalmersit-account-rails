@@ -9,6 +9,26 @@ class UsersController < ApplicationController
 
   end
 
+  def new
+    @chuser = ChalmersUser.new
+    render :new, layout: 'small_box'
+  end
+
+  def lookup
+    cid = params[:user][:cid]
+    password = params[:user][:password]
+    @chuser = ChalmersUser.valid_password? cid, password
+    if @chuser
+      render :register
+    else
+      render :new, layout: 'small_box', alert: 'credentials invalid'
+    end
+  end
+
+  def create
+
+  end
+
   def edit
 
   end
