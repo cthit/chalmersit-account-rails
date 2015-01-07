@@ -42,22 +42,17 @@
     <%= f.text_field :nickname %>
   <% end %>
 
-  <%= f.label :cn do %>
-    <%= User.human_attribute_name(:cn) %>
-    <%= f.select :cn, options_for_select(LdapUser.display_formats, f.object.cn) %>
-  <% end %>
-
   <div class="row">
-    <div class="small-12 medium-6 columns">
+    <div class="small-12 medium-9 columns">
+      <%= f.label :cn do %>
+        <%= User.human_attribute_name(:cn) %>
+        <%= f.select :cn, options_for_select(LdapUser.display_formats, f.object.cn) %>
+      <% end %>
+    </div>
+    <div class="small-12 medium-3 columns">
       <%= f.label :preferredLanguage do %>
         <%= User.human_attribute_name(:preferredLanguage) %>
         <%= f.select :preferredLanguage, options_for_select([[t('sv'), :sv], [t('en'), :en]], f.object.preferredLanguage) %>
-      <% end %>
-    </div>
-    <div class="small-12 medium-6 columns">
-      <%= f.label :loginShell do %>
-        <%= User.human_attribute_name(:loginShell) %>
-        <%= f.select :loginShell, options_for_select(['/bin/bash', '/bin/zsh']) %>
       <% end %>
     </div>
   </div>

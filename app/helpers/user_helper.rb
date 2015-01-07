@@ -1,6 +1,6 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail member_of preferredLanguage admissionYear loginShell telephonenumber display_name notifyBy push_services)
+    %w(uid full_name nickname mail member_of preferredLanguage admissionYear telephonenumber display_name notifyBy push_services)
   end
 
   def attr_or_not_entered(user, a)
