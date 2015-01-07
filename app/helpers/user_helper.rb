@@ -30,7 +30,7 @@ module UserHelper
   # Default to mail
   def service_to_image(service)
     service ||= :mail
-    image_tag "#{service}.png", size: "24", title: t(service)
+    image_tag "#{service}.png", size: "24", title: service
   end
 
   def member_of(members)
