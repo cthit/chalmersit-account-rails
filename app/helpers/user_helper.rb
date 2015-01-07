@@ -1,6 +1,6 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail preferredLanguage admissionYear loginShell telephonenumber display_name notifyBy push_services)
+    %w(uid full_name nickname mail member_of preferredLanguage admissionYear loginShell telephonenumber display_name notifyBy push_services)
   end
 
   def attr_or_not_entered(user, a)
@@ -13,6 +13,8 @@ module UserHelper
     return t(value) if a == 'preferredLanguage'
 
     return push_service_image(value) if a == 'push_services' && value.any?
+
+    return member_of(value) if a == 'member_of'
 
     value
   end
@@ -29,5 +31,12 @@ module UserHelper
   def service_to_image(service)
     service ||= :mail
     image_tag "#{service}.png", size: "24", title: t(service)
+  end
+
+  def member_of(members)
+    return content_tag(:em, t('non_member'), class: 'not-entered') if members.empty?
+    members.map do |m|
+      m.cn
+    end.join ", "
   end
 end

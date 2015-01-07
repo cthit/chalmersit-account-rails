@@ -38,6 +38,7 @@ en:
   send_instructions: Send me reset password instructions
   info_changed: The changes were saved
   all_model: "All %{model}"
+  non_member: No membership as of yet
   activerecord:
     models:
       user: User
@@ -51,6 +52,7 @@ en:
         sn: Last name
         cn: Display format
         display_name: Display format
+        member_of: Member of
         preferredLanguage: Language
         admissionYear: Admission year
         nollanPhoto: Nollan Photo

@@ -1,11 +1,16 @@
 class LdapUser < ActiveLdap::Base
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=it,ou=people'
+  belongs_to :groups, class_name: 'LdapGroup', many: 'member', primary_key: 'dn'
 
   validates :mail, presence: true
   validates :nickname, presence: true
   validate :has_valid_display_format
 
+  # The groups the user is a member of
+  def member_of
+    memberof ||= self.groups.collect{|group| group }
+  end
 
   def full_name
     @full_name ||= "#{gn} #{sn}"

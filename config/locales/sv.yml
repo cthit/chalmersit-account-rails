@@ -38,6 +38,7 @@ sv:
   send_instructions: Återställ
   info_changed: Ändringarna sparades
   all_model: "Alla %{model}"
+  non_member: Kom aldrig med...
   activerecord:
     models:
       user: Användare
@@ -51,6 +52,7 @@ sv:
         sn: Efternamn
         cn: Visningsformat
         display_name: Visningsformat
+        member_of: Medlem i
         preferredLanguage: Språk
         admissionYear: Antagningsår
         nollanPhoto: Nollanfoto
