@@ -21,9 +21,9 @@ module UserHelper
 
   # Make image tags out of all the current push services
   def push_service_image(services)
-    services.map do |s|
-      service_to_image(s[:service]) + ' '
-    end.join.html_safe
+    services.keys.map do |s|
+      service_to_image(s)
+    end.join(' ').html_safe
   end
 
   # Make an image tag out of a service name.
@@ -38,5 +38,12 @@ module UserHelper
     members.map do |m|
       m.cn
     end.join ", "
+  end
+
+  def push_services
+    [
+      {name: 'pushover', maxtoken: 30, maxdevice: 25, url: 'https://pushover.net'},
+      {name: 'pushbullet', maxtoken: 32, maxdevice: 16, url: 'https://pushbullet.com'}
+    ]
   end
 end

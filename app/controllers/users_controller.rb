@@ -31,6 +31,7 @@ class UsersController < ApplicationController
     end
 
     def ldap_user_params
-      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn, :preferredLanguage, :loginShell)
+      push_service_attrs = [:api, :device]
+      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn, :preferredLanguage, { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] }, :loginShell)
     end
 end
