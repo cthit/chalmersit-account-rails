@@ -1,4 +1,4 @@
-$ ->
+$(document).on 'page:change', ->
   $('.edit_ldap_user').on 'input', '#ldap_user_gn, #ldap_user_sn, #ldap_user_nickname', replaceDisplayName
 
   replaceDisplayName()
