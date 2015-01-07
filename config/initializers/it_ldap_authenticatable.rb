@@ -9,19 +9,17 @@ module Devise
 
       def authenticate!
         begin
-          ldap_user = LdapUser.find(params_auth_hash[:cid])
-          if ldap_user.bind(params_auth_hash[:password])
-            ldap_user.remove_connection
+          user = LdapUser.first(params_auth_hash[:cid])
+          unless ActiveLdap::UserPassword.valid? params_auth_hash[:password], user.userPassword
+            fail!(:invalid)
           end
 
-          user = ldap_user.db_user
-          remember_me(user)
+          db_user ||= user.db_user
+          remember_me(db_user)
         rescue ActiveLdap::EntryNotFound
           return fail!(:not_found_in_database)
-        rescue ActiveLdap::AuthenticationError
-          return fail!(:invalid)
         end
-        success!(user)
+        success!(db_user)
       end
     end
   end
