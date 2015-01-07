@@ -4,36 +4,39 @@ class LdapGroup < ActiveLdap::Base
                :classes => ['groupOfNames', 'posixGroup','top'],
                scope: :sub
 
-  def members(recursive=true)
-    #TODO: reduce number of queries
-    users ||= []
-    dns ||= self.member(true).each do |dn|
-      unless dn_is_group?(dn) then
-        users << LdapUser.find(dn)
-      else
-        users.push(*LdapGroup.find(dn).members(false)) if recursive
-      end
-    end
-    users.uniq
+  GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
+
+  def members
+    @members_cache ||= {}
+    @members ||= members_as_dn.lazy.map { |m| @members_cache[m] ||= LdapUser.find(m) }
+  end
+
+  def members_as_dn
+    @members_dn ||= recursive_members(dn, true).uniq
   end
 
   def dn_is_group?(dn)
-    group_base ||= ActiveLdap::DistinguishedName.parse("ou=groups,dc=chalmers,dc=it")
-    begin
-      # FIXME: Find prettier way to do this...
-      dn - group_base
-    rescue ArgumentError
-      return false
-    end
-    true
+    dn.to_s.include? GROUP_BASE
   end
 
   def is_member?(user)
-    members.include? user
+    members_as_dn.include? user.dn.to_s
   end
 
   def to_s
     cn
   end
 
+  private
+    def recursive_members(dn, recursive = true)
+      users = []
+      LdapGroup.find(dn).member(true).each do |dn|
+        if not dn_is_group?(dn)
+          users << dn
+        elsif recursive
+          users.push(*recursive_members(dn, false))
+        end
+      end
+      users
+    end
 end
