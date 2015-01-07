@@ -37,10 +37,20 @@
     </div>
   </div>
 
-  <%= f.label :nickname do %>
-    <%= User.human_attribute_name(:nickname) %>
-    <%= f.text_field :nickname %>
-  <% end %>
+  <div class="row">
+    <div class="small-12 large-7 columns">
+      <%= f.label :nickname do %>
+        <%= User.human_attribute_name(:nickname) %>
+        <%= f.text_field :nickname %>
+      <% end %>
+    </div>
+    <div class="small-12 large-5 columns">
+      <%= f.label :telephonenumber do %>
+        <%= User.human_attribute_name(:telephonenumber) %>
+        <%= f.phone_field :telephonenumber, placeholder: '+46....' %>
+      <% end %>
+    </div>
+  </div>
 
   <div class="row">
     <div class="small-12 medium-9 columns">
