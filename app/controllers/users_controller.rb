@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :find_model
+  before_filter :authenticate_user!
+  before_filter :find_model, except: :index
 
   def index
-    @users = User.all
+    @users = LdapUser.all(order: :asc, sort_by: "uid")
   end
 
   def show

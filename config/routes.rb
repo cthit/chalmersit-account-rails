@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, only: [:index, :show]
   get '/me' => 'users#show', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
