@@ -6,7 +6,10 @@ module Devise
       def authenticate!
         begin
           user = LdapUser.find(params_auth_hash[:cid])
-          unless ActiveLdap::UserPassword.valid? params_auth_hash[:password], user.userPassword
+
+          this = params_auth_hash[:password].force_encoding('ascii-8bit')
+          that = user.userPassword.force_encoding('ascii-8bit')
+          unless ActiveLdap::UserPassword.valid? this, that
             return fail!(:invalid)
           end
 
