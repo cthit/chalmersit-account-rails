@@ -37,7 +37,7 @@ class LdapUser < ActiveLdap::Base
 
   def push_services
     return nil if self.pushService.nil?
-    @push_services ||= self.pushService.map do |s|
+    @push_services ||= self.pushService(true).map do |s| # true = force return array of values
       service, device, key = s.split ";"
       [service, {device: device, api: key}]
     end.to_h

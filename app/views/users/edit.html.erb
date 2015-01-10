@@ -69,16 +69,18 @@
 
   <fieldset>
     <legend><%= t('notification', count: 2) %></legend>
-    <%= f.label :notifyBy  do %>
-      <%= User.human_attribute_name(:notifyBy) %><br>
-      <%= f.collection_radio_buttons :notifyBy, ['mail', 'pushover', 'pushbullet'], :to_s, -> (s) { service_to_image(s) } %>
-    <% end %>
+    <div class="notifyBy">
+      <%= f.label :notifyBy  do %>
+        <%= User.human_attribute_name(:notifyBy) %><br>
+        <%= f.collection_radio_buttons :notifyBy, ['mail', 'pushover', 'pushbullet'], :to_s, -> (s) { service_to_image(s) } %>
+      <% end %>
+    </div>
     <table>
       <% push_services.each do |s| %>
         <tr>
           <td><%= service_to_image s[:name] %> <%= link_to s[:name].titlecase, s[:url] %></td>
-          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][api]", (@user.push_services[s[:name]][:api] if @user.push_services), maxlength: s[:maxtoken], placeholder: 'User token' %></td>
-          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][device]", (@user.push_services[s[:name]][:device] if @user.push_services), maxlength: s[:maxdevice], placeholder: 'Device (empty = all)' %></td>
+          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][device]", (@user.push_services[s[:name]][:device] if @user.push_services && @user.push_services[s[:name]]), maxlength: s[:maxdevice], placeholder: 'Device (empty = all)' %></td>
+          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][api]", (@user.push_services[s[:name]][:api] if @user.push_services  && @user.push_services[s[:name]]), maxlength: s[:maxtoken], placeholder: 'User token' %></td>
         </tr>
       <% end %>
     </table>
