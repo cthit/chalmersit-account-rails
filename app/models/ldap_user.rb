@@ -6,6 +6,7 @@ class LdapUser < ActiveLdap::Base
   validates :mail, presence: true
   validates :nickname, presence: true
   validate :has_valid_display_format
+  validate :has_valid_notifyBy
 
   # The groups the user is a member of
   def member_of
@@ -45,7 +46,7 @@ class LdapUser < ActiveLdap::Base
 
   def push_services=(services)
     self.pushService = services.map do |k, v|
-      "#{k};#{v[:device]};#{v[:api]}"
+      "#{k};#{v[:device]};#{v[:api]}" if v[:api].present?
     end
   end
 
@@ -55,6 +56,10 @@ class LdapUser < ActiveLdap::Base
 
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
+  end
+
+  def has_valid_notifyBy
+    errors.add(:notifyBy, :not_set) unless self.notifyBy == 'mail' || push_services.include?(notifyBy)
   end
 
   def self.display_formats

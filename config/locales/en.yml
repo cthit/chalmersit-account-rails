@@ -73,3 +73,5 @@ en:
           attributes:
             display_name:
               not_valid_format: has invalid format
+            notifyBy:
+              not_set: is set to an unspecified push service
