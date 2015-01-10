@@ -73,3 +73,5 @@ sv:
           attributes:
             display_name:
               not_valid_format: har ett felaktigt format
+            notifyBy:
+              not_set: är satt till en ospecificerad aviseringstjänst
