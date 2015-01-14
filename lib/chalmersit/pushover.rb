@@ -1,9 +1,8 @@
-require 'notifications/notify'
+require 'chalmersit/notify'
 require 'net/https'
 #require 'JSON'
 
-module ChalmersIT
-  class Pushover < Notify
+class Chalmersit::Pushover < Chalmersit::Notify
 
   private
   def self.setup_request(url, port)
@@ -59,6 +58,5 @@ module ChalmersIT
         end
       end
     end
-  end
 
 end
