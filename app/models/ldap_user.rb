@@ -84,7 +84,7 @@ class LdapUser < ActiveLdap::Base
     p user_info
     if user_info[:status] == 0
         errors.add("pushover:", user_info[:errors].first)
-    elsif !user_info[:devices].include?(device)
+    elsif device.present? && (not user_info[:devices].include?(device))
         errors.add("pushover:", "Unknown device. Your devices: #{user_info[:devices].join ', '}")
     end
   end
