@@ -66,10 +66,18 @@ sv:
         push_services:
           one: Push-avisering
           other: Push-aviseringar
+  users:
+    edit:
+      device_placeholder: Lämna tomt för att skicka till alla enheter
+      token_placeholder: Din API-nyckel
+      service: Aviseringstjänst
+      token: API-nyckel
+      device: Enhet
   activemodel:
     errors:
       models:
         ldap_user:
+          unknown_device: "Okänd enhet. Dina enheter: %{known_devices}"
           attributes:
             display_name:
               not_valid_format: har ett felaktigt format

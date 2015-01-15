@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
-  before_filter :find_model
+  before_filter :authenticate_user!
+  before_filter :find_model, except: :index
 
   def index
-    @users = User.all
+    @users = LdapUser.all(order: :asc, sort_by: "uid")
   end
 
   def show
@@ -31,7 +32,9 @@ class UsersController < ApplicationController
     end
 
     def ldap_user_params
-      push_service_attrs = [:api, :device]
-      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn, :telephonenumber, :preferredLanguage, :notifyBy, { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
+      push_service_attrs = [:device, :api]
+      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
+                                        :telephonenumber, :preferredLanguage,
+                                        :notifyBy, { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
 end

@@ -66,10 +66,18 @@ en:
         push_services:
           one: Push notification
           other: Push notifications
+  users:
+    edit:
+      device_placeholder: Leave blank to send to all your devices
+      token_placeholder: Your API-key
+      service: Aviseringstjänst
+      token: API-nyckel
+      device: Enhet
   activemodel:
     errors:
       models:
         ldap_user:
+          unknown_device: "Unknown device. Your devices: %{known_devices}"
           attributes:
             display_name:
               not_valid_format: has invalid format
