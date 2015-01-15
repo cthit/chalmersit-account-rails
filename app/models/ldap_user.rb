@@ -44,17 +44,18 @@ class LdapUser < ActiveLdap::Base
   def push_services
     return nil if self.pushService.nil?
     @push_services ||= self.pushService(true).map do |s| # true = force return array of values
-      service, device, key = s.split ";"
+      service, key, device = s.split ';'
       [service, {device: device, api: key}]
     end.to_h
   end
 
   def push_services=(services)
     ps = services.map do |k, v|
-      "#{k};#{v[:device]};#{v[:api]}" if v[:api].present?
+      "#{k};#{v[:api]};#{v[:device]}" if v[:api].present?
     end
 
     push_services_will_change! unless ps == self.pushService
+    @push_services = services
     self.pushService = ps
   end
 
@@ -80,8 +81,6 @@ class LdapUser < ActiveLdap::Base
 
   def validate_pushover user, device
     user_info = Chalmersit::Pushover.info user
-    p user
-    p user_info
     if user_info[:status] == 0
         errors.add("pushover:", user_info[:errors].first)
     elsif device.present? && (not user_info[:devices].include?(device))
