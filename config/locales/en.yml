@@ -66,6 +66,10 @@ en:
         push_services:
           one: Push notification
           other: Push notifications
+  users:
+    edit:
+      device_placeholder: Leave blank to send to all your devices
+      token_placeholder: Your API-key
   activemodel:
     errors:
       models:

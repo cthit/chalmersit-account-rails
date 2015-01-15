@@ -66,6 +66,10 @@ sv:
         push_services:
           one: Push-avisering
           other: Push-aviseringar
+  users:
+    edit:
+      device_placeholder: Lämna tomt för att skicka till alla enheter
+      token_placeholder: Din API-nyckel
   activemodel:
     errors:
       models:
