@@ -76,6 +76,14 @@
       <% end %>
     </div>
     <table>
+        <thead>
+            <tr>
+                <th><%= t '.service' %></th>
+                <th><%= t '.token' %></th>
+                <th><%= t '.device' %></th>
+            </tr>
+        </thead>
+        <tbody>
       <% push_services.each do |s| %>
         <tr>
           <td><%= service_to_image s[:name] %> <%= link_to s[:name].titlecase, s[:url] %></td>
@@ -83,6 +91,7 @@
           <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][device]", (@user.push_services[s[:name]][:device] if @user.push_services && @user.push_services[s[:name]]), maxlength: s[:maxdevice], placeholder: t('.device_placeholder') %></td>
         </tr>
       <% end %>
+        </tbody>
     </table>
   </fieldset>
 

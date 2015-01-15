@@ -70,6 +70,9 @@ en:
     edit:
       device_placeholder: Leave blank to send to all your devices
       token_placeholder: Your API-key
+      service: Aviseringstjänst
+      token: API-nyckel
+      device: Enhet
   activemodel:
     errors:
       models:

@@ -70,6 +70,9 @@ sv:
     edit:
       device_placeholder: Lämna tomt för att skicka till alla enheter
       token_placeholder: Din API-nyckel
+      service: Aviseringstjänst
+      token: API-nyckel
+      device: Enhet
   activemodel:
     errors:
       models:
