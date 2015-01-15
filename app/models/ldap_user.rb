@@ -84,7 +84,7 @@ class LdapUser < ActiveLdap::Base
     if user_info[:status] == 0
         errors.add("pushover:", user_info[:errors].first)
     elsif device.present? && (not user_info[:devices].include?(device))
-        errors.add("pushover:", "Unknown device. Your devices: #{user_info[:devices].join ', '}")
+        errors.add("pushover:", I18n.translate('activemodel.errors.models.ldap_user.unknown_device', known_devices: user_info[:devices].join(', ')))
     end
   end
 

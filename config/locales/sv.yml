@@ -74,6 +74,7 @@ sv:
     errors:
       models:
         ldap_user:
+          unknown_device: "Okänd enhet. Dina enheter: %{known_devices}"
           attributes:
             display_name:
               not_valid_format: har ett felaktigt format
