@@ -42,6 +42,7 @@ en:
   info_changed: The changes were saved
   all_model: "All %{model}"
   non_member: No membership as of yet
+  admin_override: digIT-override
   activerecord:
     models:
       user: User
@@ -73,6 +74,8 @@ en:
       service: Aviseringstjänst
       token: API-nyckel
       device: Enhet
+    show:
+      existential_crisis: That didn't look like you...
   activemodel:
     errors:
       models:

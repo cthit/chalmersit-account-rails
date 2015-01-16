@@ -42,6 +42,7 @@ sv:
   info_changed: Ändringarna sparades
   all_model: "Alla %{model}"
   non_member: Kom aldrig med...
+  admin_override: digIT-dominering!
   activerecord:
     models:
       user: Användare
@@ -73,6 +74,8 @@ sv:
       service: Aviseringstjänst
       token: API-nyckel
       device: Enhet
+    show:
+      existential_crisis: Det där såg inte ut som dig...
   activemodel:
     errors:
       models:
