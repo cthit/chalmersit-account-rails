@@ -1,6 +1,24 @@
 <% content_for :title, t("all_model", model:User.model_name.human(count: 2).downcase) %>
-<ul>
-  <% @users.each do |u| %>
-    <li><%= u.full_name %></li>
+<table>
+        <thead>
+            <th>Full name</th>
+        <% if current_user.admin? %>
+            <th>CID</th>
+            <th>Nickname</th>
+            <th>mail</th>
+        <% end %>
+        </thead>
+        <tbody>
+            <% @users.each do |u| %>
+            <tr>
+                <td><%= link_to u.full_name, "/users/#{u.uid}" %></td>
+            <% if current_user.admin? %>
+                <td><%= u.uid %></td>
+                <td><%= u.nickname %></td>
+                <td><%= u.mail %></td>
+            <% end %>
+            </tr>
+        </tbody>
+
   <% end %>
-</ul>
+</table>

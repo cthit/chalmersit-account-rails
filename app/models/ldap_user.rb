@@ -14,7 +14,6 @@ class LdapUser < ActiveLdap::Base
 
   # The groups the user is a member of
   def member_of
-    #TODO: reduce number of queries
     @member_of ||= begin
       memberof = self.groups
       all = LdapGroup.find(:all)
