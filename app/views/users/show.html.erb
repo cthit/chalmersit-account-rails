@@ -1,4 +1,6 @@
-<% content_for :title, t('logged_in_as') + ' ' + @user.display_name %>
+<% is_admin_or_me =  current_user != @user.db_user && current_user.admin?%>
+<% title = (is_admin_or_me) ? '' : t('logged_in_as') + ' ' %>
+<% content_for :title, title + @user.display_name %>
 <section class="user-details">
   <table>
     <% user_attrs.each do |a| %>
@@ -13,5 +15,7 @@
     <% end %>
   </table>
 </section>
+<% unless is_admin_or_me %>
 <%= link_to t('edit'), edit_me_path %> |
 <%= link_to t('logout'), destroy_user_session_path, method: :delete %>
+<% end %>
