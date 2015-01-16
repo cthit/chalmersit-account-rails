@@ -1,13 +1,18 @@
 class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?
-  before_filter :find_model, except: :index
+  before_filter :find_model, except: [:index,:show]
 
   def index
     @users = LdapUser.all(order: :asc, sort_by: "uid")
   end
 
+  def me
+    render :show
+  end
+
   def show
+    @user = LdapUser.find(params[:id])
   end
 
   def edit

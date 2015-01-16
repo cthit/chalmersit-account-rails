@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     authenticated :user do
-      root 'users#show', as: :authenticated_root
+      root 'users#me', as: :authenticated_root
     end
 
     unauthenticated do
@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
-  get '/me' => 'users#show', as: :me
+  get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
 
