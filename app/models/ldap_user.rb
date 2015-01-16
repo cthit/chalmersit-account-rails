@@ -1,6 +1,5 @@
 class LdapUser < ActiveLdap::Base
   include ActiveModel::Dirty
-  #include Chalmersit
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=it,ou=people'
   belongs_to :groups, class_name: 'LdapGroup', many: 'member', primary_key: 'dn'

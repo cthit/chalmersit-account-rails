@@ -1,0 +1,5 @@
+<% content_for :title, t('.title') %>
+
+<main role="main">
+<p class="text-center"><i><%= @pre_auth.error_response.body[:error_description] %></i></p>
+</main>
