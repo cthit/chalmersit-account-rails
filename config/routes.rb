@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session

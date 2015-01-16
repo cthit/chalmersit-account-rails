@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
+  before_filter :authenticate_user!, unless: :doorkeeper_request?
   before_filter :find_model, except: :index
 
   def index
@@ -7,7 +8,6 @@ class UsersController < ApplicationController
   end
 
   def show
-
   end
 
   def edit
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
 
   private
     def find_model
-      @db_user = current_user
+      @db_user = current_user || User.find(doorkeeper_token.resource_owner_id)
       @user = @db_user.ldap_user
     end
 
@@ -36,5 +36,9 @@ class UsersController < ApplicationController
       params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
                                         :telephonenumber, :preferredLanguage,
                                         :notifyBy, { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
+    end
+
+    def doorkeeper_request?
+      doorkeeper_token.present?
     end
 end
