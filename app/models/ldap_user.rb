@@ -62,6 +62,16 @@ class LdapUser < ActiveLdap::Base
     @db_user ||= User.find_or_create_by(cid: uid)
   end
 
+  def admin?
+    @admin ||= member_of.any? {|g| g.cn.downcase == 'digit' }
+  end
+
+  def self.display_formats
+    ["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"]
+  end
+
+  private
+
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
   end
@@ -89,10 +99,5 @@ class LdapUser < ActiveLdap::Base
 
   def validate_pushbullet user, device
     true
-  end
-
-
-  def self.display_formats
-    ["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"]
   end
 end
