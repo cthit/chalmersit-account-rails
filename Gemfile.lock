@@ -60,6 +60,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.8.0)
+    configurable_engine (0.4.7)
+      rails (> 3.1.0)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -243,6 +245,7 @@ DEPENDENCIES
   activeldap
   better_errors
   coffee-rails (~> 4.0.0)
+  configurable_engine
   devise
   doorkeeper
   foundation-rails (~> 5.4.5)

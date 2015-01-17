@@ -35,6 +35,9 @@ gem 'spring',        group: :development
 # oauth provider library
 gem 'doorkeeper'
 
+# Admin configurable settings
+gem 'configurable_engine'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
