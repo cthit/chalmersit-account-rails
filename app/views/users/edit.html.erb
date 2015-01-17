@@ -1,4 +1,4 @@
-<% content_for :title, t('edit_your_info') %>
+<% content_for :title, t('edit_profile') %>
 
 <% if @user.errors.any? %>
   <div id="error_explanation" data-alert class="alert-box warning">
@@ -98,5 +98,4 @@
   <%= f.submit t('save'), class: 'button expand' %>
 <% end %>
 
-<%= link_to t('back'), me_path %> |
-<%= link_to t('logout'), destroy_user_session_path, method: :delete %>
+<%= link_to t('back'), me_path %>

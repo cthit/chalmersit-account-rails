@@ -15,8 +15,3 @@
     <% end %>
   </table>
 </section>
-<% unless is_admin_or_me %>
-<%= link_to t('edit'), edit_me_path, class: "button small" %> |
-<%= link_to t('logout'), destroy_user_session_path, method: :delete, class: "button small alert" %>
-<%= link_to "chalmers.it", "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}", class: "button small success right" %>
-<% end %>

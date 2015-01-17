@@ -20,13 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  site_title: IT Account
   login: Sign in
   logout: Sign out
   mail: E-mail
   edit: Edit
   error: Error
   logged_in_as: Signed in as
-  edit_your_info: Edit your information
+  edit_profile: Edit profile
   back: Back
   save: Save
   sv: Swedish
@@ -38,11 +39,15 @@ en:
   not_entered: Not entered
   remember_me: Remember me
   forgot_password: Forgot your password?
+  create_user: New user
   send_instructions: Send me reset password instructions
   info_changed: The changes were saved
   all_model: "All %{model}"
   non_member: No membership as of yet
-  admin_override: digIT-override
+  admin_override: digIT-override!
+  administration: Administration
+  applications: Applications
+  menu: Menu
   activerecord:
     models:
       user: User

@@ -1,0 +1,68 @@
+<nav class="top-bar" data-topbar role="navigation" data-options="mobile_show_parent_link:false">
+  <ul class="title-area">
+    <li class="name">
+      <h1>
+        <%= link_to t('site_title'), "/", class: "top-logo" %>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="has-dropdown">
+<% if signed_in? %>
+        <%= link_to me_path do %>
+        <i class="fi-torsos-male-female"></i>
+        <%= current_user.display_name %>
+        <% end %>
+<% else %>
+        <a href="#"><%= t('menu') %></a>
+<% end %>
+        <ul class="dropdown">
+<% if signed_in? %>
+          <li><a href="<%= edit_me_path %>"><i class="fi-wrench"></i> <%= t('edit_profile') %></a></li>
+    <% if current_user.admin? %>
+          <li><a href="<%= admin_path %>"><i class="fi-widget"></i> <%= t('administration') %></a></li>
+    <% end %>
+          <li><a href="<%= destroy_user_session_path %>"><i class="fi-arrows-out"></i> <%= t('logout') %></a></li>
+<% else %>
+          <li><a href="<%= new_user_session_path %>"><i class="fi-arrows-in"></i> <%= t('login') %></a></li>
+          <li><a href="<%= new_password_path(resource_name) %>"><i class="fi-eject"></i> <%= t('forgot_password') %></a></li>
+          <li><a href="<%= "#" %>"><i class="fi-plus"></i> <%= t('create_user') %></a></li>
+<% end %>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+    <li>
+    <%= link_to "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}", class: "prominent" do %>
+        <i class="fi-bookmark"></i>
+        chalmers.it
+    <% end %>
+    </li>
+<% if signed_in? %>
+    <li class="has-dropdown">
+      <a href="#"><%= t('applications') %></a>
+      <ul class="dropdown">
+       <li>
+        <%= link_to "#" do %>
+            <i class="fi-checkbox"></i>
+            bookIT
+        <% end %>
+       </li>
+       <li>
+        <%= link_to "#" do %>
+            <i class="fi-play"></i>
+            playIT
+        <% end %>
+       </li>
+      </ul>
+    </li>
+<% end %>
+    </ul>
+  </section>
+</nav>

@@ -20,13 +20,14 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 sv:
+  site_title: IT-konto
   login: Logga in
   logout: Logga ut
   mail: E-post
   edit: Ändra
   error: Fel
   logged_in_as: Inloggad som
-  edit_your_info: Ändra dina uppgifter
+  edit_profile: Ändra din profil
   back: Tillbaka
   save: Spara
   sv: svenska
@@ -38,11 +39,15 @@ sv:
   not_entered: Ej angivet
   remember_me: Kom ihåg mig
   forgot_password: Glömt ditt lösenord?
+  create_user: Bli IT-teknolog
   send_instructions: Återställ
   info_changed: Ändringarna sparades
   all_model: "Alla %{model}"
   non_member: Kom aldrig med...
-  admin_override: digIT-dominering!
+  admin_override: digIT-override!
+  administration: Administration
+  applications: Applikationer
+  menu: Meny
   activerecord:
     models:
       user: Användare

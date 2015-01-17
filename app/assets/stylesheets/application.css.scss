@@ -20,6 +20,8 @@
 @import "foundation/components/tables";
 @import "foundation/components/alert-boxes";
 @import "foundation/components/labels";
+@import "foundation/components/top-bar";
+@import 'foundation-icons';
 
 body {
   background: #f1f1f1;
@@ -65,4 +67,19 @@ body {
   margin: 16px 0;
   padding: 25px;
   background: white;
+}
+
+.top-bar {
+    a {
+        text-decoration: none;
+        
+    }
+    a.top-logo {
+        background: url(itlogo.svg) no-repeat left;
+        background-size: $topbar-height - 5;
+        padding-left: $topbar-height !important;
+    }
+    .prominent {
+        background-color: green !important;
+    }
 }
