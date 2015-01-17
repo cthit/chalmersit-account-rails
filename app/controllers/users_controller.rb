@@ -4,14 +4,17 @@ class UsersController < ApplicationController
   before_filter :find_model, except: [:index,:show]
 
   def index
+    @show_restricted = show_restricted_fields?
     @users = LdapUser.all(order: :asc, sort_by: "uid")
   end
 
   def me
+    @show_restricted = show_restricted_fields?
     render :show
   end
 
   def show
+    @show_restricted = show_restricted_fields?
     @user = LdapUser.find(params[:id])
     unless doorkeeper_request? || current_user.admin? || current_user == @user
       redirect_to :me, alert: I18n.translate('users.show.existential_crisis')
@@ -50,5 +53,9 @@ class UsersController < ApplicationController
 
     def doorkeeper_request?
       doorkeeper_token.present?
+    end
+
+    def show_restricted_fields?
+      (current_user && current_user.admin?) || doorkeeper_request?
     end
 end

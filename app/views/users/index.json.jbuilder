@@ -1,6 +1,6 @@
 json.array!(@users) do |u|
   json.extract! u, :uid, :display_name
-  if current_user.admin?
+  if @show_restricted
     json.extract! u, :admissionYear, :full_name, :nickname, :mail,
       :acceptedUserAgreement, :preferredLanguage, :admissionYear,
       :telephonenumber, :display_name

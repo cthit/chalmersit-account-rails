@@ -2,7 +2,7 @@
 <table role="grid">
         <thead>
             <th>Full name</th>
-        <% if current_user.admin? %>
+        <% if @show_restricted %>
             <th>CID</th>
             <th>Nickname</th>
             <th>mail</th>
@@ -12,7 +12,7 @@
             <% @users.each do |u| %>
             <tr>
                 <td><%= link_to u.full_name, "/users/#{u.uid}" %></td>
-            <% if current_user.admin? %>
+            <% if @show_restricted %>
                 <td><%= u.uid %></td>
                 <td><%= u.nickname %></td>
                 <td><%= u.mail %></td>
