@@ -16,10 +16,10 @@ class UsersController < ApplicationController
   def show
     @show_restricted = show_restricted_fields?
     @user = LdapUser.find(params[:id])
-    unless doorkeeper_request? || current_user.admin? || current_user == @user
-      redirect_to :me, alert: I18n.translate('users.show.existential_crisis')
-    else
+    if doorkeeper_request? || current_user.admin?
       flash.now[:notice] = I18n.translate('admin_override')
+    elsif current_user != @user.db_user
+      redirect_to :me, alert: I18n.translate('users.show.existential_crisis')
     end
   end
 
