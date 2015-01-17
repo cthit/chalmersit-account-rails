@@ -14,6 +14,8 @@
  *= require_self
  */
 
+
+@import "foundation/components/type";
 @import "foundation/components/grid";
 @import "foundation/components/buttons";
 @import "foundation/components/forms";
@@ -70,15 +72,18 @@ body {
 }
 
 .top-bar {
-    a {
-        text-decoration: none;
-    }
     a.top-logo {
         background: url(itlogo.svg) no-repeat left;
-        background-size: $topbar-height - 1;
-        padding-left: $topbar-height !important;
+        background-size: $topbar-height - 0.4;
+        margin-left: 9px;
+        padding-left: $topbar-height - 0.4 !important;
     }
-    .prominent {
-        background-color: green !important;
+}
+
+.top-bar-section, .top-bar-section .dropdown {
+    li:not(.has-form) a:not(.button), li:not(.has-form):not(.active) > a:not(.button) {
+        &:hover {
+            background-color: $topbar-link-bg-active-hover;
+        }
     }
 }

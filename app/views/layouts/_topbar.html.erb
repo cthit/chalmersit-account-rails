@@ -11,6 +11,7 @@
   <section class="top-bar-section">
     <!-- Right Nav Section -->
     <ul class="right">
+      <li class="divider"></li>
       <li class="has-dropdown">
 <% if signed_in? %>
         <%= link_to me_path do %>
@@ -38,12 +39,14 @@
 
     <!-- Left Nav Section -->
     <ul class="left">
-    <li>
-    <%= link_to "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}", class: "prominent" do %>
+    <li class="divider"></li>
+    <li class="active">
+    <%= link_to "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}" do %>
         <i class="fi-bookmark"></i>
         chalmers.it
     <% end %>
     </li>
+    <li class="divider"></li>
 <% if signed_in? %>
     <li class="has-dropdown">
       <a href="#"><%= t('applications') %></a>
