@@ -2,7 +2,6 @@ class LdapUser < ActiveLdap::Base
   include ActiveModel::Dirty
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=it,ou=people'
-  belongs_to :groups, class_name: 'LdapGroup', many: 'member', primary_key: 'dn'
 
   validates :mail, presence: true
   validates :nickname, presence: true
@@ -15,10 +14,10 @@ class LdapUser < ActiveLdap::Base
   # The groups the user is a member of
   def member_of
     @member_of ||= begin
-      memberof = self.groups
-      all = LdapGroup.find(:all)
+      memberof = []
+      all = LdapGroup.all
 
-      (all - memberof).each do |g|
+      all.each do |g|
         if g.is_member?(self) then
           memberof << g
         end

@@ -11,6 +11,10 @@ class LdapGroup < ActiveLdap::Base
     @members ||= members_as_dn.lazy.map { |m| @members_cache[m] ||= LdapUser.find(m) }
   end
 
+  def self.all
+    @@all ||= self.find(:all)
+  end
+
   def members_as_dn
     @members_dn ||= recursive_members(dn, true).uniq
   end
