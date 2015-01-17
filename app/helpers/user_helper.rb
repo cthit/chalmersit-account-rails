@@ -46,4 +46,13 @@ module UserHelper
       {name: 'pushbullet', maxtoken: 32, maxdevice: 16, url: 'https://pushbullet.com'}
     ]
   end
+
+  def whoose_profile user
+    if current_user && current_user == user.db_user
+      "your_profile"
+    else
+      "their_profile"
+    end
+  end
+
 end

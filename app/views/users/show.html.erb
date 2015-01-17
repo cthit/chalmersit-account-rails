@@ -1,6 +1,4 @@
-<% is_admin_or_me = current_user && current_user != @user.db_user && current_user.admin?%>
-<% title = (is_admin_or_me) ? '' : t('logged_in_as') + ' ' %>
-<% content_for :title, title + @user.display_name %>
+<% content_for :title, t(whoose_profile(@user)) %>
 <section class="user-details">
   <table>
     <% user_attrs.each do |a| %>
