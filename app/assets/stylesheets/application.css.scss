@@ -72,11 +72,10 @@ body {
 .top-bar {
     a {
         text-decoration: none;
-        
     }
     a.top-logo {
         background: url(itlogo.svg) no-repeat left;
-        background-size: $topbar-height - 5;
+        background-size: $topbar-height - 1;
         padding-left: $topbar-height !important;
     }
     .prominent {

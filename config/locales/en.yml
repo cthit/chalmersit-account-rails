@@ -20,7 +20,7 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  site_title: IT Account
+  site_title: -account
   login: Sign in
   logout: Sign out
   mail: E-mail
