@@ -1,4 +1,4 @@
-<% is_admin_or_me =  current_user != @user.db_user && current_user.admin?%>
+<% is_admin_or_me = current_user && current_user != @user.db_user && current_user.admin?%>
 <% title = (is_admin_or_me) ? '' : t('logged_in_as') + ' ' %>
 <% content_for :title, title + @user.display_name %>
 <section class="user-details">

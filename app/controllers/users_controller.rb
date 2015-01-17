@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def show
     @user = LdapUser.find(params[:id])
-    unless current_user.admin? || current_user == @user
+    unless doorkeeper_request? || current_user.admin? || current_user == @user
       redirect_to :me, alert: I18n.translate('users.show.existential_crisis')
     else
       flash.now[:notice] = I18n.translate('admin_override')
