@@ -1,5 +1,5 @@
 <% content_for :title, t("all_model", model:User.model_name.human(count: 2).downcase) %>
-<table>
+<table role="grid">
         <thead>
             <th>Full name</th>
         <% if current_user.admin? %>
