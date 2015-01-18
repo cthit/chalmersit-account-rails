@@ -96,8 +96,8 @@
   </fieldset>
 
     <ul class="button-group even-2">
-        <li><%= f.submit t('save'), class: 'button small' %></li>
-        <li><%= link_to t('back'), me_path, class: 'button small secondary' %></li>
+        <li><%= button_tag type: :submit, class: 'button small' do %><%= fa_icon('save') + ' ' + t('save') %><% end %></li>
+        <li><%= link_to me_path, class: 'button small secondary' do %><%= fa_icon('angle-left') + ' ' + t('back') %><% end %></li>
     </ul>
 <% end %>
 

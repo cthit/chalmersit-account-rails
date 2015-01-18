@@ -15,7 +15,7 @@
       <li class="has-dropdown <%= "active" if on_pages? me_path %>">
 <% if signed_in? %>
         <%= link_to me_path do %>
-        <i class="fi-torsos-male-female"></i>
+        <%= fa_icon 'user' %>
         <%= current_user.display_name %>
         <% end %>
 <% else %>
@@ -23,15 +23,15 @@
 <% end %>
         <ul class="dropdown">
 <% if signed_in? %>
-          <li><a href="<%= edit_me_path %>"><i class="fi-wrench"></i> <%= t('edit_profile') %></a></li>
+            <li><a href="<%= edit_me_path %>"><%= fa_icon 'edit' %> <%= t 'edit_profile'  %></a></li>
     <% if current_user.admin? %>
-          <li><a href="<%= admin_path %>"><i class="fi-widget"></i> <%= t('administration') %></a></li>
+            <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
     <% end %>
-          <li class="logout"><a href="<%= destroy_user_session_path %>"><i class="fi-arrows-out"></i> <%= t('logout') %></a></li>
+    <li class="logout"><a href="<%= destroy_user_session_path %>"><%= fa_icon 'sign-out' %> <%= t('logout') %></a></li>
 <% else %>
-          <li><a href="<%= new_user_session_path %>"><i class="fi-arrows-in"></i> <%= t('login') %></a></li>
-          <li><a href="<%= new_password_path(resource_name) %>"><i class="fi-eject"></i> <%= t('forgot_password') %></a></li>
-          <li><a href="<%= "#" %>"><i class="fi-plus"></i> <%= t('create_user') %></a></li>
+          <li> <%= link_to new_user_session_path do %><%= fa_icon 'sign-in' %> <%= t 'login' %> <% end %> 
+          <li> <%= link_to new_password_path(resource_name) do %><%= fa_icon 'eject' %> <%= t 'forgot_password' %> <% end %> 
+          <li> <%= link_to '#' do %><%= fa_icon 'plus' %> <%= t 'create_user' %> <% end %> 
 <% end %>
         </ul>
       </li>
@@ -42,8 +42,7 @@
     <li class="divider"></li>
     <li class="active">
     <%= link_to "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}" do %>
-        <i class="fi-bookmark"></i>
-        chalmers.it
+        <%= fa_icon 'external-link', text: "chalmers.it" %>
     <% end %>
     </li>
     <li class="divider"></li>
@@ -53,14 +52,12 @@
       <ul class="dropdown">
        <li>
         <%= link_to "#" do %>
-            <i class="fi-checkbox"></i>
-            bookIT
+            <%= fa_icon 'bookmark-o', text: 'bookIT' %>
         <% end %>
        </li>
        <li>
         <%= link_to "#" do %>
-            <i class="fi-play"></i>
-            playIT
+            <%= fa_icon 'play', text: 'playIT' %>
         <% end %>
        </li>
       </ul>
@@ -68,12 +65,12 @@
  <% if signed_in? && current_user.admin? %>
     <li class="divider"></li>
     <li class="<%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
-            <i class="fi-torsos-all"></i>
+            <%= fa_icon 'users' %>
             <%= t("all_model", model:User.model_name.human(count: 2).downcase) %>
         <% end %>
     </li>
     <li class="<%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
-            <i class="fi-address-book"></i>
+            <%= fa_icon 'folder' %>
             <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
         <% end %>
     </li>
