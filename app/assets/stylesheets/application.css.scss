@@ -111,3 +111,13 @@ body {
 .labels span {
     margin-top: 15px;
 }
+
+@media (max-width: 730px) {
+        .hide-on-small {
+            display: none;
+        }
+}
+
+.dropdown-width {
+    min-width: 200px;
+}

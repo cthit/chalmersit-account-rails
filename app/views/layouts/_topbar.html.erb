@@ -12,7 +12,7 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
-      <li class="has-dropdown <%= "active" if on_pages? me_path %>">
+      <li class="has-dropdown dropdown-width <%= "active" if on_pages? me_path %>">
 <% if signed_in? %>
         <%= link_to me_path do %>
         <%= fa_icon 'user' %>
@@ -64,12 +64,12 @@
     </li>
  <% if signed_in? && current_user.admin? %>
     <li class="divider"></li>
-    <li class="<%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
+    <li class="hide-on-small <%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
             <%= fa_icon 'users' %>
             <%= t("all_model", model:User.model_name.human(count: 2).downcase) %>
         <% end %>
     </li>
-    <li class="<%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
+    <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
             <%= fa_icon 'folder' %>
             <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
         <% end %>
