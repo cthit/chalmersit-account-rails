@@ -1,2 +1,11 @@
 <% content_for :title, @group.displayName %>
 <p><%= @group.description %></p>
+<ul class="side-nav">
+    <%= @group.members.each do |m| %>
+        <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
+                <i class="fi-torso"></i>
+                <%= "#{m.full_name} (#{m.uid})" %>
+            <% end %>
+        </li>
+    <% end %>
+</ul>
