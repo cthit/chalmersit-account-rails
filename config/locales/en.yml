@@ -51,7 +51,9 @@ en:
   menu: Menu
   activerecord:
     models:
-      user: User
+      user:
+        one: User
+        other: Users
     attributes:
       user:
         mail: E-mail
@@ -87,8 +89,8 @@ en:
   activemodel:
     models:
       ldap_group:
-        one: Grupp
-        other: Grupper
+        one: Group
+        other: Groups
     errors:
       models:
         ldap_user:
