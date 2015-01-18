@@ -47,7 +47,7 @@ sv:
   non_member: Kom aldrig med...
   admin_override: digIT-override!
   administration: Administration
-  applications: Applikationer
+  my_applications: Mina applikationer
   menu: Meny
   activerecord:
     models:

@@ -47,7 +47,7 @@ en:
   non_member: No membership as of yet
   admin_override: digIT-override!
   administration: Administration
-  applications: Applications
+  my_applications: My applications
   menu: Menu
   activerecord:
     models:
