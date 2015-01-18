@@ -95,7 +95,9 @@
     </table>
   </fieldset>
 
-  <%= f.submit t('save'), class: 'button expand' %>
+    <ul class="button-group even-2">
+        <li><%= f.submit t('save'), class: 'button small' %></li>
+        <li><%= link_to t('back'), me_path, class: 'button small secondary' %></li>
+    </ul>
 <% end %>
 
-<%= link_to t('back'), me_path %>
