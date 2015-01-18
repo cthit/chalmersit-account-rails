@@ -3,7 +3,10 @@
   <div class="small-11 medium-9 small-centered columns login-box">
     <div class="row">
       <div class="small-11 small-centered columns">
-        <h2><%= yield(:title) %></h2>
+          <div class="row">
+        <h2 class="left"><%= yield(:title) %></h2>
+        <div class="right"><%= yield(:labels) %></div>
+        </div>
         <%= yield %>
       </div>
     </div>

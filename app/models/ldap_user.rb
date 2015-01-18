@@ -26,6 +26,10 @@ class LdapUser < ActiveLdap::Base
     end
   end
 
+  def name_and_nick
+    @name_and_nick ||= "#{gn} '#{nickname}' #{sn}"
+  end
+
   def full_name
     @full_name ||= "#{gn} #{sn}"
   end

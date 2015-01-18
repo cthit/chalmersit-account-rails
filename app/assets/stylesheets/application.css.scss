@@ -93,3 +93,13 @@ body {
         }
     }
 }
+
+.admin-label {
+    @include label(
+        $padding:7px 10px 7px 24px,
+        $radius:5px
+    );
+    background:#F08A24 url(digit.svg) no-repeat left;
+    background-position: 5px;
+    background-size: 16px;
+}

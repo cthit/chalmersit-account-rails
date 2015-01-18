@@ -1,4 +1,7 @@
-<% content_for :title, t(whoose_profile(@user)) %>
+<% content_for :title, @user.name_and_nick %>
+<% if @user.admin? %>
+    <% content_for :labels do  %><span class="admin-label">Admin</span><% end %>
+<% end %>
 <section class="user-details">
   <table>
     <% user_attrs.each do |a| %>
