@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resource :admin, except: :new
-
   use_doorkeeper
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   as :user do
@@ -22,6 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:index, :show]
+  resources :groups, only: [:index, :show]
+  resource :admin, except: :new
+
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me

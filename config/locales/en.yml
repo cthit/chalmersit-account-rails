@@ -82,7 +82,13 @@ en:
       device: Enhet
     show:
       existential_crisis: That didn't look like you...
+  groups:
+    index:
   activemodel:
+    models:
+      ldap_group:
+        one: Grupp
+        other: Grupper
     errors:
       models:
         ldap_user:

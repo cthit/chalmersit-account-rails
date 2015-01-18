@@ -1,0 +1,19 @@
+<% content_for :title, t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+<table>
+    <thead>
+        <tr>
+            <th>cn</th>
+            <th>displayName</th>
+            <th>desription</th>
+        </tr>
+    </thead>
+    <tbody>
+<% @groups.each do |g| %>
+    <tr>
+        <td><%= link_to g.cn, group_path(g) %></td>
+        <td><%= g.displayName %></td>
+        <td><%= g.description %></td>
+    </tr>
+<% end %>
+    </tbody>
+</table>

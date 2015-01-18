@@ -82,7 +82,13 @@ sv:
       device: Enhet
     show:
       existential_crisis: Det där såg inte ut som dig...
+  groups:
+    index:
   activemodel:
+    models:
+      ldap_group:
+        one: Grupp
+        other: Grupper
     errors:
       models:
         ldap_user:
