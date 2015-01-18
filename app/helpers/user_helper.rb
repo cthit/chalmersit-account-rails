@@ -36,7 +36,7 @@ module UserHelper
   def member_of(members)
     return content_tag(:em, t('non_member'), class: 'not-entered') if members.empty?
     members.map do |m|
-      m.cn
+      m.displayName
     end.join ", "
   end
 
