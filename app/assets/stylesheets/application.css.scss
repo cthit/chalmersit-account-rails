@@ -79,6 +79,10 @@ body {
         margin-left: 9px;
         padding-left: $topbar-height - 0.4 !important;
     }
+
+}
+.top-bar-section .dropdown li.logout:not(.has-form):not(.active) > a:not(.button) {
+    background-color: #d2322d;
 }
 
 .top-bar-section, .top-bar-section .dropdown {
