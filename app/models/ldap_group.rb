@@ -1,7 +1,7 @@
 class LdapGroup < ActiveLdap::Base
   ldap_mapping dn_attribute: 'cn',
                prefix: 'ou=fkit,ou=groups',
-               :classes => ['groupOfNames', 'posixGroup','top'],
+               :classes => ['groupOfNames', 'posixGroup','top', 'itGroup'],
                scope: :sub
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
