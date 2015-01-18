@@ -1,8 +1,17 @@
 <% content_for :title, t("all_model", model:User.model_name.human(count: 2).downcase) %>
+
+<dl class="sub-nav left">
+    <dt>Filter:</dt>
+    <dd class="<%= "active" if params[:admission].nil? %>"><a href="<%= users_path %>">All</a></dd>
+<% (years_until_current 5).each do |y| %>
+    <%= content_tag :dd, link_to(y, admission: y), class: active_on_equal(y.to_s, params[:admission]) %>
+<% end %>
+</dl>
 <table role="grid">
         <thead>
             <th>CID</th>
             <th>Full name</th>
+            <th>Admission year</th>
         <% if @show_restricted %>
         <% end %>
         </thead>
@@ -11,6 +20,7 @@
             <tr>
                 <td><%= link_to u.uid, user_path(u) %></td>
                 <td><%= u.name_and_nick %></td>
+                <td><%= u.admission_year %></td>
             <% if @show_restricted %>
             <% end %>
             </tr>

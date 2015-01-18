@@ -55,4 +55,16 @@ module UserHelper
     end
   end
 
+  def years_until_current years_back
+    current = Time.new.year
+    current - years_back..current
+  end
+
+  def active_on_equal(this, that)
+    if this == that
+      "active"
+    else
+      ""
+    end
+  end
 end

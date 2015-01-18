@@ -5,7 +5,12 @@ class UsersController < ApplicationController
 
   def index
     @show_restricted = show_restricted_fields?
-    @users = LdapUser.all(order: :asc, sort_by: "uid")
+    if !params[:admission]
+      @users = LdapUser.all(order: :asc, sort_by: "uid")
+    else
+      @users = LdapUser.find(:all, attribute: 'admissionYear',
+                             value: params[:admission], order: :asc, sort_by: "gn")
+    end
   end
 
   def me
