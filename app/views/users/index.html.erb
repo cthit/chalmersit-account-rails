@@ -1,21 +1,17 @@
 <% content_for :title, t("all_model", model:User.model_name.human(count: 2).downcase) %>
 <table role="grid">
         <thead>
+            <th>CID</th>
             <th>Full name</th>
         <% if @show_restricted %>
-            <th>CID</th>
-            <th>Nickname</th>
-            <th>mail</th>
         <% end %>
         </thead>
         <tbody>
             <% @users.each do |u| %>
             <tr>
-                <td><%= link_to u.full_name, "/users/#{u.uid}" %></td>
+                <td><%= link_to u.uid, user_path(u) %></td>
+                <td><%= u.name_and_nick %></td>
             <% if @show_restricted %>
-                <td><%= u.uid %></td>
-                <td><%= u.nickname %></td>
-                <td><%= u.mail %></td>
             <% end %>
             </tr>
         </tbody>
