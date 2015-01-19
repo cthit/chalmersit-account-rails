@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117162347) do
+ActiveRecord::Schema.define(version: 20150119224502) do
+
+  create_table "applications", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "applications", ["name"], name: "index_applications_on_name"
 
   create_table "configurables", force: :cascade do |t|
     t.string   "name"
@@ -61,6 +69,44 @@ ActiveRecord::Schema.define(version: 20150117162347) do
   end
 
   add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+
+  create_table "service_data", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "send_to"
+    t.string   "device"
+    t.integer  "subscription_id"
+    t.integer  "notification_service_id"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
+  add_index "service_data", ["notification_service_id"], name: "index_service_data_on_notification_service_id"
+  add_index "service_data", ["subscription_id"], name: "index_service_data_on_subscription_id"
+  add_index "service_data", ["user_id"], name: "index_service_data_on_user_id"
+
+  create_table "subscribable_types", force: :cascade do |t|
+    t.integer  "application_id"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "subscribable_types", ["application_id"], name: "index_subscribable_types_on_application_id"
+  add_index "subscribable_types", ["name"], name: "index_subscribable_types_on_name"
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "category"
+    t.integer  "application_id"
+    t.integer  "service_data_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "subscriptions", ["application_id"], name: "index_subscriptions_on_application_id"
+  add_index "subscriptions", ["service_data_id"], name: "index_subscriptions_on_service_data_id"
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "cid",                    limit: 255,             null: false
