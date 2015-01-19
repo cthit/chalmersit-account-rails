@@ -1,5 +1,10 @@
 <% content_for :title, @group.displayName %>
-<p><%= @group.description %></p>
+<%= print_if_present :em, @group.function %>
+<br />
+<%= link_to fa_icon('external-link', text: 'Homepage'), @group.homepage unless @group.homepage.nil? %>
+<%= mail_to @group.mail, fa_icon('envelope', text:'Mail') unless @group.homepage.nil? %>
+
+<%= print_if_present :p, @group.description %>
 <ul class="side-nav">
     <%= @group.members.each do |m| %>
         <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
