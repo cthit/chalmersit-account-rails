@@ -1,12 +1,10 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail member_of preferredLanguage admissionYear telephonenumber display_name notifyBy push_services)
+    %w(uid full_name nickname mail member_of preferredLanguage admissionYear telephonenumber display_name)
   end
 
   def attr_or_not_entered(user, a)
     value = user.send(a)
-
-    return service_to_image(value) if a == 'notifyBy'
 
     return content_tag(:em, t('not_entered'), class: 'not-entered') if value.nil?
 

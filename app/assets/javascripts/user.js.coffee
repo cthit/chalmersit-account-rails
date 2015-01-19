@@ -16,6 +16,4 @@ setRadioBoxesEnabled = ->
   services = ['pushover', 'pushbullet']
   $(services).each ->
     apibox = $("#ldap_user_push_services_#{this}_api")
-    # set radio box enabled if length of value == maxlength
-    $("#ldap_user_notifyBy_#{this}").prop 'disabled', apibox.val().length < apibox.prop 'maxlength'
 

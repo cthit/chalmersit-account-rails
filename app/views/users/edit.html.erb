@@ -69,12 +69,6 @@
 
   <fieldset>
     <legend><%= t('notification', count: 2) %></legend>
-    <div class="notifyBy">
-      <%= f.label :notifyBy  do %>
-        <%= User.human_attribute_name(:notifyBy) %><br>
-        <%= f.collection_radio_buttons :notifyBy, ['mail', 'pushover', 'pushbullet'], :to_s, -> (s) { service_to_image(s) } %>
-      <% end %>
-    </div>
     <table>
         <thead>
             <tr>

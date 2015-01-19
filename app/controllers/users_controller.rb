@@ -53,7 +53,7 @@ class UsersController < ApplicationController
       push_service_attrs = [:device, :api]
       params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
                                         :telephonenumber, :preferredLanguage,
-                                        :notifyBy, { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
+                                        { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
 
     def doorkeeper_request?

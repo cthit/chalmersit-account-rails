@@ -6,7 +6,6 @@ class LdapUser < ActiveLdap::Base
   validates :mail, presence: true
   validates :nickname, presence: true
   validate :has_valid_display_format
-  validate :has_valid_notifyBy
   validate :has_valid_api_keys
 
   define_attribute_methods :push_services
@@ -76,10 +75,6 @@ class LdapUser < ActiveLdap::Base
 
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
-  end
-
-  def has_valid_notifyBy
-    errors.add(:notifyBy, :not_set) unless self.notifyBy == 'mail' || push_services.include?(notifyBy)
   end
 
   def has_valid_api_keys
