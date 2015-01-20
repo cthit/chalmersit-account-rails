@@ -1,16 +1,31 @@
 <% content_for :title, @group.displayName %>
-<%= print_if_present :em, @group.function %>
-<br />
-<%= link_to fa_icon('external-link', text: 'Homepage'), @group.homepage unless @group.homepage.nil? %>
-<%= mail_to @group.mail, fa_icon('envelope', text:'Mail') unless @group.homepage.nil? %>
-
-<%= print_if_present :p, @group.description %>
-<ul class="side-nav">
-    <%= @group.members.each do |m| %>
-        <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
-                <i class="fi-torso"></i>
-                <%= "#{m.full_name} (#{m.uid})" %>
-            <% end %>
-        </li>
-    <% end %>
-</ul>
+<div class="row">
+    <%= content_tag :p, content_tag(:em, @group.function) %>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        <h5><%= fa_icon 'child', text: t('.member', count: @group.members.size) %></h5>
+        <ul class="side-nav no-padding">
+        <%= @group.members.each do |m| %>
+            <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
+                    <i class="fi-torso"></i>
+                    <%= "#{m.full_name} (#{m.uid})" %>
+                <% end %>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+    <div class="large-6 columns">
+        <dl>
+            <dt><%= fa_icon 'info-circle', text: 'Info' %></dt>
+            <dd><%= @group.description %></dd>
+        <% unless @group.homepage.nil? %>
+            <%= dd_homepages @group.homepage(true) %>
+        <% end %>
+        <% unless @group.mail.nil? %>
+            <dt><%= fa_icon('envelope', text: t('mail', count: @group.mail(true).size)) %></dt>
+            <dd><%= mail_to @group.mail %></dd>
+        <% end %>
+        </dl>
+    </div>
+</div>

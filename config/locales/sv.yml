@@ -23,7 +23,12 @@ sv:
   site_title: -konto
   login: Logga in
   logout: Logga ut
-  mail: E-post
+  mail:
+    one: E-post
+    other: E-postaddresser
+  homepage:
+    one: Hemsida
+    other: Hemsidor
   edit: Ändra
   error: Fel
   your_profile: Din profil
@@ -84,6 +89,10 @@ sv:
       existential_crisis: Det där såg inte ut som dig...
   groups:
     index:
+    show:
+      member:
+        one: Member
+        other: Members
   activemodel:
     models:
       ldap_group:

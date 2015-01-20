@@ -23,7 +23,12 @@ en:
   site_title: -account
   login: Sign in
   logout: Sign out
-  mail: E-mail
+  mail:
+    one: E-mail
+    other: E-mail addresses
+  homepage:
+    one: Homepage
+    other: Homepages
   edit: Edit
   error: Error
   your_profile: Your profile
@@ -86,6 +91,10 @@ en:
       existential_crisis: That didn't look like you...
   groups:
     index:
+    show:
+      member:
+        one: Member
+        other: Members
   activemodel:
     models:
       ldap_group:
