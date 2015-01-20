@@ -54,6 +54,8 @@ sv:
   administration: Administration
   my_applications: Mina applikationer
   menu: Meny
+  committee: Kommitté
+  society: Förening
   activerecord:
     models:
       user: Användare

@@ -1,4 +1,7 @@
 <% content_for :title, @group.displayName %>
+<% content_for :labels do %>
+    <%= content_tag :span, t(@group.type), class: 'label success' if @group.type %>
+<% end  %>
 <div class="row">
     <%= content_tag :p, content_tag(:em, (@group.function_localised locale)) %>
 </div>

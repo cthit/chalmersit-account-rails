@@ -54,6 +54,8 @@ en:
   administration: Administration
   my_applications: My applications
   menu: Menu
+  committee: Committee
+  society: Society
   activerecord:
     models:
       user:
