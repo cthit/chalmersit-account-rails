@@ -39,6 +39,9 @@ gem 'doorkeeper'
 # Admin configurable settings
 gem 'configurable_engine'
 
+# Simplifies forms
+gem 'simple_form'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'

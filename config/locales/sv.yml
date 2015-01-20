@@ -89,6 +89,8 @@ sv:
       device: Enhet
     show:
       existential_crisis: Det där såg inte ut som dig...
+    index:
+      looking_for: 'Who are you looking for?'
   groups:
     index:
     show:
