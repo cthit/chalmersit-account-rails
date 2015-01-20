@@ -9,7 +9,7 @@
         <%= @group.members.each do |m| %>
             <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
                     <i class="fi-torso"></i>
-                    <%= "#{m.full_name} (#{m.uid})" %>
+                    <%= "#{m.name_and_nick}" %>
                 <% end %>
             </li>
         <% end %>
@@ -18,7 +18,7 @@
     <div class="large-6 columns">
         <dl>
             <dt><%= fa_icon 'info-circle', text: 'Info' %></dt>
-            <dd><%= @group.description %></dd>
+            <dd><%= @group.description_localised locale %></dd>
         <% unless @group.homepage.nil? %>
             <%= dd_homepages @group.homepage(true) %>
         <% end %>

@@ -31,6 +31,18 @@ class LdapGroup < ActiveLdap::Base
     cn
   end
 
+  def description_localised locale
+    desc = description(true)
+    desc.each do |d|
+      split = d.split(';')
+      p locale, split
+      if locale == split.first.to_sym
+        return split.last
+      end
+    end
+    desc.first
+  end
+
   private
     def recursive_members(dn, recursive = true)
       users = []
