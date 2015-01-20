@@ -12,7 +12,7 @@
     <!-- Right Nav Section -->
     <ul class="right">
       <li class="divider"></li>
-      <li class="has-dropdown dropdown-width <%= "active" if on_pages? me_path %>">
+      <li class="has-dropdown dropdown-width <%= "active" if on_pages? authenticated_root_path, me_path %>">
 <% if signed_in? %>
         <%= link_to me_path do %>
         <%= fa_icon 'user' %>
