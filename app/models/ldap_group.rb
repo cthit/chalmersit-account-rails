@@ -31,16 +31,12 @@ class LdapGroup < ActiveLdap::Base
     cn
   end
 
+  def function_localised locale
+    localise_field function(true), locale
+  end
+
   def description_localised locale
-    desc = description(true)
-    desc.each do |d|
-      split = d.split(';')
-      p locale, split
-      if locale == split.first.to_sym
-        return split.last
-      end
-    end
-    desc.first
+    localise_field description(true), locale
   end
 
   private
@@ -55,4 +51,14 @@ class LdapGroup < ActiveLdap::Base
       end
       users
     end
+
+  def localise_field field, locale
+    field.each do |f|
+      split = f.split(';')
+      if locale == split.first.to_sym
+        return split.last
+      end
+    end
+    field.first
+  end
 end

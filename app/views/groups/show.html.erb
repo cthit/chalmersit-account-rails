@@ -1,6 +1,6 @@
 <% content_for :title, @group.displayName %>
 <div class="row">
-    <%= content_tag :p, content_tag(:em, @group.function) %>
+    <%= content_tag :p, content_tag(:em, (@group.function_localised locale)) %>
 </div>
 <div class="row">
     <div class="large-6 columns">
