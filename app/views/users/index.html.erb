@@ -7,21 +7,21 @@
     <%= content_tag :dd, link_to(y, admission: y), class: active_on_equal(y.to_s, params[:admission]) %>
 <% end %>
 </dl>
-<%= simple_form_for :search, method: :get do |f| %>
+<%= form_tag users_path, method: :get do -%>
     <div class="row collapse">
         <div class="small-2 columns">
-            <%= f.input :type, label: false, selected: 'Nickname', collection: ['Nickname', 'CID', 'Name'] -%>
+            <%= select_tag :t, options_from_collection_for_select(searchable_fields, :downcase, :to_s, params[:t]) -%>
         </div>
-        <div class="small-8 columns">
-            <%= f.input :query, label: false, placeholder: t('.looking_for') -%>
+        <div class="small-5 columns">
+            <%= search_field_tag :q, (params[:q] unless params[:q].nil?), placeholder: t('.looking_for') %>
         </div>
-        <div class="small-2 columns">
-            <%= button_tag type: :submit, class: 'button tiny' do -%>
+        <div class="small-2 columns end">
+            <button class="button tiny">
                 <%= fa_icon 'search' -%>
-            <% end -%>
+            </button>
         </div>
     </div>
-<% end %>
+<% end -%>
 <table role="grid">
         <thead>
             <th>CID</th>

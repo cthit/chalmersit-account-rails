@@ -65,4 +65,8 @@ module UserHelper
       ""
     end
   end
+
+  def searchable_fields
+    %w(Nickname CID Name)
+  end
 end
