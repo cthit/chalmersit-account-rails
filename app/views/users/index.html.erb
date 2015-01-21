@@ -31,9 +31,9 @@
 <% if !@users.empty? -%>
 <table role="grid">
         <thead>
-            <th>CID</th>
-            <th>Full name</th>
-            <th>Admission year</th>
+            <th><%= User.human_attribute_name(:uid) %></th>
+            <th><%= User.human_attribute_name(:full_name) %></th>
+            <th><%= User.human_attribute_name(:admissionYear) %></th>
         <% if @show_restricted %>
         <% end %>
         </thead>

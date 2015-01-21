@@ -91,7 +91,7 @@ sv:
       existential_crisis: Det där såg inte ut som dig...
     index:
       unknown_type: Jag vet inte hur jag ska leta efter det...
-      looking_for: 'Who are you looking for?'
+      looking_for: Vem letar du efter?
       protip: 'Protip: Du kan använda * som jokeroperator'
       all: Alla
       search: Sök
