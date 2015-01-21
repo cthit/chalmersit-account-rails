@@ -31,20 +31,20 @@
 <% if !@users.empty? -%>
 <table role="grid">
         <thead>
+        <% if @show_restricted %>
             <th><%= User.human_attribute_name(:uid) %></th>
+        <% end %>
             <th width="100%"><%= User.human_attribute_name(:full_name) %></th>
             <th><%= User.human_attribute_name(:admissionYear) %></th>
-        <% if @show_restricted %>
-        <% end %>
         </thead>
         <tbody>
             <% @users.each do |u| %>
             <tr>
-                <td><%= link_to u.uid, user_path(u) %></td>
-                <td><%= u.name_and_nick %></td>
-                <td><%= u.admission_year %></td>
             <% if @show_restricted %>
+                <td><%= u.uid %></td>
             <% end %>
+                <td><%= link_to u.name_and_nick, user_path(u) %></td>
+                <td><%= u.admission_year %></td>
             </tr>
         </tbody>
 
