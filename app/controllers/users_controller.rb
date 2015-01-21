@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if params[:t].present? && params[:q].present?
       case params[:t]
       when 'name'
-        @users = search 'gn', params[:q]
+        @users = search_name params[:q]
       when *searchable_fields.map(&:last)
         @users = search params[:t], params[:q]
       else
@@ -85,5 +85,13 @@ class UsersController < ApplicationController
 
     def search attribute, value, order = :asc
       LdapUser.all(order: order, sort_by: attribute, attribute: attribute, value: value)
+    end
+
+    def search_name query
+      split = query.split ' '
+      query_str = "&" + split.map! do |q|
+        "(|(gn=#{q})(sn=#{q}))"
+      end.join
+      LdapUser.find(:all, filter: query_str)
     end
 end

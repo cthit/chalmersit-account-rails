@@ -86,8 +86,8 @@ en:
     edit:
       device_placeholder: Leave blank to send to all your devices
       token_placeholder: Your API-key
-      service: Aviseringstjänst
-      token: API-nyckel
+      service: Push service
+      token: API-key
       device: Enhet
     show:
       existential_crisis: That didn't look like you...
