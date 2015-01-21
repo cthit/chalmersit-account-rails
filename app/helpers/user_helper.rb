@@ -67,6 +67,6 @@ module UserHelper
   end
 
   def searchable_fields
-    %w(Nickname CID Name)
+    [['Nick', 'nickname'], ['CID', 'uid'], [t('activerecord.attributes.user.full_name'), 'name']]
   end
 end

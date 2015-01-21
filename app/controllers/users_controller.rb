@@ -2,14 +2,27 @@ class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?
   before_filter :find_model, except: [:index,:show]
+  include UserHelper
 
   def index
     @show_restricted = show_restricted_fields?
-    if !params[:admission]
-      @users = LdapUser.all(order: :asc, sort_by: "uid")
+    if params[:t] && params[:q]
+      case params[:t]
+      when 'name'
+        @users = search 'gn', params[:q]
+      when *searchable_fields.map(&:last)
+        @users = search params[:t], params[:q]
+      else
+        flash.now[:error] = t('.unknown_type')
+        @users = []
+      end
     else
-      @users = LdapUser.find(:all, attribute: 'admissionYear',
-                             value: params[:admission], order: :asc, sort_by: "gn")
+      if !params[:admission]
+        @users = LdapUser.all(order: :asc, sort_by: "uid")
+      else
+        @users = LdapUser.find(:all, attribute: 'admissionYear',
+                               value: params[:admission], order: :asc, sort_by: "gn")
+      end
     end
   end
 
@@ -62,5 +75,9 @@ class UsersController < ApplicationController
 
     def show_restricted_fields?
       (current_user && current_user.admin?) || doorkeeper_request?
+    end
+
+    def search attribute, value, order = :asc
+      LdapUser.all(order: order, sort_by: attribute, attribute: attribute, value: value)
     end
 end

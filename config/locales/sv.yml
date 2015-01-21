@@ -90,7 +90,9 @@ sv:
     show:
       existential_crisis: Det där såg inte ut som dig...
     index:
+      unknown_type: Jag vet inte hur jag ska leta efter det...
       looking_for: 'Who are you looking for?'
+      protip: 'Protip: Du kan använda * som jokeroperator'
   groups:
     index:
     show:

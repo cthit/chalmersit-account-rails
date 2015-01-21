@@ -92,7 +92,9 @@ en:
     show:
       existential_crisis: That didn't look like you...
     index:
+      unknown_type: I don't know how to found that for you...
       looking_for: 'Who are you looking for?'
+      protip: 'Protip: You can use * as a wildcard operator'
   groups:
     index:
     show:
