@@ -93,6 +93,10 @@ sv:
       unknown_type: Jag vet inte hur jag ska leta efter det...
       looking_for: 'Who are you looking for?'
       protip: 'Protip: Du kan använda * som jokeroperator'
+      all: Alla
+      search: Sök
+      nothing_found: Kunde inte hitta några personer som matchar din sökning
+      incomplete_search: Ofullständig sökning
   groups:
     index:
     show:

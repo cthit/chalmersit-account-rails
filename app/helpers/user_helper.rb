@@ -55,7 +55,7 @@ module UserHelper
 
   def years_until_current years_back
     current = Time.new.year
-    current - years_back..current
+    current - years_back+1..current
   end
 
   def active_on_equal(this, that)

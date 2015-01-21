@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @show_restricted = show_restricted_fields?
-    if params[:t] && params[:q]
+    if params[:t].present? && params[:q].present?
       case params[:t]
       when 'name'
         @users = search 'gn', params[:q]
@@ -17,6 +17,12 @@ class UsersController < ApplicationController
         @users = []
       end
     else
+      if params[:t] || params[:q]
+        flash.now[:error] = t('.incomplete_search')
+        @users = []
+        return
+      end
+
       if !params[:admission]
         @users = LdapUser.all(order: :asc, sort_by: "uid")
       else

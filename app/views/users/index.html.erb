@@ -2,7 +2,10 @@
 
 <dl class="sub-nav left">
     <dt>Filter:</dt>
-    <dd class="<%= "active" if params[:admission].nil? %>"><a href="<%= users_path %>">All</a></dd>
+    <dd class="<%= "active" if params[:admission].nil? && !params[:q] && !params[:t] %>"><a href="<%= users_path %>"><%= t('.all') %></a></dd>
+    <% if params[:q] && params[:t] -%>
+    <dd class="active"><%= link_to t('.search'),'#' %></dd>
+    <% end -%>
 <% (years_until_current 5).each do |y| %>
     <%= content_tag :dd, link_to(y, admission: y), class: active_on_equal(y.to_s, params[:admission]) %>
 <% end %>
@@ -25,6 +28,7 @@
         </div>
     </div>
 <% end -%>
+<% if !@users.empty? -%>
 <table role="grid">
         <thead>
             <th>CID</th>
@@ -46,3 +50,6 @@
 
   <% end %>
 </table>
+<% else -%>
+    <p><%= t('.nothing_found') %></p>
+<% end -%>

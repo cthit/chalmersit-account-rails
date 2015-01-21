@@ -95,6 +95,10 @@ en:
       unknown_type: I don't know how to found that for you...
       looking_for: 'Who are you looking for?'
       protip: 'Protip: You can use * as a wildcard operator'
+      all: All
+      search: Search
+      nothing_found: Could not find any people matching your query
+      incomplete_search: Incomplete search
   groups:
     index:
     show:
