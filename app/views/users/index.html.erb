@@ -7,15 +7,21 @@
     <%= content_tag :dd, link_to(y, admission: y), class: active_on_equal(y.to_s, params[:admission]) %>
 <% end %>
 </dl>
-<div>
-<%= simple_form_for :search, html: {class: 'form-inline'}, method: :get do |f| %>
-<%= f.input :type, label: false, selected: 'Nickname', collection: ['Nickname', 'CID', 'Name'], input_html: {class: 'selection-width'} -%>
-<%= f.input :query, label: false, placeholder: t('.looking_for'), input_html: {class: 'input-width'} -%>
-<%= button_tag type: :submit, class: 'button tiny top-align' do -%>
-    <%= fa_icon 'search' -%>
-<% end -%>
+<%= simple_form_for :search, method: :get do |f| %>
+    <div class="row collapse">
+        <div class="small-2 columns">
+            <%= f.input :type, label: false, selected: 'Nickname', collection: ['Nickname', 'CID', 'Name'] -%>
+        </div>
+        <div class="small-8 columns">
+            <%= f.input :query, label: false, placeholder: t('.looking_for') -%>
+        </div>
+        <div class="small-2 columns">
+            <%= button_tag type: :submit, class: 'button tiny' do -%>
+                <%= fa_icon 'search' -%>
+            <% end -%>
+        </div>
+    </div>
 <% end %>
-</div>
 <table role="grid">
         <thead>
             <th>CID</th>
