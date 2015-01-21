@@ -12,16 +12,16 @@
 </dl>
 <%= form_tag users_path, method: :get do -%>
     <div class="row collapse">
-        <div class="small-2 columns">
+        <div class="small-3 large-2 columns">
             <%= select_tag :t, options_for_select(searchable_fields, params[:t]) -%>
         </div>
         <div class="small-5 columns">
             <%= search_field_tag :q, (params[:q] unless params[:q].nil?), placeholder: t('.looking_for') %>
         </div>
-        <div class="small-2 columns end">
-            <button id="q" class="button tiny">
+        <div class="small-2 columns">
+            <%= button_tag name: '', id: 'q', class: 'button tiny' do -%>
                 <%= fa_icon 'search' -%>
-            </button>
+            <% end -%>
         </div>
         <div class="small-12 columns">
             <em id="protip"><%= t('.protip') if @users.empty? %></em>
