@@ -99,6 +99,8 @@ sv:
       incomplete_search: Ofullständig sökning
   groups:
     index:
+      cn: Kommitté/Förening
+      description: Beskrivning
     show:
       member:
         one: Medlem

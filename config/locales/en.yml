@@ -101,6 +101,8 @@ en:
       incomplete_search: Incomplete search
   groups:
     index:
+      cn: Committee/Society
+      description: Description
     show:
       member:
         one: Member
