@@ -58,7 +58,7 @@ body {
   margin: 16px auto 0;
   width: 75%;
   min-height: 200px;
-  background: url(itlogo.svg) no-repeat center;
+  background: asset-url('itlogo.svg') no-repeat center;
   background-size: contain;
   &.animating {
     -webkit-animation: rotating 2s ease-out infinite;
@@ -76,7 +76,7 @@ body {
 
 .top-bar {
     a.top-logo {
-        background: url(itlogo.svg) no-repeat left;
+        background: asset-url('itlogo.svg') no-repeat left;
         background-size: $topbar-height - 0.4;
         margin-left: 9px;
         padding-left: $topbar-height - 0.4 !important;
@@ -100,7 +100,7 @@ body {
         $padding:7px 10px 7px 24px,
         $radius:5px
     );
-    background:#2D882D url(digit.svg) no-repeat left;
+    background:#2D882D asset-url('digit.svg') no-repeat left;
     background-position: 5px;
     background-size: 16px;
 }
