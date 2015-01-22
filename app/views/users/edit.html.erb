@@ -12,11 +12,6 @@
 <% end %>
 
 <%= form_for(@user, url: update_me_path) do |f| %>
-  <%= f.label :uid do %>
-    <%= User.human_attribute_name(:uid) %>
-    <%= f.text_field :uid, disabled: true %>
-  <% end %>
-
   <%= f.label :mail do %>
     <%= User.human_attribute_name(:mail) %>
     <%= f.email_field :mail %>

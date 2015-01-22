@@ -79,11 +79,13 @@ class LdapUser < ActiveLdap::Base
   end
 
   def has_valid_api_keys
-    return unless push_services_changed?
+    #return unless push_services_changed?
 
-    push_services.each do |k, v|
-        send "validate_#{k}", v[:api], v[:device]
-    end
+    #push_services.each do |k, v|
+    #    send "validate_#{k}", v[:api], v[:device]
+    #end
+    # FIXME: rewrite...
+    true
   end
 
   def validate_pushover user, device
