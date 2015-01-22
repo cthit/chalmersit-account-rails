@@ -12,7 +12,9 @@ class LdapGroup < ActiveLdap::Base
   end
 
   def self.all
-    @@all ||= self.find(:all)
+    Rails.cache.fetch(all_groups_cache_key) do
+      self.find(:all)
+    end
   end
 
   def members_as_dn
@@ -60,5 +62,9 @@ class LdapGroup < ActiveLdap::Base
       end
     end
     field.first
+  end
+
+  def self.all_groups_cache_key
+    LdapGroup.count
   end
 end

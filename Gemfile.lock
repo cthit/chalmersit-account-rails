@@ -62,6 +62,7 @@ GEM
     coffee-script-source (1.8.0)
     configurable_engine (0.4.7)
       rails (> 3.1.0)
+    dalli (2.7.2)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -257,6 +258,7 @@ DEPENDENCIES
   better_errors
   coffee-rails (~> 4.0.0)
   configurable_engine
+  dalli
   devise
   doorkeeper
   font-awesome-rails
