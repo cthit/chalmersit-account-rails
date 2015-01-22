@@ -46,7 +46,7 @@ en:
   remember_me: Remember me
   forgot_password: Forgot your password?
   create_user: New user
-  send_instructions: Send me reset password instructions
+  send_instructions: Reset my password
   info_changed: The changes were saved
   all_model: "All %{model}"
   non_member: No membership as of yet

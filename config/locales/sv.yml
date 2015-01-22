@@ -46,7 +46,7 @@ sv:
   remember_me: Kom ihåg mig
   forgot_password: Glömt ditt lösenord?
   create_user: Bli IT-teknolog
-  send_instructions: Återställ
+  send_instructions: Återställ mitt lösenord
   info_changed: Ändringarna sparades
   all_model: "Alla %{model}"
   non_member: Kom aldrig med...

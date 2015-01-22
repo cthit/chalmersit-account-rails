@@ -8,5 +8,8 @@
     <%= f.label :remember_me, t('remember_me') %>
   <% end -%>
   <br>
-  <%= f.submit t('login'), class: 'login-btn small-12 columns button' %>
+  <%= button_tag class: 'login-btn small-12 columns button' do %>
+      <%= fa_icon 'sign-in' -%>
+      <%= t('login') -%>
+  <% end -%>
 <% end %>
