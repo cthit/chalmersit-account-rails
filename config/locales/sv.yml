@@ -20,13 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 sv:
+  site_title: -konto
   login: Logga in
   logout: Logga ut
-  mail: E-post
+  mail:
+    one: E-post
+    other: E-postaddresser
+  homepage:
+    one: Hemsida
+    other: Hemsidor
   edit: Ändra
   error: Fel
-  logged_in_as: Inloggad som
-  edit_your_info: Ändra dina uppgifter
+  your_profile: Din profil
+  their_profile: Deras profil
+  edit_profile: Ändra din profil
   back: Tillbaka
   save: Spara
   sv: svenska
@@ -38,10 +45,17 @@ sv:
   not_entered: Ej angivet
   remember_me: Kom ihåg mig
   forgot_password: Glömt ditt lösenord?
-  send_instructions: Återställ
+  create_user: Bli IT-teknolog
+  send_instructions: Återställ mitt lösenord
   info_changed: Ändringarna sparades
   all_model: "Alla %{model}"
   non_member: Kom aldrig med...
+  admin_override: digIT-override!
+  administration: Administration
+  my_applications: Mina applikationer
+  menu: Meny
+  committee: Kommitté
+  society: Förening
   activerecord:
     models:
       user: Användare
@@ -66,10 +80,42 @@ sv:
         push_services:
           one: Push-avisering
           other: Push-aviseringar
+  users:
+    edit:
+      device_placeholder: Lämna tomt för att skicka till alla enheter
+      token_placeholder: Din API-nyckel
+      service: Aviseringstjänst
+      token: API-nyckel
+      device: Enhet
+    show:
+      existential_crisis: Det där såg inte ut som dig...
+    index:
+      unknown_type: Jag vet inte hur jag ska leta efter det...
+      looking_for: Vem letar du efter?
+      protip: 'Protip: Du kan använda * som jokeroperator'
+      all: Alla
+      search: Sök
+      nothing_found: Kunde inte hitta några personer som matchar din sökning
+      incomplete_search: Ofullständig sökning
+  groups:
+    index:
+      cn: Kommitté/Förening
+      description: Beskrivning
+    show:
+      member:
+        one: Medlem
+        other: Medlemmar
   activemodel:
+    models:
+      ldap_group:
+        one: Grupp
+        other: Grupper
     errors:
       models:
         ldap_user:
+          unknown_device: "Okänd enhet. Dina enheter: %{known_devices}"
           attributes:
             display_name:
               not_valid_format: har ett felaktigt format
+            notifyBy:
+              not_set: är satt till en ospecificerad aviseringstjänst

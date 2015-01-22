@@ -20,13 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  site_title: -account
   login: Sign in
   logout: Sign out
-  mail: E-mail
+  mail:
+    one: E-mail
+    other: E-mail addresses
+  homepage:
+    one: Homepage
+    other: Homepages
   edit: Edit
   error: Error
-  logged_in_as: Signed in as
-  edit_your_info: Edit your information
+  your_profile: Your profile
+  their_profile: Their profile
+  edit_profile: Edit profile
   back: Back
   save: Save
   sv: Swedish
@@ -38,13 +45,22 @@ en:
   not_entered: Not entered
   remember_me: Remember me
   forgot_password: Forgot your password?
-  send_instructions: Send me reset password instructions
+  create_user: New user
+  send_instructions: Reset my password
   info_changed: The changes were saved
   all_model: "All %{model}"
   non_member: No membership as of yet
+  admin_override: digIT-override!
+  administration: Administration
+  my_applications: My applications
+  menu: Menu
+  committee: Committee
+  society: Society
   activerecord:
     models:
-      user: User
+      user:
+        one: User
+        other: Users
     attributes:
       user:
         mail: E-mail
@@ -66,10 +82,42 @@ en:
         push_services:
           one: Push notification
           other: Push notifications
+  users:
+    edit:
+      device_placeholder: Leave blank to send to all your devices
+      token_placeholder: Your API-key
+      service: Push service
+      token: API-key
+      device: Enhet
+    show:
+      existential_crisis: That didn't look like you...
+    index:
+      unknown_type: I don't know how to found that for you...
+      looking_for: 'Who are you looking for?'
+      protip: 'Protip: You can use * as a wildcard operator'
+      all: All
+      search: Search
+      nothing_found: Could not find any people matching your query
+      incomplete_search: Incomplete search
+  groups:
+    index:
+      cn: Committee/Society
+      description: Description
+    show:
+      member:
+        one: Member
+        other: Members
   activemodel:
+    models:
+      ldap_group:
+        one: Group
+        other: Groups
     errors:
       models:
         ldap_user:
+          unknown_device: "Unknown device. Your devices: %{known_devices}"
           attributes:
             display_name:
               not_valid_format: has invalid format
+            notifyBy:
+              not_set: is set to an unspecified push service

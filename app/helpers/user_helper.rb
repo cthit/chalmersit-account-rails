@@ -1,14 +1,26 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail member_of preferredLanguage admissionYear telephonenumber display_name notifyBy push_services)
+    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name)
+  end
+
+  def priv_attrs
+    %w(uid preferredLanguage display_name)
+  end
+
+  # Returns true if I am able to view a privileged variable
+  def can_i_view? attr
+    if current_user == @user.db_user || current_user.admin?
+      return true
+    end
+    !priv_attrs.include?(attr)
+  end
+
+  def show_attr? attr
+    can_i_view?(attr) && @user.send(attr).present?
   end
 
   def attr_or_not_entered(user, a)
     value = user.send(a)
-
-    return service_to_image(value) if a == 'notifyBy'
-
-    return content_tag(:em, t('not_entered'), class: 'not-entered') if value.nil?
 
     return t(value) if a == 'preferredLanguage'
 
@@ -36,7 +48,7 @@ module UserHelper
   def member_of(members)
     return content_tag(:em, t('non_member'), class: 'not-entered') if members.empty?
     members.map do |m|
-      m.cn
+      link_to m.displayName, group_path(m)
     end.join ", "
   end
 
@@ -44,6 +56,35 @@ module UserHelper
     [
       {name: 'pushover', maxtoken: 30, maxdevice: 25, url: 'https://pushover.net'},
       {name: 'pushbullet', maxtoken: 32, maxdevice: 16, url: 'https://pushbullet.com'}
+    ]
+  end
+
+  def whoose_profile user
+    if current_user && current_user == user.db_user
+      "your_profile"
+    else
+      "their_profile"
+    end
+  end
+
+  def years_until_current years_back
+    current = Time.new.year
+    current - years_back+1..current
+  end
+
+  def active_on_equal(this, that)
+    if this == that
+      "active"
+    else
+      ""
+    end
+  end
+
+  def searchable_fields
+    [ #Display, #param name
+     ['Nick', 'nickname'],
+     ['CID', 'uid'],
+     [t('activerecord.attributes.user.full_name'), 'name']
     ]
   end
 end

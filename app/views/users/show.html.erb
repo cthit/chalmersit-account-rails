@@ -1,18 +1,22 @@
-<% content_for :title, t('logged_in_as') + ' ' + @user.display_name %>
-
+<% content_for :title, @user.name_and_nick %>
+<% if @user.admin? %>
+    <% content_for :labels do  %><span class="admin-label">Admin</span><% end %>
+<% end %>
 <section class="user-details">
-  <table>
+  <table class="borderless">
+    <tbody>
     <% user_attrs.each do |a| %>
-      <tr>
-        <td>
-          <strong><%= User.human_attribute_name(a) %></strong>
-        </td>
-        <td>
-          <%= attr_or_not_entered(@user, a) %><br>
-        </td>
-      </tr>
+        <% if show_attr? a %>
+          <tr>
+            <td>
+              <strong><%= User.human_attribute_name(a) %></strong>
+            </td>
+            <td width="100%">
+              <%= attr_or_not_entered(@user, a).html_safe %><br>
+            </td>
+          </tr>
+        <% end %>
     <% end %>
+    </tbody>
   </table>
 </section>
-<%= link_to t('edit'), edit_me_path %> |
-<%= link_to t('logout'), destroy_user_session_path, method: :delete %>

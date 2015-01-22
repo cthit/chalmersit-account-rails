@@ -1,6 +1,55 @@
 <% content_for :title, t("all_model", model:User.model_name.human(count: 2).downcase) %>
-<ul>
-  <% @users.each do |u| %>
-    <li><%= u.full_name %></li>
+
+<dl class="sub-nav left">
+    <dt>Filter:</dt>
+    <dd class="<%= "active" if params[:admission].nil? && !params[:q] && !params[:t] %>"><a href="<%= users_path %>"><%= t('.all') %></a></dd>
+    <% if params[:q] && params[:t] -%>
+    <dd class="active"><%= link_to t('.search'),'#' %></dd>
+    <% end -%>
+<% (years_until_current 5).each do |y| %>
+    <%= content_tag :dd, link_to(y, admission: y), class: active_on_equal(y.to_s, params[:admission]) %>
+<% end %>
+</dl>
+<%= form_tag users_path, method: :get do -%>
+    <div class="row collapse">
+        <div class="small-3 large-2 columns">
+            <%= select_tag :t, options_for_select(searchable_fields, params[:t]) -%>
+        </div>
+        <div class="small-5 columns">
+            <%= search_field_tag :q, (params[:q] unless params[:q].nil?), placeholder: t('.looking_for') %>
+        </div>
+        <div class="small-2 columns">
+            <%= button_tag name: '', id: 'q', class: 'button tiny' do -%>
+                <%= fa_icon 'search' -%>
+            <% end -%>
+        </div>
+        <div class="small-12 columns">
+            <em id="protip"><%= t('.protip') if @users.empty? %></em>
+        </div>
+    </div>
+<% end -%>
+<% if !@users.empty? -%>
+<table role="grid">
+        <thead>
+        <% if @show_restricted %>
+            <th><%= User.human_attribute_name(:uid) %></th>
+        <% end %>
+            <th width="100%"><%= User.human_attribute_name(:full_name) %></th>
+            <th><%= User.human_attribute_name(:admissionYear) %></th>
+        </thead>
+        <tbody>
+            <% @users.each do |u| %>
+            <tr>
+            <% if @show_restricted %>
+                <td><%= u.uid %></td>
+            <% end %>
+                <td><%= link_to u.name_and_nick, user_path(u) %></td>
+                <td><%= u.admission_year %></td>
+            </tr>
+        </tbody>
+
   <% end %>
-</ul>
+</table>
+<% else -%>
+    <p><%= t('.nothing_found') %></p>
+<% end -%>

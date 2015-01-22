@@ -1,7 +1,7 @@
 class LdapGroup < ActiveLdap::Base
   ldap_mapping dn_attribute: 'cn',
                prefix: 'ou=fkit,ou=groups',
-               :classes => ['groupOfNames', 'posixGroup','top'],
+               classes:  ['groupOfNames', 'posixGroup','top', 'itGroup'],
                scope: :sub
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
@@ -9,6 +9,10 @@ class LdapGroup < ActiveLdap::Base
   def members
     @members_cache ||= {}
     @members ||= members_as_dn.lazy.map { |m| @members_cache[m] ||= LdapUser.find(m) }
+  end
+
+  def self.all
+    @@all ||= self.find(:all)
   end
 
   def members_as_dn
@@ -27,6 +31,14 @@ class LdapGroup < ActiveLdap::Base
     cn
   end
 
+  def function_localised locale
+    localise_field function(true), locale
+  end
+
+  def description_localised locale
+    localise_field description(true), locale
+  end
+
   private
     def recursive_members(dn, recursive = true)
       users = []
@@ -39,4 +51,14 @@ class LdapGroup < ActiveLdap::Base
       end
       users
     end
+
+  def localise_field field, locale
+    field.each do |f|
+      split = f.split(';')
+      if locale == split.first.to_sym
+        return split.last
+      end
+    end
+    field.first
+  end
 end

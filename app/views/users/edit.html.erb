@@ -1,4 +1,4 @@
-<% content_for :title, t('edit_your_info') %>
+<% content_for :title, t('edit_profile') %>
 
 <% if @user.errors.any? %>
   <div id="error_explanation" data-alert class="alert-box warning">
@@ -16,23 +16,29 @@
 
   <fieldset>
     <legend><%= t('notification', count: 2) %></legend>
-    <%= f.label :notifyBy  do %>
-      <%= User.human_attribute_name(:notifyBy) %><br>
-      <%= f.collection_radio_buttons :notifyBy, ['mail', 'pushover', 'pushbullet'], :to_s, -> (s) { service_to_image(s) } %>
-    <% end %>
     <table>
+        <thead>
+            <tr>
+                <th><%= t '.service' %></th>
+                <th><%= t '.token' %></th>
+                <th><%= t '.device' %></th>
+            </tr>
+        </thead>
+        <tbody>
       <% push_services.each do |s| %>
         <tr>
           <td><%= service_to_image s[:name] %> <%= link_to s[:name].titlecase, s[:url] %></td>
-          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][api]", (@user.push_services[s[:name]][:api] if @user.push_services), maxlength: s[:maxtoken], placeholder: 'User token' %></td>
-          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][device]", (@user.push_services[s[:name]][:device] if @user.push_services), maxlength: s[:maxdevice], placeholder: 'Device (empty = all)' %></td>
+          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][api]", (@user.push_services[s[:name]][:api] if @user.push_services  && @user.push_services[s[:name]]), maxlength: s[:maxtoken], placeholder: t('.token_placeholder') %></td>
+          <td><%= text_field_tag "ldap_user[push_services][#{s[:name]}][device]", (@user.push_services[s[:name]][:device] if @user.push_services && @user.push_services[s[:name]]), maxlength: s[:maxdevice], placeholder: t('.device_placeholder') %></td>
         </tr>
       <% end %>
+        </tbody>
     </table>
   </fieldset>
 
-  <%= f.submit t('save'), class: 'button' %>
+    <ul class="button-group even-2">
+        <li><%= link_to me_path, class: 'button small secondary' do %><%= fa_icon('angle-left') + ' ' + t('back') %><% end %></li>
+        <li><%= button_tag type: :submit, class: 'button small' do %><%= fa_icon('save') + ' ' + t('save') %><% end %></li>
+    </ul>
 <% end %>
 
-<%= link_to t('back'), me_path %> |
-<%= link_to t('logout'), destroy_user_session_path, method: :delete %>

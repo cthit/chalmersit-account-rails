@@ -14,12 +14,19 @@
  *= require_self
  */
 
+
+@import "foundation/components/type";
 @import "foundation/components/grid";
 @import "foundation/components/buttons";
 @import "foundation/components/forms";
 @import "foundation/components/tables";
 @import "foundation/components/alert-boxes";
 @import "foundation/components/labels";
+@import "foundation/components/top-bar";
+@import "foundation/components/button-groups";
+@import "foundation/components/side-nav";
+@import "foundation/components/sub-nav";
+@import "font-awesome";
 
 body {
   background: #f1f1f1;
@@ -51,7 +58,7 @@ body {
   margin: 16px auto 0;
   width: 75%;
   min-height: 200px;
-  background: url(itlogo.svg) no-repeat center;
+  background: asset-url('itlogo.svg') no-repeat center;
   background-size: contain;
   &.animating {
     -webkit-animation: rotating 2s ease-out infinite;
@@ -65,4 +72,52 @@ body {
   margin: 16px 0;
   padding: 25px;
   background: white;
+}
+
+.top-bar {
+    a.top-logo {
+        background: asset-url('itlogo.svg') no-repeat left;
+        background-size: $topbar-height - 0.4;
+        margin-left: 9px;
+        padding-left: $topbar-height - 0.4 !important;
+    }
+
+}
+.top-bar-section .dropdown li.logout:not(.has-form):not(.active) > a:not(.button) {
+    background-color: #d2322d;
+}
+
+.top-bar-section, .top-bar-section .dropdown {
+    li:not(.has-form) a:not(.button), li:not(.has-form):not(.active) > a:not(.button) {
+        &:hover {
+            background-color: $topbar-link-bg-active-hover;
+        }
+    }
+}
+
+.admin-label {
+    @include label(
+        $padding:7px 10px 7px 24px,
+        $radius:5px
+    );
+    background:#2D882D asset-url('digit.svg') no-repeat left;
+    background-position: 5px;
+    background-size: 16px;
+}
+
+.labels {
+    height: 55px;
+}
+.labels span {
+    margin-top: 15px;
+}
+
+@media (max-width: 730px) {
+        .hide-on-small {
+            display: none;
+        }
+}
+
+.dropdown-width {
+    min-width: 200px;
 }

@@ -1,0 +1,17 @@
+<% content_for :title, t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+<table>
+    <thead>
+        <tr>
+            <th><%= t('.cn') -%></th>
+            <th width="100%"><%= t('.description') -%></th>
+        </tr>
+    </thead>
+    <tbody>
+<% @groups.each do |g| %>
+    <tr>
+        <td><%= link_to g.displayName, group_path(g) %></td>
+        <td><%= g.description_localised locale %></td>
+    </tr>
+<% end %>
+    </tbody>
+</table>

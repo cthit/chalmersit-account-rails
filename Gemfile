@@ -11,14 +11,14 @@ gem 'activeldap', require: 'active_ldap/railtie'
 gem 'net-ldap', '~> 0.9.0'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
-gem 'foundation-rails', '~> 5.4.5'
+gem 'foundation-rails', '~> 5.5.0'
+gem "font-awesome-rails"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -32,9 +32,22 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
+# oauth provider library
+gem 'doorkeeper'
+
+# Admin configurable settings
+gem 'configurable_engine'
+
+# Simplifies forms
+gem 'simple_form'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
+end
+
+group :production do
+  gem 'therubyracer',  platforms: :ruby
 end
 
 gem 'rspec-rails', group: [:development, :test]

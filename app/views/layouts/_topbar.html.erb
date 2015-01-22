@@ -1,0 +1,82 @@
+<nav class="top-bar" data-topbar role="navigation" data-options="mobile_show_parent_link:false">
+  <ul class="title-area">
+    <li class="name">
+      <h1>
+        <%= link_to t('site_title'), "/", class: "top-logo" %>
+      </h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
+  </ul>
+
+  <section class="top-bar-section">
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <li class="divider"></li>
+      <li class="has-dropdown dropdown-width <%= "active" if on_pages? authenticated_root_path, me_path %>">
+<% if signed_in? %>
+        <%= link_to me_path do %>
+        <%= fa_icon 'user' %>
+        <%= current_user.display_name %>
+        <% end %>
+<% else %>
+        <a href="#"><%= t('menu') %></a>
+<% end %>
+        <ul class="dropdown">
+<% if signed_in? %>
+            <li><a href="<%= edit_me_path %>"><%= fa_icon 'edit' %> <%= t 'edit_profile'  %></a></li>
+    <% if current_user.admin? %>
+            <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
+    <% end %>
+    <li class="logout"><a href="<%= destroy_user_session_path %>"><%= fa_icon 'sign-out' %> <%= t('logout') %></a></li>
+<% else %>
+          <li> <%= link_to new_user_session_path do %><%= fa_icon 'sign-in' %> <%= t 'login' %> <% end %> 
+          <li> <%= link_to new_password_path(resource_name) do %><%= fa_icon 'eject' %> <%= t 'forgot_password' %> <% end %> 
+          <li> <%= link_to '#' do %><%= fa_icon 'plus' %> <%= t 'create_user' %> <% end %> 
+<% end %>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- Left Nav Section -->
+    <ul class="left">
+    <li class="divider"></li>
+    <li class="active">
+    <%= link_to "#{Configurable.mainsite_url}#{Configurable.mainsite_login_uri}" do %>
+        <%= fa_icon 'external-link', text: "chalmers.it" %>
+    <% end %>
+    </li>
+    <li class="divider"></li>
+<% if signed_in? %>
+    <li class="has-dropdown">
+      <a href="#"><%= t('my_applications') %></a>
+      <ul class="dropdown">
+       <li>
+        <%= link_to "#" do %>
+            <%= fa_icon 'bookmark-o', text: 'bookIT' %>
+        <% end %>
+       </li>
+       <li>
+        <%= link_to "#" do %>
+            <%= fa_icon 'play', text: 'playIT' %>
+        <% end %>
+       </li>
+      </ul>
+    </li>
+ <% if signed_in? && current_user.admin? %>
+    <li class="divider"></li>
+    <li class="hide-on-small <%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
+            <%= fa_icon 'users' %>
+            <%= t("all_model", model:User.model_name.human(count: 2).downcase) %>
+        <% end %>
+    </li>
+    <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
+            <%= fa_icon 'folder' %>
+            <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+        <% end %>
+    </li>
+    <li class="divider"></li>
+ <% end %>
+<% end %>
+    </ul>
+  </section>
+</nav>

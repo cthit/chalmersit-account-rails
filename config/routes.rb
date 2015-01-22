@@ -1,16 +1,17 @@
 Rails.application.routes.draw do
+  use_doorkeeper
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   as :user do
     get 'login' => 'devise/sessions#new', :as => :new_user_session
     post 'login' => 'devise/sessions#create', :as => :user_session
-    delete 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   devise_scope :user do
     authenticated :user do
-      root 'users#show', as: :authenticated_root
+      root 'users#me', as: :authenticated_root
     end
 
     unauthenticated do
@@ -18,7 +19,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/me' => 'users#show', as: :me
+  resources :users, only: [:index, :show]
+  resources :groups, only: [:index, :show]
+  resource :admin, except: :new
+
+  get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
 
