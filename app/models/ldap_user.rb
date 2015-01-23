@@ -20,7 +20,7 @@ class LdapUser < Activedap
   end
 
   def self.all_cached
-    Rails.cache.fetch(LdapUser.all_users_cache_key) do
+    @all ||= Rails.cache.fetch(LdapUser.all_users_cache_key) do
         LdapUser.all(order: :asc, sort_by: "uid")
     end
   end
@@ -28,7 +28,7 @@ class LdapUser < Activedap
   # The groups the user is a member of
   # FIXME: invalidate on member change...
   def member_of
-    Rails.cache.fetch("#{uid}/memberof") do
+    @member_of ||= Rails.cache.fetch("#{uid}/memberof") do
       memberof = []
       all = LdapGroup.all_cached
 

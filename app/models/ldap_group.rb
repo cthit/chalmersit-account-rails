@@ -9,13 +9,13 @@ class LdapGroup < Activedap
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
   def members
-    Rails.cache.fetch("#{cn}/members") do
+    @members ||= Rails.cache.fetch("#{cn}/members") do
       LdapUser.find(members_as_dn)
     end
   end
 
   def self.all_cached
-    Rails.cache.fetch(all_groups_cache_key) do
+    @all ||= Rails.cache.fetch(all_groups_cache_key) do
       self.find(:all)
     end
   end
@@ -77,16 +77,18 @@ class LdapGroup < Activedap
   private
     # Concat users of group members one layer deep
     def recursive_members()
+      return @users if @users.present?
+
       # False is the users, true groups
       grouped = member(true).group_by{|g| LdapGroup.dn_is_group? g} 
-      users = grouped[false] || []
+      @users = grouped[false] || []
       groups = grouped[true] || []
 
       groups.each do |g_dn|
         group_users = LdapGroup.find(g_dn).member.group_by{|g| LdapGroup.dn_is_group? g}[false]
-        users.push(*group_users)
+        @users.push(*group_users)
       end
-      users
+      @users
     end
 
     def localise_field field, locale
