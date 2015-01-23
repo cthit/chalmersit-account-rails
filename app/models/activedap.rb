@@ -6,7 +6,6 @@ class Activedap < ActiveLdap::Base
   # Create a new instance of the correct class from given DN and attributes
   def self._load data
     dn, attributes = eval data
-
     obj = self.ancestors[0].allocate
     obj.instance_eval do
       initialize_by_ldap_data(dn, attributes)

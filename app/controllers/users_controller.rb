@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       end
 
       if !params[:admission]
-        @users = LdapUser.all(order: :asc, sort_by: "uid")
+        @users = LdapUser.all_cached
       else
         @users = LdapUser.find(:all, attribute: 'admissionYear',
                                value: params[:admission], order: :asc, sort_by: "gn")
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
   def show
     @show_restricted = show_restricted_fields?
-    @user = LdapUser.find(params[:id])
+    @user = LdapUser.find_cached(params[:id])
   end
 
   def edit

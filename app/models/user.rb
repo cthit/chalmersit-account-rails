@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   devise :recoverable, :rememberable, :trackable
 
   def ldap_user
-    @ldap_user ||= LdapUser.find(cid)
+    @ldap_user ||= LdapUser.find_cached(cid)
   end
 
   def method_missing(meth)
