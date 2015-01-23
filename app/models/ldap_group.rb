@@ -1,4 +1,4 @@
-class LdapGroup < ActiveLdap::Base
+class LdapGroup < Activedap
   ldap_mapping dn_attribute: 'cn',
                prefix: 'ou=fkit,ou=groups',
                classes:  ['groupOfNames', 'posixGroup','top', 'itGroup'],
@@ -40,6 +40,17 @@ class LdapGroup < ActiveLdap::Base
   def description_localised locale
     localise_field description(true), locale
   end
+
+  def cache_key
+    "#{cn}/#{attributes.hash}"
+  end
+
+  def _dump level = 0
+    attrs = attributes
+    attrs['member'].map!(&:to_s)
+    [dn.to_s, attrs].to_s
+  end
+
 
   private
     def recursive_members(dn, recursive = true)

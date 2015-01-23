@@ -1,4 +1,4 @@
-class LdapUser < ActiveLdap::Base
+class LdapUser < Activedap
   include ActiveModel::Dirty
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=it,ou=people',
@@ -70,6 +70,10 @@ class LdapUser < ActiveLdap::Base
 
   def self.display_formats
     ["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"]
+  end
+
+  def cache_key
+    "#{uid}/#{db_user.updated_at.to_i}"
   end
 
   private
