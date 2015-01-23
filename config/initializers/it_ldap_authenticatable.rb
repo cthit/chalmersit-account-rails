@@ -5,7 +5,7 @@ module Devise
     class ItLdapAuthenticatable < Authenticatable
       def authenticate!
         begin
-          user = LdapUser.find(params_auth_hash[:cid])
+          user = LdapUser.find_cached(params_auth_hash[:cid])
 
           this = params_auth_hash[:password].force_encoding('ascii-8bit')
           that = user.userPassword.force_encoding('ascii-8bit')

@@ -41,6 +41,9 @@ gem 'configurable_engine'
 # Simplifies forms
 gem 'simple_form'
 
+# Memcached interface
+gem 'dalli'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
