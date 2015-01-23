@@ -1,6 +1,6 @@
 module GroupsHelper
   def dd_link icon, text, link
-    content_tag :dt, fa_icon(icon, text: text) + (content_tag :dd, (link_to link))
+    content_tag :dt, fa_icon(icon, text: text) + (content_tag :dd, (link_to link, link))
   end
 
   def dd_homepages homepages
