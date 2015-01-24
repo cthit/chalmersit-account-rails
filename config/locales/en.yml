@@ -56,6 +56,8 @@ en:
   menu: Menu
   committee: Committee
   society: Society
+  next: Next
+  prev: Previous
   activerecord:
     models:
       user:

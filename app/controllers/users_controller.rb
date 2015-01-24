@@ -3,15 +3,16 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, unless: :doorkeeper_request?
   before_filter :find_model, except: [:index,:show]
   include UserHelper
+  require 'will_paginate/array'
 
   def index
     @show_restricted = show_restricted_fields?
     if params[:t].present? && params[:q].present?
       case params[:t]
       when 'name'
-        @users = search_name params[:q]
+        @users = search_name(params[:q]).paginate(page: params[:page])
       when *searchable_fields.map(&:last)
-        @users = search params[:t], params[:q]
+        @users = search(params[:t], params[:q]).paginate(page: params[:page])
       else
         flash.now[:error] = t('.unknown_type')
         @users = []
@@ -24,10 +25,13 @@ class UsersController < ApplicationController
       end
 
       if !params[:admission]
-        @users = LdapUser.all_cached
+        @users = LdapUser.all_cached.paginate(page: params[:page])
       else
-        @users = LdapUser.find(:all, attribute: 'admissionYear',
-                               value: params[:admission], order: :asc, sort_by: "gn")
+        @users = Rails.cache.fetch("admission_year/#{params[:admission]}", expire: 10.minutes) do
+          LdapUser.find(:all, attribute: 'admissionYear',
+                        value: params[:admission], order: :asc,
+                        sort_by: "gn")
+        end.paginate(page: params[:page])
       end
     end
   end

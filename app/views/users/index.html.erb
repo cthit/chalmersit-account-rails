@@ -50,6 +50,11 @@
 
   <% end %>
 </table>
+<div class="pagination-centered">
+    <%= will_paginate @users, renderer: FoundationPagination::Rails, 
+        previous_label: "« #{t('prev')}",
+        next_label: "#{t('next')} »" %>
+</div>
 <% else -%>
     <p><%= t('.nothing_found') %></p>
 <% end -%>

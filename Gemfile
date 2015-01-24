@@ -44,6 +44,9 @@ gem 'simple_form'
 # Memcached interface
 gem 'dalli'
 
+# Pagination support
+gem 'will_paginate-foundation'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
