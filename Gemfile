@@ -41,8 +41,8 @@ gem 'configurable_engine'
 # Simplifies forms
 gem 'simple_form'
 
-# Memcached interface
-gem 'dalli'
+# Redis cache interface
+gem 'redis-rails'
 
 # Pagination support
 gem 'will_paginate-foundation'

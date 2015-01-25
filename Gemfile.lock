@@ -62,7 +62,6 @@ GEM
     coffee-script-source (1.8.0)
     configurable_engine (0.4.7)
       rails (> 3.1.0)
-    dalli (2.7.2)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -177,6 +176,23 @@ GEM
       ffi (>= 0.5.0)
     rdoc (4.2.0)
       json (~> 1.4)
+    redis (3.2.0)
+    redis-actionpack (4.0.0)
+      actionpack (~> 4)
+      redis-rack (~> 1.5.0)
+      redis-store (~> 1.1.0)
+    redis-activesupport (4.0.0)
+      activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-rack (1.5.0)
+      rack (~> 1.5)
+      redis-store (~> 1.1.0)
+    redis-rails (4.0.0)
+      redis-actionpack (~> 4)
+      redis-activesupport (~> 4)
+      redis-store (~> 1.1.0)
+    redis-store (1.1.4)
+      redis (>= 2.2)
     ref (1.0.5)
     responders (2.0.2)
       railties (>= 4.2.0.alpha, < 5)
@@ -261,7 +277,6 @@ DEPENDENCIES
   better_errors
   coffee-rails (~> 4.0.0)
   configurable_engine
-  dalli
   devise
   doorkeeper
   font-awesome-rails
@@ -271,6 +286,7 @@ DEPENDENCIES
   jquery-rails
   net-ldap (~> 0.9.0)
   rails (= 4.2.0)
+  redis-rails
   rspec-rails
   sass-rails (~> 5.0.1)
   sdoc (~> 0.4.0)
