@@ -70,7 +70,7 @@
         <% end %>
     </li>
     <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
-            <%= fa_icon 'folder' %>
+            <%= (on_pages? groups_path) ? fa_icon('folder-open') : fa_icon('folder') %>
             <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
         <% end %>
     </li>
