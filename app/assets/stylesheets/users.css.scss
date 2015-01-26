@@ -21,3 +21,9 @@
 .borderless {
     border: 0;
 }
+
+@import "foundation/components/side-nav";
+.member-of-side-nav {
+    @include side-nav();
+    padding-top: 0;
+}

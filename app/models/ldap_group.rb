@@ -40,7 +40,7 @@ class LdapGroup < Activedap
   end
 
   def to_s
-    cn
+    displayName
   end
 
   def function_localised locale

@@ -61,6 +61,9 @@ class UsersController < ApplicationController
     end
   end
 
+  def hello
+  end
+
   private
     def find_model
       @db_user = current_user || User.find(doorkeeper_token.resource_owner_id)

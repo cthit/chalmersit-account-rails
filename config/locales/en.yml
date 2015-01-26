@@ -101,6 +101,13 @@ en:
       search: Search
       nothing_found: Could not find any people matching your query
       incomplete_search: Incomplete search
+    hello:
+        hello: "Hello %{name}!"
+        welcome: Welcome to the IT student division's authentication system
+        my_membership: My memberships
+        my_apps: My applications
+        my_profile: My profile
+        show: Show
   groups:
     index:
       cn: Committee/Society
