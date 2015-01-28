@@ -45,6 +45,9 @@ en:
   not_entered: Not entered
   remember_me: Remember me
   forgot_password: Forgot your password?
+  change_password: Change your password
+  new_password: New password
+  confirm_password: Confirm password
   create_user: New user
   send_instructions: Reset my password
   info_changed: The changes were saved
@@ -56,6 +59,8 @@ en:
   menu: Menu
   committee: Committee
   society: Society
+  next: Next
+  prev: Previous
   activerecord:
     models:
       user:
@@ -99,6 +104,13 @@ en:
       search: Search
       nothing_found: Could not find any people matching your query
       incomplete_search: Incomplete search
+    hello:
+        hello: "Hello %{name}!"
+        welcome: Welcome to the IT student division's authentication system
+        my_membership: My memberships
+        my_apps: My applications
+        my_profile: My profile
+        show: Show
   groups:
     index:
       cn: Committee/Society

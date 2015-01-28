@@ -1,9 +1,9 @@
 class GroupsController < ApplicationController
   def index
-    @groups = LdapGroup.all
+    @groups = LdapGroup.all_cached
   end
 
   def show
-    @group = LdapGroup.find(params[:id])
+    @group = LdapGroup.find_cached(params[:id])
   end
 end

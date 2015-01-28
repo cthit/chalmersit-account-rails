@@ -1,21 +1,19 @@
-<h2>Change your password</h2>
+<% content_for :title, t('forgot_password') %>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= devise_error_messages! %>
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.hidden_field :reset_password_token %>
+  <!--<%= devise_error_messages! %>-->
 
   <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+    <%= f.input :password, autofocus: true, autocomplete: "off", label: t('new_password') %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.input :password_confirmation, autocomplete: "off", label: t('confirm_password') %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Change my password" %>
+    <%= button_tag t('change_password'), class: "button expand" %>
   </div>
 <% end %>
 

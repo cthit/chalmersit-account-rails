@@ -12,7 +12,7 @@
 <% end %>
 
 <%= form_for(@user, url: update_me_path) do |f| %>
-  <%= render partial: 'form', locals: f: f %>
+    <%= render partial: 'form', locals: {f: f} %>
 
   <fieldset>
     <legend><%= t('notification', count: 2) %></legend>

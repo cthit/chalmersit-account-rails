@@ -27,7 +27,7 @@
     <% if current_user.admin? %>
             <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
     <% end %>
-    <li class="logout"><a href="<%= destroy_user_session_path %>"><%= fa_icon 'sign-out' %> <%= t('logout') %></a></li>
+    <li class="logout"><%= link_to destroy_user_session_path do %><%= fa_icon 'sign-out' %> <%= t('logout') %><% end %></li>
 <% else %>
           <li> <%= link_to new_user_session_path do %><%= fa_icon 'sign-in' %> <%= t 'login' %> <% end %> 
           <li> <%= link_to new_password_path(resource_name) do %><%= fa_icon 'eject' %> <%= t 'forgot_password' %> <% end %> 
@@ -48,7 +48,7 @@
     <li class="divider"></li>
 <% if signed_in? %>
     <li class="has-dropdown">
-      <a href="#"><%= t('my_applications') %></a>
+        <a href="#"><%= fa_icon 'cubes' %> <%= t('my_applications') %></a>
       <ul class="dropdown">
        <li>
         <%= link_to "#" do %>
@@ -70,7 +70,7 @@
         <% end %>
     </li>
     <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
-            <%= fa_icon 'folder' %>
+            <%= (on_pages? groups_path) ? fa_icon('folder-open') : fa_icon('folder') %>
             <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
         <% end %>
     </li>

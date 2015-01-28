@@ -6,7 +6,7 @@ module ApplicationHelper
   end
 
   def is_me? user
-    current_user && current_user == user.db_user
+    current_user && current_user.cid == user.uid
   end
 
   def user_or_me user

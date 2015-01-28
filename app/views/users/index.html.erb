@@ -12,7 +12,7 @@
 </dl>
 <%= form_tag users_path, method: :get do -%>
     <div class="row collapse">
-        <div class="small-3 large-2 columns">
+        <div class="small-3 columns">
             <%= select_tag :t, options_for_select(searchable_fields, params[:t]) -%>
         </div>
         <div class="small-5 columns">
@@ -50,6 +50,11 @@
 
   <% end %>
 </table>
+<div class="pagination-centered">
+    <%= will_paginate @users, renderer: FoundationPagination::Rails, 
+        previous_label: "« #{t('prev')}",
+        next_label: "#{t('next')} »" %>
+</div>
 <% else -%>
     <p><%= t('.nothing_found') %></p>
 <% end -%>

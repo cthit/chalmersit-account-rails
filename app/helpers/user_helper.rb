@@ -9,7 +9,7 @@ module UserHelper
 
   # Returns true if I am able to view a privileged variable
   def can_i_view? attr
-    if current_user == @user.db_user || current_user.admin?
+    if current_user.cid == @user.uid || current_user.admin?
       return true
     end
     !priv_attrs.include?(attr)
@@ -60,7 +60,7 @@ module UserHelper
   end
 
   def whoose_profile user
-    if current_user && current_user == user.db_user
+    if current_user && current_user.cid == user.uid
       "your_profile"
     else
       "their_profile"
