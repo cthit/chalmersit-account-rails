@@ -3,15 +3,21 @@ class User < ActiveRecord::Base
   # :confirmable, :validatable, :lockable, :timeoutable and :omniauthable
 
   # for later: :registerable,
-  devise :recoverable, :rememberable, :trackable
+  devise :ldap_authenticatable, :recoverable, :rememberable, :trackable
 
   def ldap_user
     @ldap_user ||= LdapUser.find_cached(cid)
   end
 
+  def email
+    method_missing :mail
+  end
+
+  def email= new_mail
+    ldap_user.send :mail, new_mail
+  end
+
   def method_missing(meth)
     ldap_user.send(meth)
   end
-
-  attr_accessor :email, :password
 end

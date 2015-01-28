@@ -27,7 +27,7 @@
     <% if current_user.admin? %>
             <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
     <% end %>
-    <li class="logout"><a href="<%= destroy_user_session_path %>"><%= fa_icon 'sign-out' %> <%= t('logout') %></a></li>
+    <li class="logout"><%= link_to destroy_user_session_path do %><%= fa_icon 'sign-out' %> <%= t('logout') %><% end %></li>
 <% else %>
           <li> <%= link_to new_user_session_path do %><%= fa_icon 'sign-in' %> <%= t 'login' %> <% end %> 
           <li> <%= link_to new_password_path(resource_name) do %><%= fa_icon 'eject' %> <%= t 'forgot_password' %> <% end %> 
