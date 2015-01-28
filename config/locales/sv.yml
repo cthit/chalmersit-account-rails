@@ -45,6 +45,9 @@ sv:
   not_entered: Ej angivet
   remember_me: Kom ihåg mig
   forgot_password: Glömt ditt lösenord?
+  change_password: Byt ditt lösenord
+  new_password: Nytt lösenord
+  confirm_password: Bekräfta lösenord
   create_user: Bli IT-teknolog
   send_instructions: Återställ mitt lösenord
   info_changed: Ändringarna sparades

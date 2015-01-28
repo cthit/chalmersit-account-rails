@@ -9,9 +9,15 @@ class User < ActiveRecord::Base
     @ldap_user ||= LdapUser.find_cached(cid)
   end
 
+  def email
+    method_missing :mail
+  end
+
+  def email= new_mail
+    ldap_user.send :mail, new_mail
+  end
+
   def method_missing(meth)
     ldap_user.send(meth)
   end
-
-  attr_accessor :email, :password
 end

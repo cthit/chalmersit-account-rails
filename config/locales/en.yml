@@ -45,6 +45,9 @@ en:
   not_entered: Not entered
   remember_me: Remember me
   forgot_password: Forgot your password?
+  change_password: Change your password
+  new_password: New password
+  confirm_password: Confirm password
   create_user: New user
   send_instructions: Reset my password
   info_changed: The changes were saved
