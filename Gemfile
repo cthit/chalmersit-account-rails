@@ -8,7 +8,8 @@ gem 'sqlite3'
 
 # ActiveLdap for communication with LDAP
 gem 'activeldap', require: 'active_ldap/railtie'
-gem 'net-ldap', '~> 0.9.0'
+gem 'net-ldap', '~> 0.5.1'
+gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.1'

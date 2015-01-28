@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :validatable, :lockable, :timeoutable and :omniauthable
 
   # for later: :registerable,
-  devise :recoverable, :rememberable, :trackable
+  devise :ldap_authenticatable, :recoverable, :rememberable, :trackable
 
   def ldap_user
     @ldap_user ||= LdapUser.find_cached(cid)
