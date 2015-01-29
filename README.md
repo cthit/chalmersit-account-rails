@@ -1,4 +1,4 @@
-ccount management for chalmers.it
+# Account management for chalmers.it
 Written in rails. Used as a single sign on (SSO) page.
 
 ## Requirements
@@ -51,7 +51,6 @@ Contribute
 Want to contribute? Great! Fire of a mail to digit@chalmers.it or send a pull request.
 
 We use git flow in this repository.
-Make a change in your file and instantanously see your updates!
 
 License
 ----
