@@ -136,10 +136,11 @@ sv:
         chalmers_user:
           attributes:
             cid:
-              blank: "You must specify your Chalmers ID (CID)"
-              too_short: "A CID must be between 3-8 in length"
-              invalid: "That does not look like a valid CID"
+              blank: Du måste ange ditt CID
+              too_short: Ett CID måste vara mellan 3-8 tecken i längd
+              invalid: Ogiltigt CID
             password:
-              blank: "You must specify a password"
-              too_short: "A password must be ≥ 10 chars"
-              wrong_cid_or_pass: Wrong password or CID
+              blank: Men hallå, du måste ange ett lösenord!
+              too_short: Lösenordet måste vara längre 10 tecken enligt Chalmers policy
+            base:
+              wrong_cid_or_pass: Fel CID och/eller lösenord

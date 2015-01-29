@@ -2,6 +2,7 @@
 
 <em><%= t '.chalmers_account' %></em>
 <%= simple_form_for @chuser, url: lookup_me_path, method: :post, validate: true do |f| %>
+  <%= f.error :base %>
   <div class="row collapse">
       <div class="small-2 columns">
           <span class="prefix"><%= fa_icon 'user' %></span>

@@ -14,10 +14,14 @@ class ChalmersUser
       errors.add(:password, :too_short)
     end
 
-    # Try to bind to Chalmers ldap
-    @ldap = ChalmersLdapUser.valid_password? cid, password
-    unless @ldap[:valid]
-      errors.add(:password, :wrong_cid_or_pass)
+    if errors.empty?
+      begin
+        krb5 = Kerberos::Krb5.new
+        # Authenticate against Kerberos. raises Kerberos::Krb5::Exception on wrong password.
+        krb5.get_init_creds_password cid, password
+      rescue Kerberos::Krb5::Exception
+        errors.add(:base, :wrong_cid_or_pass)
+      end
     end
   end
 end

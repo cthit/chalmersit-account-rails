@@ -144,5 +144,6 @@ en:
               invalid: "That does not look like a valid CID"
             password:
               blank: "You must specify a password"
-              too_short: "A password must be ≥ 10 chars"
-              wrong_cid_or_pass: Wrong password or CID
+              too_short: "A password must be ≥ 10 chars according to Chalmers policy"
+            base:
+              wrong_cid_or_pass: Wrong CID and/or password
