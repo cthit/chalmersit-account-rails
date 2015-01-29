@@ -52,13 +52,12 @@ class UsersController < ApplicationController
   end
 
   def lookup
-    cid = params[:user][:cid]
-    password = params[:user][:password]
-    @chuser = ChalmersUser.valid_password? cid, password
-    if @chuser
+    @chuser = ChalmersUser.new(chalmers_user_params)
+    # TODO: Check if IT-student. If not render error page with instructions
+    if @chuser.valid?
       render :register
     else
-      render :new, layout: 'small_box', alert: 'credentials invalid'
+      render :new, layout: 'small_box'
     end
   end
 
@@ -95,6 +94,10 @@ class UsersController < ApplicationController
       params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
                                         :telephonenumber, :preferredLanguage,
                                         { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
+    end
+
+    def chalmers_user_params
+      params.require(:chalmers_user).permit(:cid, :password)
     end
 
     def doorkeeper_request?

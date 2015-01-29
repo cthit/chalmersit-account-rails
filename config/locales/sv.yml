@@ -103,11 +103,14 @@ sv:
       nothing_found: Kunde inte hitta några personer som matchar din sökning
       incomplete_search: Ofullständig sökning
     hello:
-        hello: "Hej %{name}!"
-        welcome: Välkommen till IT-sektionens autentiseringssystem
-        my_membership: Mina medlemskap
-        my_profile: Min profil
-        show: Visa
+      hello: "Hej %{name}!"
+      welcome: Välkommen till IT-sektionens autentiseringssystem
+      my_membership: Mina medlemskap
+      my_profile: Min profil
+      show: Visa
+    new:
+      register_user: Registrera ny användare
+      chalmers_account: Logga in med ditt Chalmerskonto nedan
   groups:
     index:
       cn: Kommitté/Förening
@@ -130,3 +133,13 @@ sv:
               not_valid_format: har ett felaktigt format
             notifyBy:
               not_set: är satt till en ospecificerad aviseringstjänst
+        chalmers_user:
+          attributes:
+            cid:
+              blank: "You must specify your Chalmers ID (CID)"
+              too_short: "A CID must be between 3-8 in length"
+              invalid: "That does not look like a valid CID"
+            password:
+              blank: "You must specify a password"
+              too_short: "A password must be ≥ 10 chars"
+              wrong_cid_or_pass: Wrong password or CID

@@ -1,21 +1,19 @@
-<% content_for :title, 'Register user' %>
+<% content_for :title, t('.register_user') %>
 
-<% if @chuser.errors.any? %>
-  <div id="error_explanation" data-alert class="alert-box warning">
-    <h3><%= t('error') %></h3>
-    <ul>
-    <% @chuser.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+<em><%= t '.chalmers_account' %></em>
+<%= simple_form_for @chuser, url: lookup_me_path, method: :post, validate: true do |f| %>
+  <div class="row collapse">
+      <div class="small-2 columns">
+          <span class="prefix"><%= fa_icon 'user' %></span>
+      </div>
+      <%= f.input :cid, placeholder: 'CID', label: false, wrapper_html: {class: "small-10 columns"} %>
+
+      <div class="small-2 columns">
+          <span class="prefix"><%= fa_icon 'lock' %></span>
+      </div>
+      <%= f.input :password, placeholder: t('password'), label: false, wrapper_html: {class: "small-10 columns"} %>
   </div>
-<% end %>
 
-<%= form_tag(lookup_me_path) do %>
-
-  <%= text_field_tag 'user[cid]', '', placeholder: 'CID' %>
-  <%= password_field_tag 'user[password]', '', placeholder: 'Password' %>
-
-  <%= submit_tag 'Register', class: 'button' %>
+  <%= button_tag t('.register_user'), class: 'button expand' %>
 
 <% end %>

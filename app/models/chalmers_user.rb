@@ -1,22 +1,23 @@
-class ChalmersUser < ActiveLdap::Base
-  setup_connection host: 'ldap.chalmers.se', base: 'dc=chalmers,dc=se'
-  ldap_mapping dn_attribute: 'uid',
-               prefix: 'ou=people'
+class ChalmersUser
+  include ActiveModel::Model
+  attr_accessor :cid, :password
 
-  GROUP_BASE = 'cn=pr_ch_tkite,ou=groups,dc=chalmers,dc=se'
+  validates :cid, presence: true, length: {within: 3..10}, format: {with: /\A[a-z]+[0-9a-z]*\z/, }
+  validate :valid_password?
 
-  def it?
-    @it ||= search(filter: "member=#{dn}", scope: :base, attributes: ['memberOf'], base: GROUP_BASE).any?
-  end
+  def valid_password?
+    unless password.present?
+      errors.add(:password, :blank)
+    end
+    unless password.size > 10
+      # Chalmers password policy specifies a minimum length of 10
+      errors.add(:password, :too_short)
+    end
 
-  def self.valid_password?(cid, passwd)
-    begin
-      user = ChalmersUser.find(cid)
-      user.bind(passwd)
-      ChalmersUser.remove_connection
-      user
-    rescue ActiveLdap::AuthenticationError, ActiveLdap::EntryNotFound
-      false
+    # Try to bind to Chalmers ldap
+    @ldap = ChalmersLdapUser.valid_password? cid, password
+    unless @ldap[:valid]
+      errors.add(:password, :wrong_cid_or_pass)
     end
   end
 end
