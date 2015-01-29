@@ -1,0 +1,10 @@
+<% unless @error %>
+    <% content_for :title, t('.title') %>
+<% else %>
+    <% content_for :title, @error[:title] %>
+<% end %>
+<% if @error %>
+  <p><%= @error[:body].html_safe %></p>
+<% else %>
+  <h4 class="subheader"><%= t '.unspecified' %>
+<% end %>

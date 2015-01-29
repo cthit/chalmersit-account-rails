@@ -53,9 +53,14 @@ class UsersController < ApplicationController
 
   def lookup
     @chuser = ChalmersUser.new(chalmers_user_params)
-    # TODO: Check if IT-student. If not render error page with instructions
     if @chuser.valid?
-      render :register
+      if @chuser.it_student?
+        render :register
+      else
+        @error = {title: t('activemodel.errors.models.chalmers_user.failures.register'),
+                  body: t('activemodel.errors.models.chalmers_user.failures.register_help')}
+        render :error
+      end
     else
       render :new, layout: 'small_box'
     end

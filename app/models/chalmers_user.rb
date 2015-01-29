@@ -15,13 +15,46 @@ class ChalmersUser
     end
 
     if errors.empty?
-      begin
-        krb5 = Kerberos::Krb5.new
-        # Authenticate against Kerberos. raises Kerberos::Krb5::Exception on wrong password.
-        krb5.get_init_creds_password cid, password
-      rescue Kerberos::Krb5::Exception
-        errors.add(:base, :wrong_cid_or_pass)
-      end
+      #begin
+      #  krb5 = Kerberos::Krb5.new
+      #  # Authenticate against Kerberos. raises Kerberos::Krb5::Exception on wrong password.
+      #  krb5.get_init_creds_password cid, password
+      #rescue Kerberos::Krb5::Exception
+      #  errors.add(:base, :wrong_cid_or_pass)
+      #end
     end
   end
+
+
+
+  def mail
+    init_ldap
+    @ldap.mail
+  end
+
+  def firstname
+    init_ldap
+    @ldap.gn
+  end
+
+  def lastname
+    init_ldap
+    @ldap.sn
+  end
+
+  def it_student?
+    init_ldap
+    @ldap.it?
+  end
+
+  private
+    def init_ldap
+      begin
+        @ldap ||= ChalmersLdapUser.find(cid)
+      rescue NoMethodError
+        # This occurs sometimes when the connection to Chalmers LDAP is lost...
+        ChalmersLdapUser.setup_connection(ChalmersLdapUser.remove_connection)
+        @ldap = ChalmersLdapUser.find(cid)
+      end
+    end
 end

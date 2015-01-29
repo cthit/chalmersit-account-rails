@@ -111,6 +111,9 @@ sv:
     new:
       register_user: Registrera ny användare
       chalmers_account: Logga in med ditt Chalmerskonto nedan
+    error:
+      title: Något gick snett
+      unspecified: Ett okänt fel inträffade
   groups:
     index:
       cn: Kommitté/Förening
@@ -144,3 +147,6 @@ sv:
               too_short: Lösenordet måste vara längre 10 tecken enligt Chalmers policy
             base:
               wrong_cid_or_pass: Fel CID och/eller lösenord
+          failures:
+            register: Kunde inte registrera dig
+            register_help: "Det gick ej att verifiera att du går på IT-programmet. Detta kan bero på att du är masterstudent till exempel.<p>Om du går på IT-programmet (eller har gått) så kontakta <span data-tooltip aria-haspopup='true' class='has-tip' title='Mail: digit@chalmers.it. <br />IRC: #digIT@irc.chalmers.it'>digIT</span> så fixar vi ett konto åt dig manuellt.</p>"

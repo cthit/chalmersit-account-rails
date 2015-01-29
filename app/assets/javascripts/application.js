@@ -17,6 +17,7 @@
 //= require foundation/foundation
 //= require foundation/foundation.alert
 //= require foundation/foundation.topbar
+//= require foundation/foundation.tooltip
 //= require_tree .
 
 $(document).foundation();
