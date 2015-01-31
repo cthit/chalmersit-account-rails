@@ -7,6 +7,10 @@ class UsersController < ApplicationController
 
   def index
     @show_restricted = show_restricted_fields?
+    if request.format.json?
+      return @users = LdapUser.all_cached
+    end
+
     if params[:t].present? && params[:q].present?
       case params[:t]
       when 'name'
