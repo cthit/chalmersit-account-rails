@@ -142,6 +142,7 @@ sv:
               blank: Du måste ange ditt CID
               too_short: Ett CID måste vara mellan 3-8 tecken i längd
               invalid: Ogiltigt CID
+              already_registered: Det CID:et är redan registrerat
             password:
               blank: Men hallå, du måste ange ett lösenord!
               too_short: Lösenordet måste vara längre 10 tecken enligt Chalmers policy
