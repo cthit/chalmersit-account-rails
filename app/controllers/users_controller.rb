@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
-  before_filter :authenticate_user!, unless: :doorkeeper_request?
-  before_filter :find_model, except: [:index,:show]
+  before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
+  before_filter :find_model, except: [:index,:show, :new, :lookup, :create]
   include UserHelper
   require 'will_paginate/array'
 
