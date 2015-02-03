@@ -104,7 +104,7 @@ en:
       search: Search
       nothing_found: Could not find any people matching your query
       incomplete_search: Incomplete search
-    hello:
+    dashboard:
       hello: "Hello %{name}!"
       welcome: Welcome to the IT student division's authentication system
       my_membership: My memberships

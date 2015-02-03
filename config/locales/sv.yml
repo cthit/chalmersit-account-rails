@@ -102,7 +102,7 @@ sv:
       search: Sök
       nothing_found: Kunde inte hitta några personer som matchar din sökning
       incomplete_search: Ofullständig sökning
-    hello:
+    dashboard:
       hello: "Hej %{name}!"
       welcome: Välkommen till IT-sektionens autentiseringssystem
       my_membership: Mina medlemskap
