@@ -82,6 +82,7 @@ sv:
         loginShell: Loginskal
         telephonenumber: Telefonnummer
         notifyBy: Meddela mig via
+        acceptedUserAgreement: Användaravtal
         push_services:
           one: Push-avisering
           other: Push-aviseringar
@@ -102,12 +103,22 @@ sv:
       search: Sök
       nothing_found: Kunde inte hitta några personer som matchar din sökning
       incomplete_search: Ofullständig sökning
-    hello:
-        hello: "Hej %{name}!"
-        welcome: Välkommen till IT-sektionens autentiseringssystem
-        my_membership: Mina medlemskap
-        my_profile: Min profil
-        show: Visa
+    dashboard:
+      hello: "Hej %{name}!"
+      welcome: Välkommen till IT-sektionens autentiseringssystem
+      my_membership: Mina medlemskap
+      my_profile: Min profil
+      show: Visa
+    new:
+      register_user: Registrera ny användare
+      chalmers_account: Logga in med ditt Chalmerskonto nedan
+    error:
+      title: Något gick snett
+      unspecified: Ett okänt fel inträffade
+    register:
+      title: Registrera ny IT-student
+      register: Registera
+      user_agreement_desc: Jag accepterar att digIT lagrar information om mig
   groups:
     index:
       cn: Kommitté/Förening
@@ -130,3 +141,18 @@ sv:
               not_valid_format: har ett felaktigt format
             notifyBy:
               not_set: är satt till en ospecificerad aviseringstjänst
+        chalmers_user:
+          attributes:
+            cid:
+              blank: Du måste ange ditt CID
+              too_short: Ett CID måste vara mellan 3-8 tecken i längd
+              invalid: Ogiltigt CID
+              already_registered: Det CID:et är redan registrerat
+            password:
+              blank: Men hallå, du måste ange ett lösenord!
+              too_short: Lösenordet måste vara längre 10 tecken enligt Chalmers policy
+            base:
+              wrong_cid_or_pass: Fel CID och/eller lösenord
+          failures:
+            register: Kunde inte registrera dig
+            register_help: "Det gick ej att verifiera att du går på IT-programmet. Detta kan bero på att du är masterstudent till exempel.<p>Om du går på IT-programmet (eller har gått) så kontakta <span data-tooltip aria-haspopup='true' class='has-tip' title='Mail: digit@chalmers.it. <br />IRC: #digIT@irc.chalmers.it'>digIT</span> så fixar vi ett konto åt dig manuellt.</p>"

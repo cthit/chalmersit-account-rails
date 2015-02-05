@@ -2,16 +2,14 @@ Rails.application.routes.draw do
   use_doorkeeper
   devise_for :users, :path => '', :path_names => {:sign_in => 'login', :sign_out => 'logout'}
   as :user do
-    #get 'login' => 'devise/sessions#new', :as => :new_user_session
-    #post 'login' => 'devise/sessions#create', :as => :user_session
-    #get 'logout' => 'devise/sessions#destroy', :as => :destroy_user_session
+    get 'reset-password' => 'devise/passwords#new', :as => :new_password
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   devise_scope :user do
     authenticated :user do
-      root 'users#hello', as: :authenticated_root
+      root 'users#dashboard', as: :authenticated_root
     end
 
     unauthenticated do
@@ -26,6 +24,18 @@ Rails.application.routes.draw do
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
+
+  # new = login to chalmers
+  get '/new' => 'users#new', as: :new_me
+
+  # lookup = check chalmers ldap and verify, redirect to register if successful, else new
+  post '/lookup' => 'users#lookup', as: :lookup_me
+
+  # register = allow user to edit chalmers data before creation
+  get '/register' => 'users#register', as: :register_me
+
+  # create = actually create user, check chalmers ldap again!
+  post '/create' => 'users#create', as: :create_me
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

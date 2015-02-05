@@ -14,6 +14,21 @@ mainsite_login_uri:
     type: string
     default: /auth/account
 
+default_display_format:
+    name: Default display format (cn)
+    type: string
+    default: "%{nickname}"
+
+default_home_dir:
+    name: Default home directory
+    type: string
+    default: "/home/chalmersit/%{uid}"
+
+default_group_id:
+    name: Default group id
+    type: string
+    default: 4500
+
 # site_title:
 #   name: Site Title
 #   type: string

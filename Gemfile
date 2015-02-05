@@ -8,7 +8,7 @@ gem 'sqlite3'
 
 # ActiveLdap for communication with LDAP
 gem 'activeldap', require: 'active_ldap/railtie'
-gem 'net-ldap', '~> 0.5.1'
+gem 'net-ldap', '~> 0.11'
 gem "devise_ldap_authenticatable", :git => "git://github.com/cschiewek/devise_ldap_authenticatable.git"
 
 # Use SCSS for stylesheets
@@ -47,6 +47,9 @@ gem 'redis-rails'
 
 # Pagination support
 gem 'will_paginate-foundation'
+
+# Kerberos bindings (authenticate against Chalmers kerberos)
+gem 'rkerberos'
 
 group :development do
   gem 'web-console', '~> 2.0'
