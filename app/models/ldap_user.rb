@@ -5,7 +5,7 @@ class LdapUser < Activedap
                classes: ['chalmersstudent', 'posixAccount']
 
   validates :mail, presence: true
-  validates :nickname, presence: true
+  validates :nickname, :gn, :sn, :admissionYear, presence: true
   validate :has_valid_display_format
   validate :has_valid_api_keys
 

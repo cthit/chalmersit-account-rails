@@ -84,6 +84,7 @@ en:
         loginShell: Login shell
         telephonenumber: Telephone number
         notifyBy: Notify by
+        acceptedUserAgreement: User agreement
         push_services:
           one: Push notification
           other: Push notifications
@@ -117,6 +118,10 @@ en:
     error:
       title: Something went wrong
       unspecified: An unspecified error occured
+    register:
+      title: Register new IT-student
+      register: Register
+      user_agreement_desc: I accept that digIT stores information about me
   groups:
     index:
       cn: Committee/Society

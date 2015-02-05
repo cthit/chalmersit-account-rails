@@ -45,15 +45,16 @@ class ChalmersUser
     init_ldap
     @ldap.gn
   end
+  alias_method :gn, :firstname
 
   def lastname
     init_ldap
     @ldap.sn
   end
+  alias_method :sn, :lastname
 
   def it_student?
-    init_ldap
-    @ldap.it?
+    init_ldap && @ldap.it?
   end
 
   private
@@ -64,6 +65,9 @@ class ChalmersUser
         # This occurs sometimes when the connection to Chalmers LDAP is lost...
         ChalmersLdapUser.setup_connection(ChalmersLdapUser.remove_connection)
         @ldap = ChalmersLdapUser.find(cid)
+      rescue ActiveLdap::EntryNotFound
+        return false
       end
+      true
     end
 end

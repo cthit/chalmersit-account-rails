@@ -82,6 +82,7 @@ sv:
         loginShell: Loginskal
         telephonenumber: Telefonnummer
         notifyBy: Meddela mig via
+        acceptedUserAgreement: Användaravtal
         push_services:
           one: Push-avisering
           other: Push-aviseringar
@@ -114,6 +115,10 @@ sv:
     error:
       title: Något gick snett
       unspecified: Ett okänt fel inträffade
+    register:
+      title: Registrera ny IT-student
+      register: Registera
+      user_agreement_desc: Jag accepterar att digIT lagrar information om mig
   groups:
     index:
       cn: Kommitté/Förening

@@ -55,6 +55,11 @@ class UsersController < ApplicationController
     @chuser = ChalmersUser.new(chalmers_user_params)
     if @chuser.valid?
       if @chuser.it_student?
+        lu = LdapUser.new(uid: @chuser.cid,
+                          gn: @chuser.gn,
+                          sn: @chuser.sn,
+                          mail: @chuser.mail)
+        @user = User.new(ldap_user: lu)
         render :register
       else
         @error = {title: t('activemodel.errors.models.chalmers_user.failures.register'),
@@ -67,7 +72,32 @@ class UsersController < ApplicationController
   end
 
   def create
+    # TODO: do some sanity checks here so that curl-posts aren't allowd, thereby circumventing Chalmers-checks...
+    lu               = LdapUser.new(user_register_params)
+    lu.cn            = Configurable.default_display_format
+    lu.homedirectory = Configurable.default_home_dir % {uid: lu.uid}
+    lu.gidnumber     = Configurable.default_group_id
+    lu.uidnumber     = next_uid
+    @user = User.new(cid: lu.uid, ldap_user: lu)
 
+    @user.password              = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+
+    p @user.acceptedUserAgreement
+    p lu.acceptedUserAgreement
+    if @user.valid?
+      pw = encrypt_pw @user.password
+      @user.ldap_user.userPassword = pw
+      @user.password = pw
+      @user.password_confirmation = pw
+
+      @user.save!
+      @user.ldap_user.save!
+       sign_in(@user)
+      render :dashboard
+    else
+      render :register
+    end
   end
 
   def edit
@@ -101,6 +131,13 @@ class UsersController < ApplicationController
                                         { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
 
+    def user_register_params
+      params.require(:user).permit(:uid, :password, :password_confirmation,
+                                   :gn, :sn, :mail, :telephonenumber,
+                                   :admissionYear, :nickname, :acceptedUserAgreement,
+                                   :cn, :preferredLanguage)
+    end
+
     def chalmers_user_params
       params.require(:chalmers_user).permit(:cid, :password)
     end
@@ -123,5 +160,14 @@ class UsersController < ApplicationController
         "(|(gn=#{q})(sn=#{q}))"
       end.join
       LdapUser.find(:all, filter: query_str)
+    end
+
+    # Return the next available uid number
+    def next_uid
+       LdapUser.all(limit: 1, sort_by: :uidnumber, order: :desc).first[:uidnumber]+1
+    end
+
+    def encrypt_pw pw, salt=nil
+      ActiveLdap::UserPassword.ssha pw, salt
     end
 end
