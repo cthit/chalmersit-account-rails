@@ -1,2 +1,24 @@
-<h1>Admins#show</h1>
-<p>Find me in app/views/admins/show.html.erb</p>
+<% content_for :title, "Administrator" %>
+<div class="row">
+    <div class="columns small-12 medium-6 large-4">
+    <ul class="side-nav">
+      <li class="heading"><%= fa_icon 'cog'%> General</li>
+      <li><%= link_to 'Defaults', admin_configurable_path %></li>
+      <li><a href="#">Mass mail</a></li>
+    </ul>
+    </div>
+    <div class="columns small-12 medium-6 large-4">
+    <ul class="side-nav">
+      <li class="heading"><%= fa_icon 'users'%> User related</li>
+      <li><a href="#">List users</a></li>
+      <li><a href="#">Add user</a></li>
+    </ul>
+    </div>
+    <div class="columns small-12 large-4">
+    <ul class="side-nav">
+      <li class="heading"><%= fa_icon 'folder'%> Group related</li>
+      <li><a href="#">List groups</a></li>
+      <li><a href="#">Add group</a></li>
+    </ul>
+    </div>
+</div>
