@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resource :admin, only: :show
 
   namespace :admin do
-    resources :groups, only: [:index, :show]
+    resources :groups
   end
 
   get '/search' => 'users#search', as: :search
