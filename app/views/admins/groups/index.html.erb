@@ -20,7 +20,7 @@
             <ul id="drop-<%= g.cn -%>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
               <li><%= link_to admin_group_path(g) do %><%= fa_icon 'info-circle', text: 'View' -%><%- end -%></li>
               <li><%= link_to edit_admin_group_path(g) do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
-              <li><%= link_to admin_group_path(g), method: :delete  do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
+              <li><%= link_to admin_group_path(g), method: :delete, data: {confirm: "Are you sure you want to delete '#{g.cn}'?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
             </ul>
         </td>
     </tr>
