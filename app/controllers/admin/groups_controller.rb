@@ -1,9 +1,8 @@
 class Admin::GroupsController < ApplicationController
   before_filter :ensure_admin
-  prepend_view_path 'app/views/admin'
 
   def show
-    @groups = LdapGroup.all
+    @group = LdapGroup.find(params[:id])
     render 'admins/groups/show'
   end
 

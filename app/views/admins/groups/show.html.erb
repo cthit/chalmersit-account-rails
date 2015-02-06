@@ -1,2 +1,44 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/admins/groups/show.html.erb</p>
+<% content_for :title, "#{@group.displayName} (admin-mode)"%>
+
+<ul class="button-group radius even-5">
+    <li><%= link_to admin_groups_path, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= link_to edit_admin_group_path(@group), class: "button tiny success" do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
+    <li><%= link_to admin_group_path(@group), class: "button tiny alert", method: :delete, data: {confirm: "Are you sure?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
+</ul>
+<div class="row">
+<h3 class="subheader">Attributes</h3>
+<table>
+    <thead>
+        <th>Attribute</th>
+        <th width="100%">Value</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>DN</td>
+            <td><%= @group.dn %></td>
+        </tr>
+        <%- @group.attributes.keys.each do |a| -%>
+            <%- next if a == 'member' -%>
+            <tr>
+                <td><%= a %></td>
+                <td><%= @group.attributes[a] %></td>
+            </tr>
+        <%- end -%>
+    </tbody>
+</table>
+<h3 class="subheader">Group members</h3>
+<table>
+    <thead>
+        <th width="100%">Member</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <%- @group.member(true).each do |m| -%>
+            <tr>
+                <td><%= m %></td>
+                <td><%= link_to '#', class: 'radius button tiny alert no-margin' do -%><%= fa_icon 'remove' -%><%- end -%></td>
+            </tr>
+        <%- end -%>
+    </tbody>
+</table>
+</div>
