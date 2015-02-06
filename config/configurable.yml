@@ -8,7 +8,6 @@ mainsite_url:
     name: URL to main site (chalmers.it)
     type: string
     default: https://chalmers.it
-
 mainsite_login_uri:
     name: URI to main site login
     type: string
@@ -18,15 +17,13 @@ default_display_format:
     name: Default display format (cn)
     type: string
     default: "%{nickname}"
-
 default_home_dir:
     name: Default home directory
     type: string
     default: "/home/chalmersit/%{uid}"
-
 default_group_id:
     name: Default group id
-    type: string
+    type: integer
     default: 4500
 
 # site_title:

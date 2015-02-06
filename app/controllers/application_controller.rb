@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
     render :text => exception, :status => 500
   end
+  before_filter :authenticate_user!
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -28,6 +30,14 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     I18n.locale = current_user.preferredLanguage if current_user && current_user.preferredLanguage && I18n.available_locales.include?(current_user.preferredLanguage.to_sym)
+  end
+
+  def ensure_admin
+    redirect_to unauthenticated_root_path
+  end
+
+  def doorkeeper_request?
+    doorkeeper_token.present?
   end
 
   helper_method :session_path, :new_session_path

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
-  before_filter :find_model, except: [:index,:show, :new, :lookup, :create]
+  before_filter :find_model, only: [:me, :dashboard, :edit, :update]
   include UserHelper
   require 'will_paginate/array'
 
@@ -144,10 +144,6 @@ class UsersController < ApplicationController
 
     def chalmers_user_params
       params.require(:chalmers_user).permit(:cid, :password)
-    end
-
-    def doorkeeper_request?
-      doorkeeper_token.present?
     end
 
     def show_restricted_fields?
