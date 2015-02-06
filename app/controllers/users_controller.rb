@@ -42,8 +42,8 @@ class UsersController < ApplicationController
       end
     end
 
-    render :index
     authorize @user
+    render :index
   end
 
   def me

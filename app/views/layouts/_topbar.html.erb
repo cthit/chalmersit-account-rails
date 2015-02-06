@@ -24,7 +24,7 @@
         <ul class="dropdown">
 <% if signed_in? && policy(current_user.ldap_user).edit? %>
             <li><a href="<%= edit_me_path %>"><%= fa_icon 'edit' %> <%= t 'edit_profile'  %></a></li>
-    <% if policy(current_user.ldap_user).admin? %>
+    <% if policy(LdapUser).admin? %>
             <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
     <% end %>
     <li class="logout"><%= link_to destroy_user_session_path do %><%= fa_icon 'sign-out' %> <%= t('logout') %><% end %></li>
@@ -62,18 +62,22 @@
        </li>
       </ul>
     </li>
- <% if signed_in? && current_user.admin? %>
+ <% if signed_in? %>
     <li class="divider"></li>
-    <li class="hide-on-small <%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
-            <%= fa_icon 'users' %>
-            <%= t("all_model", model:User.model_name.human(count: 2).downcase) %>
-        <% end %>
-    </li>
-    <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
-            <%= (on_pages? groups_path) ? fa_icon('folder-open') : fa_icon('folder') %>
-            <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
-        <% end %>
-    </li>
+    <% if policy(LdapUser).index? %>
+        <li class="hide-on-small <%= "active" if on_pages? users_path %>"><%= link_to users_path do %>
+                <%= fa_icon 'users' %>
+                <%= t("all_model", model:User.model_name.human(count: 2).downcase) %>
+            <% end %>
+        </li>
+    <% end %>
+    <% if policy(LdapGroup).index? %>
+        <li class="hide-on-small <%= "active" if on_pages? groups_path %>"><%= link_to groups_path do %>
+                <%= (on_pages? groups_path) ? fa_icon('folder-open') : fa_icon('folder') %>
+                <%= t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+            <% end %>
+        </li>
+    <% end %>
     <li class="divider"></li>
  <% end %>
 <% end %>
