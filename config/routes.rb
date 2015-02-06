@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :show]
   resource :admin, except: :new
 
+  get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me

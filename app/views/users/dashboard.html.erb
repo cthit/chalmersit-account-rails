@@ -13,12 +13,14 @@
                     <%= t('.show') %>
                 <% end %>
             </li>
+            <% if policy(@user).edit? %>
             <li>
                 <%= link_to edit_me_path do %>
                     <%= fa_icon 'edit' %>
                     <%= t 'edit'  %>
                 <% end %>
             </li>
+            <% end %>
         <% if @user.admin? %>
             <li>
                 <%= link_to admin_path do %>

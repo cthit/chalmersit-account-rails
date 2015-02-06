@@ -51,6 +51,9 @@ gem 'will_paginate-foundation'
 # Kerberos bindings (authenticate against Chalmers kerberos)
 gem 'rkerberos'
 
+# Authorisation framework
+gem 'pundit'
+
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'

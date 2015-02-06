@@ -1,8 +1,12 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+  before_filter :authenticate_user!
+
   rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
     render :text => exception, :status => 500
   end
-  before_filter :authenticate_user!
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -33,7 +37,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_admin
-    redirect_to unauthenticated_root_path
+    authorize :admin, :index?
   end
 
   def doorkeeper_request?
@@ -41,4 +45,12 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :session_path, :new_session_path
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = t('unauthorized')
+    redirect_to(request.referrer || unauthenticated_root_path)
+  end 
+
 end
