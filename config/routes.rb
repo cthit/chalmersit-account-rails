@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 
   resources :users, only: [:index, :show]
   resources :groups, only: [:index, :show]
-  resource :admin, except: :new
+  resource :admin, only: :show
+
+  namespace :admin do
+    resources :groups, only: [:index, :show]
+  end
 
   get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
