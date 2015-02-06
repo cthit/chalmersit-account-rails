@@ -1,22 +1,34 @@
 class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
-  before_filter :find_model, only: [:me, :dashboard, :edit, :update]
+  before_filter :find_model, except: [:show]
+  after_action :verify_authorized, except: [:new, :create, :lookup, :show]
   include UserHelper
   require 'will_paginate/array'
 
   def index
-    @show_restricted = show_restricted_fields?
-    if request.format.json?
-      return @users = LdapUser.all_cached
+    if params[:admission]
+      @users = Rails.cache.fetch("admission_year/#{params[:admission]}", expire: 10.minutes) do
+        LdapUser.find(:all, attribute: 'admissionYear',
+                      value: params[:admission], order: :asc,
+                      sort_by: "gn")
+      end
     end
 
+    @users ||= policy_scope(LdapUser)
+    unless request.format.json?
+      @users = @users.paginate(page: params[:page])
+    end
+    authorize @user
+  end
+
+  def search
     if params[:t].present? && params[:q].present?
       case params[:t]
       when 'name'
         @users = search_name(params[:q]).paginate(page: params[:page])
       when *searchable_fields.map(&:last)
-        @users = search(params[:t], params[:q]).paginate(page: params[:page])
+        @users = search_attr(params[:t], params[:q]).paginate(page: params[:page])
       else
         flash.now[:error] = t('.unknown_type')
         @users = []
@@ -25,29 +37,27 @@ class UsersController < ApplicationController
       if params[:t] || params[:q]
         flash.now[:error] = t('.incomplete_search')
         @users = []
+        render :index
         return
       end
-
-      if !params[:admission]
-        @users = LdapUser.all_cached.paginate(page: params[:page])
-      else
-        @users = Rails.cache.fetch("admission_year/#{params[:admission]}", expire: 10.minutes) do
-          LdapUser.find(:all, attribute: 'admissionYear',
-                        value: params[:admission], order: :asc,
-                        sort_by: "gn")
-        end.paginate(page: params[:page])
-      end
     end
+
+    render :index
+    authorize @user
   end
 
   def me
-    @show_restricted = show_restricted_fields?
+    authorize @user
     render :show
   end
 
   def show
-    @show_restricted = show_restricted_fields?
     @user = LdapUser.find_cached(params[:id])
+    if @user.nil?
+      redirect_to users_path, notice: t('unknown_user')
+    else
+      authorize @user
+    end
   end
 
   def new
@@ -105,10 +115,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-
+    authorize @user
   end
 
   def update
+    authorize @user
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
@@ -120,6 +131,7 @@ class UsersController < ApplicationController
   end
 
   def dashboard
+    authorize @user
   end
 
   private
@@ -146,11 +158,7 @@ class UsersController < ApplicationController
       params.require(:chalmers_user).permit(:cid, :password)
     end
 
-    def show_restricted_fields?
-      (current_user && current_user.admin?) || doorkeeper_request?
-    end
-
-    def search attribute, value, order = :asc
+    def search_attr attribute, value, order = :asc
       LdapUser.all(order: order, sort_by: attribute, attribute: attribute, value: value)
     end
 

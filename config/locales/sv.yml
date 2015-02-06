@@ -61,6 +61,8 @@ sv:
   society: Förening
   next: Nästa
   prev: Föregående
+  unauthorized: Du har inte behörighet att utföra den här åtgärden.
+  unknown_user: Vem är det?
   activerecord:
     models:
       user: Användare

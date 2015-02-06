@@ -3,6 +3,6 @@ json.extract! @user, :uid, :full_name, :nickname, :mail,
   :telephonenumber, :display_name
 json.groups @user.member_of.map { |g| g.cn }
 json.admin @user.admin?
-if @show_restricted
+if policy(@user).admin?
   json.dn @user.dn.to_s
 end
