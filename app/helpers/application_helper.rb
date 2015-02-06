@@ -13,7 +13,11 @@ module ApplicationHelper
     if is_me? user
       me_path
     else
-      user_path(user.uid)
+      if policy(user).show?
+        user_path(user.uid)
+      else
+        users_path
+      end
     end
   end
 end

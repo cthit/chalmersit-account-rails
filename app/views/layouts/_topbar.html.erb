@@ -22,9 +22,9 @@
         <a href="#"><%= t('menu') %></a>
 <% end %>
         <ul class="dropdown">
-<% if signed_in? && policy(@user).edit? %>
+<% if signed_in? && policy(current_user.ldap_user).edit? %>
             <li><a href="<%= edit_me_path %>"><%= fa_icon 'edit' %> <%= t 'edit_profile'  %></a></li>
-    <% if policy(@user).admin? %>
+    <% if policy(current_user.ldap_user).admin? %>
             <li><a href="<%= admin_path %>"><%= fa_icon 'cog' %> <%= t 'administration'  %></a></li>
     <% end %>
     <li class="logout"><%= link_to destroy_user_session_path do %><%= fa_icon 'sign-out' %> <%= t('logout') %><% end %></li>
