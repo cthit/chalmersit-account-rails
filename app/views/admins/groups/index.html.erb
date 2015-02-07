@@ -1,6 +1,6 @@
 <% content_for :title, "All groups (admin-mode)" %>
 <ul class="button-group radius even-5">
-    <li><%= link_to admin_path, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
     <li><%= link_to new_admin_group_path, class: 'radius button tiny success' do -%><%= fa_icon 'plus', text: 'New group' -%><%- end -%></li>
 </ul>
 <table>
