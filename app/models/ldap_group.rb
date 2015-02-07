@@ -5,6 +5,8 @@ class LdapGroup < Activedap
                scope: :sub
   after_save :invalidate_my_cache, :invalidate_all_cache
 
+  validates :displayName, :cn, :description, :gidNumber, presence: true
+  validate :unique_gidnumber
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
@@ -99,5 +101,15 @@ class LdapGroup < Activedap
         end
       end
       field.first
+    end
+
+    def unique_gidnumber
+      other = LdapGroup.search(attribute: :gidnumber, value: gidNumber, attributes: ['cn', 'gidNumber'], limit: 1)
+      if other.any?
+        other_cn = other.first[1]['cn'].first
+        unless other_cn == cn
+          errors.add(:gidNumber, "The choosen GID (#{gidNumber}) is already used by #{other_cn}")
+        end
+      end
     end
 end
