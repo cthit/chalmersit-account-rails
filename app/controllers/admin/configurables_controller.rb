@@ -6,6 +6,6 @@ class Admin::ConfigurablesController < ApplicationController
   def show
     super
     @key_groups = @keys.group_by{|k| k.partition('_').first }
-    render 'admin/configurable/show'
+    render 'admins/configurable/show'
   end
 end
