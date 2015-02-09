@@ -7,6 +7,7 @@ class LdapGroup < Activedap
 
   validates :displayName, :cn, :description, :gidNumber, presence: true
   validate :unique_gidnumber
+  validate :members_exists
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
@@ -82,7 +83,7 @@ class LdapGroup < Activedap
       return @users if @users.present?
 
       # False is the users, true groups
-      grouped = member(true).group_by{|g| LdapGroup.dn_is_group? g} 
+      grouped = member(true).group_by{|g| LdapGroup.dn_is_group? g}
       @users = grouped[false] || []
       groups = grouped[true] || []
 
@@ -110,6 +111,16 @@ class LdapGroup < Activedap
         unless other_cn == cn
           errors.add(:gidNumber, "The choosen GID (#{gidNumber}) is already used by #{other_cn}")
         end
+      end
+    end
+
+    def members_exists
+      grouped = member(true).group_by{|m| LdapGroup.dn_is_group? m}
+      begin
+        LdapUser.find(grouped[false]) if grouped[false] && grouped[false].any?
+        LdapGroup.find(grouped[true]) if grouped[true] && grouped[true].any?
+      rescue ActiveLdap::EntryNotFound
+        errors.add(:no_member, "Some member doesn't exist")
       end
     end
 end

@@ -30,6 +30,6 @@ class Admin::GroupsController < ApplicationController
   private
     def ldap_group_params
       params.require(:ldap_group).permit(:cn, :gidNumber, :displayName,:groupLogo, :type,
-                                         description:[], mail:[], homepage:[], function:[])
+                                         description:[], mail:[], homepage:[], member:[], function:[])
     end
 end
