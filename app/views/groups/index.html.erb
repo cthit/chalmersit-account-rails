@@ -1,4 +1,8 @@
 <% content_for :title, t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+<% if current_user && current_user.admin? %>
+    <%= link_to admin_groups_path do %><%= fa_icon 'cog', text: '(Admin view)' %><%- end -%>
+    <br /><br />
+<%- end -%>
 <table>
     <thead>
         <tr>
