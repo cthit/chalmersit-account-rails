@@ -20,11 +20,8 @@
             <td><%= @group.dn %></td>
         </tr>
         <%- @group.attributes.keys.each do |a| -%>
-            <%- next if a == 'member' -%>
-            <tr>
-                <td><%= a.titlecase %></td>
-                <td><%= @group.attributes[a] %></td>
-            </tr>
+            <%- next if a == 'member' || a == 'objectClass' -%>
+            <%= table_row @group, a %>
         <%- end -%>
     </tbody>
 </table>
