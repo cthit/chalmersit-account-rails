@@ -2,30 +2,92 @@
 
 <div class="row">
 <h3 class="subheader">Attributes</h3>
-<%= simple_form_for @group, url: admin_group_path(@group), method: :put do |f| %>
-<table>
-    <thead>
-        <th>Attribute</th>
-        <th width="100%">Value</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td width="20%">DN</td>
-            <td><%= @group.dn -%></td>
-        </tr>
-        <tr>
-            <td>Object classes</td>
-            <td><%= @group.classes.join ', ' -%></td>
-        </tr>
-        <%- @group.attributes.keys.each do |a| -%>
-            <%- next if a == 'member' || a == 'objectClass' -%>
-            <tr>
-                <td><%= a.titlecase -%></td>
-                <td><%= f.input a.to_sym, label: false, input_html: {class: 'no-margin'} -%></td>
-            </tr>
-        <%- end -%>
-    </tbody>
-</table>
+<%= simple_form_for @group, url: admin_group_path(@group), method: :put, defaults: {input_html: {class:"no-margin"} } do |f| %>
+    <fieldset>
+        <legend><%= fa_icon 'sliders', text: 'General' %></legend>
+        <table style="width: 100%;">
+            <colgroup>
+                <col span="1" style="width: 20%;" />
+                <col span="1" style="width: 80%;" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Distinguished Name">DN</span></td>
+                    <td><%= @group.dn -%></td>
+                </tr>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Determines what attributes are available">Object Classes</span></td>
+                    <td><%= @group.classes.join ', ' -%></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table style="width: 100%;">
+            <colgroup>
+                <col span="1" style="width: 20%;" />
+                <col span="1" style="width: 80%;" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Common Name - the unique ID of the group">CN</span></td>
+                    <td><%= f.input :cn, label: false -%></td>
+                </tr>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="The group ID (GID) on posix compliant systems">GID Number</span></td>
+                    <td><%= f.input :gidNumber, as: :integer, label: false -%></td>
+                </tr>
+            </tbody>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend><%= fa_icon 'info', text: 'Committee/Society' %></legend>
+        <table style="width: 100%;">
+            <colgroup>
+                <col span="1" style="width: 20%;" />
+                <col span="1" style="width: 80%;" />
+            </colgroup>
+            <tbody>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="How to 'print' the group on news posts etc.">Display name</span></td>
+                    <td><%= f.input_field :displayName, label: false -%></td>
+                </tr>
+                <tr>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Whether the group is a Committee or a Society.">Type</span></td>
+                    <td><%= f.input :type, collection: ['Committee', 'Society'], selected: @group.type, label: false -%></td>
+                </tr>
+            </tbody>
+        </table>
+        <dl>
+            <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="A short description of the groups function.">Function</span></dt>
+            <% @group.function(true).each do |func| %>
+                <dd><%= f.input_field :function, multiple: true, value: func, label: false -%></dd>
+            <% end %>
+
+            <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="A description of the group">Description</span></dt>
+            <% @group.description(true).each do |d| %>
+                <dd><%= f.input_field :description, multiple: true, value: d, as: :text, label: false -%></dd>
+            <% end %>
+        </dl>
+    </fieldset>
+
+    <fieldset>
+        <legend><%= fa_icon 'comments-o', text: 'Contact' %></legend>
+        <dl>
+            <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="Are you kidding me? Guess">Mail</span></dt>
+            <% @group.mail(true).each do |m| %>
+                <dd><%= f.input_field :mail, multiple: true, value: m, label: false -%></dd>
+            <% end %>
+            <%= link_to '#' do %><%= fa_icon 'plus', text: 'Add more' %><%- end -%>
+            <dt class="divider"></dt><dd></dd>
+
+            <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="Again? Are you stupid?">Homepage</span></dt>
+            <% @group.homepage(true).each do |h| %>
+                <dd><%= f.input_field :homepage, multiple: true, value: h, label: false -%></dd>
+            <% end %>
+            <%= link_to '#' do %><%= fa_icon 'plus', text: 'Add more' %><%- end -%>
+        </dl>
+    </fieldset>
 <h3 class="subheader">Group members</h3>
 <table>
     <thead>
@@ -45,5 +107,5 @@
     <li><%= link_to :back, class: "button small secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
     <li><%= button_tag class: "button small success" do %><%= fa_icon 'save', text: 'Save' -%><%- end -%></li>
 </ul>
-</div>
 <% end -%>
+</div>
