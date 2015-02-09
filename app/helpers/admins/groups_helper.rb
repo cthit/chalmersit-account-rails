@@ -15,4 +15,10 @@ module Admins::GroupsHelper
       end
     end
   end
+
+  def add_more_link selector, opts={text:'Add more', classes: ''}
+    link_to '#', onclick:"return false", class: "addLink #{opts[:classes]}", data: {selector: selector} do
+      fa_icon 'plus', text: opts[:text]
+    end
+  end
 end

@@ -61,13 +61,15 @@
         <dl>
             <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="A short description of the groups function.">Function</span></dt>
             <% @group.function(true).each do |func| %>
-                <dd><%= f.input_field :function, multiple: true, value: func, label: false -%></dd>
+                <dd class="function-type"><%= f.input_field :function, multiple: true, value: func, label: false -%></dd>
             <% end %>
+            <%= add_more_link '.function-type' %>
 
             <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="A description of the group">Description</span></dt>
             <% @group.description(true).each do |d| %>
-                <dd><%= f.input_field :description, multiple: true, value: d, as: :text, label: false -%></dd>
+                <dd class="desc-type"><%= f.input_field :description, multiple: true, value: d, as: :text, label: false -%></dd>
             <% end %>
+            <%= add_more_link '.desc-type' %>
         </dl>
     </fieldset>
 
@@ -76,20 +78,20 @@
         <dl>
             <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="Are you kidding me? Guess">Mail</span></dt>
             <% @group.mail(true).each do |m| %>
-                <dd><%= f.input_field :mail, multiple: true, value: m, label: false -%></dd>
+                <dd class="mail-type"><%= f.input_field :mail, multiple: true, value: m, label: false, placeholder: 'name@example.org' -%></dd>
             <% end %>
-            <%= link_to '#' do %><%= fa_icon 'plus', text: 'Add more' %><%- end -%>
+            <%= add_more_link '.mail-type' %>
             <dt class="divider"></dt><dd></dd>
 
             <dt><span data-tooltip aria-haspopup="true" class="has-tip" title="Again? Are you stupid?">Homepage</span></dt>
             <% @group.homepage(true).each do |h| %>
-                <dd><%= f.input_field :homepage, multiple: true, value: h, label: false -%></dd>
+                <dd class="homepage-type"><%= f.input_field :homepage, multiple: true, value: h, label: false, placeholder: 'https://www.example.org' -%></dd>
             <% end %>
-            <%= link_to '#' do %><%= fa_icon 'plus', text: 'Add more' %><%- end -%>
+            <%= add_more_link '.homepage-type' %>
         </dl>
     </fieldset>
 <h3 class="subheader">Group members</h3>
-<table>
+<%= content_tag :table do %>
     <thead>
         <th width="100%">Member</th>
         <th>Action</th>
@@ -97,19 +99,19 @@
     <tbody>
         <%= f.error :no_member %>
         <%- @group.member(true).each do |m| -%>
-            <tr>
-                <td><%= f.input_field :member, multiple: true, value: m, label: false -%></td>
+            <tr class="member-type">
+                <td><%= f.input_field :member, placeholder: 'Enter full DN (cannot be empty)', multiple: true, value: m, label: false -%></td>
                 <td><%= link_to '#', class: 'radius button tiny alert no-margin' do -%><%= fa_icon 'remove' -%><%- end -%></td>
             </tr>
         <%- end -%>
         <tr>
+            <td></td>
             <td>
-            <td>
-                <%= link_to '#', class: 'radius button tiny success no-margin' do %><%= fa_icon 'plus' %><%- end -%>
+                <%= add_more_link '.member-type', classes:'radius button tiny success no-margin' %>
             </td>
         </tr>
     </tbody>
-</table>
+<%- end -%>
 <ul class="button-group even-2">
     <li><%= link_to :back, class: "button small secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
     <li><%= button_tag class: "button small success" do %><%= fa_icon 'save', text: 'Save' -%><%- end -%></li>
