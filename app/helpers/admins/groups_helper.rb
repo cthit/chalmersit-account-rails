@@ -17,8 +17,14 @@ module Admins::GroupsHelper
   end
 
   def add_more_link selector, opts={text:'Add more', classes: ''}
-    link_to '#', onclick:"return false", class: "addLink #{opts[:classes]}", data: {selector: selector} do
+    link_to '#', class: "add-link #{opts[:classes]}", data: {selector: selector} do
       fa_icon 'plus', text: opts[:text]
+    end
+  end
+
+  def remove_link selector, opts={text:'Remove', classes: ''}
+    link_to '#', class: "remove-link #{opts[:classes]}", data: {selector: selector} do
+      fa_icon 'times', text: opts[:text]
     end
   end
 end
