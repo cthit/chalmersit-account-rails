@@ -148,7 +148,7 @@
         <%= f.error :no_member %>
         <%- @group.member(true).each do |m| -%>
             <tr class="member-type">
-                <td><%= f.input_field :member, placeholder: 'Enter full DN (cannot be empty)', multiple: true, value: m, label: false -%></td>
+                <td><%= f.input_field :member, placeholder: 'Enter full DN (cannot be empty)', class: 'autocomplete-dn', multiple: true, value: m, label: false -%></td>
                 <td><%= remove_link '.member-type', classes: 'radius button tiny alert no-margin' -%></td>
             </tr>
         <%- end -%>

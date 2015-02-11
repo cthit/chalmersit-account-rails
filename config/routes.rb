@@ -17,7 +17,11 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index, :show] do
+    collection do
+      get :autocomplete
+    end
+  end
   resources :groups, only: [:index, :show]
   resource :admin, only: :show
 

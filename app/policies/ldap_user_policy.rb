@@ -13,6 +13,10 @@ class LdapUserPolicy < ApplicationPolicy
     true
   end
 
+  def autocomplete?
+    search?
+  end
+
   def create?
     false
   end

@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     authorize @user
   end
 
+  def autocomplete
+    authorize @user
+    @users = LdapUser.all(filter: "(|(uid=#{params[:term]}*)(nickname=#{params[:term]}*))").take(10)
+  end
+
   def search
     if params[:t].present? && params[:q].present?
       case params[:t]

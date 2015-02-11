@@ -19,6 +19,7 @@
 //= require foundation/foundation.topbar
 //= require foundation/foundation.tooltip
 //= require foundation/foundation.dropdown
+//= require jquery-ui/autocomplete
 //= require_tree .
 
 $(document).foundation();

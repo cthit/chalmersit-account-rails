@@ -19,7 +19,6 @@ $('.add-link').click(function() {
 // Toggle disable/enable on the given selector
 function disable_toggle(selector) {
     var elems_left = $(selector).length;
-    console.log(elems_left);
     $(selector + ' .remove-link').toggleClass('disabled', elems_left == 1);
     return false;
 }
