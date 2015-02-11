@@ -64,7 +64,7 @@
                 <th>Action</th>
             </thead>
             <tbody>
-            <% @group.function(true).each do |func| %>
+            <% (append_if_empty @group.function(true)).each do |func| %>
                 <tr class="function-type">
                     <td><%= f.input_field :function, multiple: true, value: func, label: false -%></td>
                     <td><%= remove_link '.function-type', text: '', classes:'radius button tiny alert no-margin' %></td>
@@ -79,7 +79,7 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <% @group.description(true).each do |d| %>
+                <% (append_if_empty @group.description(true)).each do |d| %>
                     <tr class="desc-type">
                         <td><%= f.input_field :description, multiple: true, value: d, as: :text, label: false -%></td>
                         <td><%= remove_link '.desc-type', text: '', classes:'radius button tiny alert no-margin' %></td>
@@ -101,7 +101,7 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                <% @group.mail(true).each do |m| %>
+                    <% (append_if_empty @group.mail(true)).each do |m| %>
                         <tr class="mail-type">
                             <td>
                                 <%= f.input_field :mail, multiple: true, value: m, label: false, placeholder: 'name@example.org' -%>
@@ -124,7 +124,7 @@
                     <th>Action</th>
                 </thead>
                 <tbody>
-                    <% @group.homepage(true).each do |h| %>
+                    <% (append_if_empty @group.homepage(true)).each do |h| %>
                     <tr class="homepage-type">
                         <td><%= f.input_field :homepage, multiple: true, value: h, label: false, placeholder: 'https://www.example.org' -%></td>
                         <td><%= remove_link '.homepage-type', text: '', classes:'radius button tiny alert no-margin' %></td>

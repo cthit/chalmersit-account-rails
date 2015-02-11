@@ -18,13 +18,17 @@ class Admin::GroupsController < ApplicationController
 
   def update
     @group = LdapGroup.find(params[:id])
+    # Remove empty values
+    arrayvals = ldap_group_params.group_by{|k, v| v.kind_of?(Array)}
+    pairs     = arrayvals[true].map { |k, vs| [k, vs.reject(&:blank?)] }
+    new_h     = Hash[pairs.select { |k, vs| vs.present? }]
+    ldap_group_params = new_h.reverse_merge(Hash[arrayvals[false]])
 
     if @group.update_attributes(ldap_group_params)
       render 'admins/groups/show'
     else
       render 'admins/groups/edit'
     end
-
   end
 
   private

@@ -27,4 +27,12 @@ module Admins::GroupsHelper
       fa_icon 'times', text: opts[:text]
     end
   end
+
+  def append_if_empty a, e=''
+    if a.empty?
+      a << e
+    else
+      a
+    end
+  end
 end
