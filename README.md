@@ -31,6 +31,13 @@ $ touch config/secrets.yml
 $ touch config/ldap.yml
 $ touch config/ldap_devise.yml
 ```
+
+Put the following in `/etc/krb5.conf`
+```
+[libdefaults]
+        default_realm = CHALMERS.SE
+```
+
 #### Prepare the db
 ```sh
 $ rake db:create db:migrate
