@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   end
 
   def me
-    authorize @user
+    authorize @user unless doorkeeper_request?
     render :show
   end
 

@@ -51,6 +51,6 @@ class ApplicationController < ActionController::Base
   def user_not_authorized
     flash[:alert] = t('unauthorized')
     redirect_to(request.referrer || unauthenticated_root_path)
-  end 
+  end
 
 end
