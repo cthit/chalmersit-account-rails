@@ -27,6 +27,10 @@ ldap_default_group_id:
     name: Default group id
     type: integer
     default: 4500
+ldap_default_login_shell:
+    name: Default login shell
+    type: string
+    default: /bin/bash
 
 # site_title:
 #   name: Site Title

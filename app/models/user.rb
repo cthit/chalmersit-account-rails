@@ -6,11 +6,11 @@ class User < ActiveRecord::Base
   devise :ldap_authenticatable, :recoverable, :rememberable, :trackable
 
   validates :gn, :sn, :mail, :admissionYear, :nickname, presence: true
-  validates :password, :password_confirmation, presence: true, length: { in: 8..100 }
-  validates :password, confirmation: true
+  validates :password, :password_confirmation, presence: true, length: { in: 8..100 }, on: :update
+  validates :password, confirmation: true, on: :update
   # As specified by ITU. Minimum of 6 because 2 for region and min 5 for subscriber number
   validates :telephonenumber, allow_blank: true, numericality: { only_integer: true }, length: {minimum: 6, maximum: 15}
-  validates :acceptedUserAgreement, acceptance: true, allow_nil: false
+  validates :acceptedUserAgreement, acceptance: true, allow_nil: false, on: :update
 
   attr_accessor :password, :password_confirmation
 

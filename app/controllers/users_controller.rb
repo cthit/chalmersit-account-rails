@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
-  before_filter :find_model, except: [:show]
+  before_filter :find_model, except: [:show, :new, :lookup, :create]
   after_action :verify_authorized, except: [:new, :create, :lookup, :show]
   include UserHelper
   require 'will_paginate/array'
@@ -89,6 +89,7 @@ class UsersController < ApplicationController
     # TODO: do some sanity checks here so that curl-posts aren't allowd, thereby circumventing Chalmers-checks...
     lu               = LdapUser.new(user_register_params)
     lu.cn            = Configurable.ldap_default_display_format
+    lu.loginshell    = Configurable.ldap_default_login_shell
     lu.homedirectory = Configurable.ldap_default_home_dir % {uid: lu.uid}
     lu.gidnumber     = Configurable.ldap_default_group_id
     lu.uidnumber     = next_uid
@@ -97,8 +98,6 @@ class UsersController < ApplicationController
     @user.password              = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
 
-    p @user.acceptedUserAgreement
-    p lu.acceptedUserAgreement
     if @user.valid?
       pw = encrypt_pw @user.password
       @user.ldap_user.userPassword = pw
@@ -107,7 +106,8 @@ class UsersController < ApplicationController
 
       @user.save!
       @user.ldap_user.save!
-       sign_in(@user)
+      sign_in(@user)
+      @user = @user.ldap_user
       render :dashboard
     else
       render :register
