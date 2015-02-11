@@ -88,9 +88,9 @@ class UsersController < ApplicationController
   def create
     # TODO: do some sanity checks here so that curl-posts aren't allowd, thereby circumventing Chalmers-checks...
     lu               = LdapUser.new(user_register_params)
-    lu.cn            = Configurable.default_display_format
-    lu.homedirectory = Configurable.default_home_dir % {uid: lu.uid}
-    lu.gidnumber     = Configurable.default_group_id
+    lu.cn            = Configurable.ldap_default_display_format
+    lu.homedirectory = Configurable.ldap_default_home_dir % {uid: lu.uid}
+    lu.gidnumber     = Configurable.ldap_default_group_id
     lu.uidnumber     = next_uid
     @user = User.new(cid: lu.uid, ldap_user: lu)
 
