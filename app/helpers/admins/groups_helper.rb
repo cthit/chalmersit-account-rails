@@ -35,4 +35,9 @@ module Admins::GroupsHelper
       a
     end
   end
+
+  def available_containers
+    orgUnits ||= ActiveLdap::Base.search(filter: 'objectClass=organizationalUnit',
+                                         attributes: ['ou'], base:'ou=fkit,ou=groups,dc=chalmers,dc=it').map(&:first)
+  end
 end
