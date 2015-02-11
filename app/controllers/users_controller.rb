@@ -61,7 +61,7 @@ class UsersController < ApplicationController
     if @user.nil?
       redirect_to users_path, notice: t('unknown_user')
     else
-      authorize @user
+      authorize @user unless doorkeeper_request?
     end
   end
 
