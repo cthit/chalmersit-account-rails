@@ -11,4 +11,4 @@ $ ->
       .autocomplete('instance')._renderItem = render_item
 
 render_item = (ul, item) ->
-  $('<li>').append(item.display_name).append('<br><small>' + item.value + '</small>').appendTo(ul)
+  $('<li>').append(item.name_and_nick).append('<br><small>' + item.value + '</small>').appendTo(ul)

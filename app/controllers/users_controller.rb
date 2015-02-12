@@ -24,7 +24,8 @@ class UsersController < ApplicationController
 
   def autocomplete
     authorize @user
-    @users = LdapUser.all(filter: "(|(uid=#{params[:term]}*)(nickname=#{params[:term]}*))").take(10)
+    p build_query params[:term]
+    @users = LdapUser.all(filter: "(|(uid=#{params[:term]}*)(nickname=#{params[:term]}*)(mail=#{params[:term]})(#{build_query params[:term]}))").take(10)
   end
 
   def search
@@ -168,11 +169,17 @@ class UsersController < ApplicationController
     end
 
     def search_name query
+      query_str = build_query query
+      LdapUser.find(:all, filter: query_str)
+    end
+
+    def build_query query
+      return '' if query.nil?
+
       split = query.split ' '
-      query_str = "&" + split.map! do |q|
+      "&" + split.map! do |q|
         "(|(gn=#{q})(sn=#{q}))"
       end.join
-      LdapUser.find(:all, filter: query_str)
     end
 
     # Return the next available uid number
