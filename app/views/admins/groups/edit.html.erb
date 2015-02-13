@@ -12,8 +12,8 @@
             </colgroup>
             <tbody>
                 <tr>
-                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Distinguished Name">DN</span></td>
-                    <td><%= @group.dn -%></td>
+                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Where to store the group">Container</span></td>
+                    <td><%= f.input :container, as: :radio_buttons, collection: available_containers, checked: @group.base, label: false -%></td>
                 </tr>
                 <tr>
                     <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Determines what attributes are available">Object Classes</span></td>

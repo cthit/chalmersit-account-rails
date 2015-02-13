@@ -24,6 +24,11 @@ class Admin::GroupsController < ApplicationController
     new_h     = Hash[pairs.select { |k, vs| vs.present? }]
     ldap_group_params = new_h.reverse_merge(Hash[arrayvals[false]])
 
+    if @group.base != ldap_group_params['container']
+      @group.connection.modify_rdn @group.dn, "cn=#{@group.cn}",
+        true, ldap_group_params['container']
+    end
+
     if @group.update_attributes(ldap_group_params)
       render 'admins/groups/show'
     else
@@ -33,7 +38,7 @@ class Admin::GroupsController < ApplicationController
 
   private
     def ldap_group_params
-      params.require(:ldap_group).permit(:cn, :gidNumber, :displayName,:groupLogo, :type,
+      params.require(:ldap_group).permit(:container, :cn, :gidNumber, :displayName,:groupLogo, :type,
                                          description:[], mail:[], homepage:[], member:[], function:[])
     end
 end

@@ -11,6 +11,8 @@ class LdapGroup < Activedap
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
+  attr_accessor :container
+
   def members
     @members ||= Rails.cache.fetch("#{cn}/members") do
       LdapUser.find(members_as_dn)
