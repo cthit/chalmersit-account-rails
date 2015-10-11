@@ -1,7 +1,7 @@
 class LdapUser < Activedap
   include ActiveModel::Dirty
   ldap_mapping dn_attribute: 'uid',
-               prefix: 'ou=it,ou=people',
+               prefix: 'ou=people',
                classes: ['chalmersstudent', 'posixAccount']
 
   validates :mail, presence: true
