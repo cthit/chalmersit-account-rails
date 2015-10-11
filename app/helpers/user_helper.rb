@@ -1,6 +1,6 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name)
+    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name profile_image)
   end
 
   def priv_attrs
@@ -27,6 +27,8 @@ module UserHelper
     return push_service_image(value) if a == 'push_services' && value.any?
 
     return member_of(value) if a == 'member_of'
+
+    return image(value) if a == "profile_image"
 
     value
   end
@@ -87,4 +89,12 @@ module UserHelper
      [t('activerecord.attributes.user.full_name'), 'name']
     ]
   end
+
+  def image(path)
+    file = Rails.root + "public/images/" + path
+    if File.exists?(file)
+      return image_tag(image_path(path))
+    end
+      image_tag(image_path("default.jpg"))
+    end
 end

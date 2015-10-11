@@ -12,7 +12,6 @@ class LdapUser < Activedap
   after_save :invalidate_my_cache, :invalidate_all_cache
 
   define_attribute_methods :push_services
-
   def self.find_cached uid
     Rails.cache.fetch(uid) do
         self.find(:first, uid)
@@ -102,7 +101,10 @@ class LdapUser < Activedap
   def invalidate_my_cache
     Rails.cache.delete(uid)
   end
-
+  def profile_image
+    #path here string
+    "profile_images/#{uid}.jpg" #hash yo uid with same hash
+  end
   private
 
   def has_valid_display_format
