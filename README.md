@@ -62,5 +62,5 @@ We use git flow in this repository.
 License
 ----
 
-**Free Software, Hell Yeah!**
+[MIT License](./LICENSE)
 
