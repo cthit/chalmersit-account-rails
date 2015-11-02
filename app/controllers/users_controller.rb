@@ -129,6 +129,11 @@ class UsersController < ApplicationController
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
     if @user.update_attributes(ldap_user_params)
+      if params.require(:post).require(:profile_image)
+        uploader = ProfileImageUploader.new
+        params[:post][:profile_image].original_filename = current_user.cid+".jpg"
+        uploader.store!(params[:post][:profile_image])
+      end
       redirect_to me_path, notice: I18n.translate('info_changed')
     else
       render :edit
