@@ -104,7 +104,7 @@ class LdapUser < Activedap
   private
   def profile_image
     #path here string
-    hashed_path = Digest::SHA1.hexdigest ('kerplol123' + uid + ".jpg")
+    hashed_path = Digest::SHA1.hexdigest ('kerplol123' + uid)
     "profile_images/" + hashed_path + ".jpg"
   end
 
