@@ -51,6 +51,8 @@
   <div class="small-12 medium-12 columns">
     <%= f.label :profile_image do %>
       <%= User.human_attribute_name(:profile_image) %>
+      <br>
+      <%= attr_or_not_entered(@user, "profile_image").html_safe%>
       <%= file_field :post, :profile_image %>
     <% end %>
   </div>
