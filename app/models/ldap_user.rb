@@ -101,11 +101,12 @@ class LdapUser < Activedap
   def invalidate_my_cache
     Rails.cache.delete(uid)
   end
+  private
   def profile_image
     #path here string
-    "profile_images/#{uid}.jpg" #hash yo uid with same hash
+    hashed_path = Digest::SHA1.hexdigest ('kerplol123' + uid + ".jpg")
+    "profile_images/" + hashed_path + ".jpg"
   end
-  private
 
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
