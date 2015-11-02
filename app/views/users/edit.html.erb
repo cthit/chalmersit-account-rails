@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= form_for(@user, url: update_me_path) do |f| %>
+<%= form_for(@user, :html => {:multipart => true}, url: update_me_path) do |f| %>
     <%= render partial: 'form', locals: {f: f} %>
 
   <fieldset>
@@ -41,4 +41,3 @@
         <li><%= button_tag type: :submit, class: 'button small' do %><%= fa_icon('save') + ' ' + t('save') %><% end %></li>
     </ul>
 <% end %>
-
