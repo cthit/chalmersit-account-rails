@@ -5,7 +5,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.2.0'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
-
 # ActiveLdap for communication with LDAP
 gem 'activeldap', require: 'active_ldap/railtie'
 gem 'net-ldap', '~> 0.11'
@@ -82,4 +81,10 @@ gem 'devise'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+# Gem for obfuscating profile images name
+gem 'digest'
 
+# Gem for uploading images
+gem 'carrierwave'
+# Gem for converting images
+gem 'mini_magick'

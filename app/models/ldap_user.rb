@@ -12,7 +12,6 @@ class LdapUser < Activedap
   after_save :invalidate_my_cache, :invalidate_all_cache
 
   define_attribute_methods :push_services
-
   def self.find_cached uid
     Rails.cache.fetch(uid) do
         self.find(:first, uid)
@@ -102,8 +101,12 @@ class LdapUser < Activedap
   def invalidate_my_cache
     Rails.cache.delete(uid)
   end
-
   private
+  def profile_image
+    #path here string
+    hashed_path = Digest::SHA1.hexdigest (Rails.application.secrets.image_salt + uid)
+    "profile_images/" + hashed_path + ".jpg"
+  end
 
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
