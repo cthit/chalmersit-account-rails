@@ -51,7 +51,7 @@
                 </tr>
                 <tr>
                     <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Whether the group is a Committee or a Society.">Type</span></td>
-                    <td><%= f.input :type, collection: ['Committee', 'Society'], selected: @group.type, label: false -%></td>
+                    <td><%= f.input :type, collection: ['Committee', 'Society', 'Alumni'], selected: @group.type, label: false -%></td>
                 </tr>
             </tbody>
         </table>

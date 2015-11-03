@@ -6,8 +6,8 @@ class LdapGroup < Activedap
   after_save :invalidate_my_cache, :invalidate_all_cache
 
   validates :displayName, :cn, :description, :gidNumber, presence: true
-  validate :unique_gidnumber
-  validate :members_exists
+  validate :unique_gidnumber, on: :update
+  validate :members_exists, on: :update
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
