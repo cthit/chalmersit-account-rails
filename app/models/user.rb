@@ -37,4 +37,7 @@ class User < ActiveRecord::Base
   def method_missing(meth)
     ldap_user.send(meth)
   end
+  def rememberable_value
+    self.remember_created_at.to_s
+  end
 end
