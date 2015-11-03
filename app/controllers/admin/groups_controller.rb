@@ -16,9 +16,6 @@ class Admin::GroupsController < ApplicationController
   end
 
   def update
-    # Remove empty values
-    ldap_group_params = filter_empty ldap_group_params
-
     if @group.base != ldap_group_params['container']
       @group.connection.modify_rdn @group.dn, "cn=#{@group.cn}",
         true, ldap_group_params['container']
@@ -75,7 +72,6 @@ class Admin::GroupsController < ApplicationController
     end
 
     def filter_empty ldap_params
-      p ldap_params
       arrayvals = ldap_params.group_by{|k, v| v.kind_of?(Array)}
       pairs     = arrayvals[true].map { |k, vs| [k, vs.reject(&:blank?)] }
       new_h     = Hash[pairs.select { |k, vs| vs.present? }]
