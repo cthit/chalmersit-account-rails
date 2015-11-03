@@ -86,3 +86,5 @@ gem 'digest'
 
 # Gem for uploading images
 gem 'carrierwave'
+# Gem for converting images
+gem 'mini_magick'
