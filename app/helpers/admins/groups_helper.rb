@@ -40,4 +40,10 @@ module Admins::GroupsHelper
     orgUnits ||= ActiveLdap::Base.search(filter: 'objectClass=organizationalUnit',
                                          attributes: ['ou'], base:'ou=fkit,ou=groups,dc=chalmers,dc=it').map(&:first)
   end
+
+  def abbrev_dn rdn
+    # Remove {"ou"=>"groups"}, {"dc"=>"chalmers"}, {"dc"=>"it"}
+    abbrev = rdn[0..-4]
+    abbrev.map{|i| i.map{|k,v| "#{k}=#{v}"}}.join(",")
+  end
 end

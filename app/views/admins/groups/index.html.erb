@@ -7,8 +7,8 @@
     <thead>
         <tr>
             <th>Name</th>
-            <th >GID</th>
-            <th width="70%">DN</th>
+            <th >Abbr DN</th>
+            <th width="70%">Description</th>
             <th width="30%">Action</th>
         </tr>
     </thead>
@@ -17,7 +17,7 @@
     <tr>
         <td><%= link_to g.displayName, admin_group_path(g) %></td>
         <td><%= g.gid_number %></td>
-        <td><%= g.dn.to_s %></td>
+        <td><%= abbrev_dn g.dn.rdns %></td>
         <td>
             <button href="#" data-dropdown="drop-<%= g.cn -%>" aria-controls="drop-<%= g.cn -%>" aria-expanded="false" class="button tiny expand dropdown no-margin">Action</button><br>
             <ul id="drop-<%= g.cn -%>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
