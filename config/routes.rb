@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resource :admin, only: :show
 
   get '/admin/mail' => 'admins#mail', as: :admin_mail
+  post '/admin/send_invitations' => 'admins#send_invitations', as: :send_invitations
   namespace :admin do
     resources :groups
   end
