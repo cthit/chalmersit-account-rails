@@ -14,4 +14,8 @@ class AdminsController < ApplicationController
 
   def index
   end
+
+  def mail
+    puts "WHO \n\n\n\n\n"
+  end
 end
