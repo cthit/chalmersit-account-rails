@@ -1,0 +1,6 @@
+<% content_for :title, "Administrator" %>
+<p>Mail sent to: <br>
+<%@emails.each do |email|%>
+  <%= email %><br>
+<% end %>
+</p>

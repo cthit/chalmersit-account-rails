@@ -1,12 +1,13 @@
 class UserMailer < ApplicationMailer
-  
   # Takes array of emails and sends invitation mail.
-  def send_invitations(emails)
-    layout_name = 'user_invitation'
-    @url = "http://0.0.0.0:3000/new"
-    mail(to: emails, subject: "Välkommen till IT-sektionen!") do |format|
-      format.html { render layout: layout_name }
-      format.text { render layout: layout_name }
+  def self.send_invitations(emails)
+    emails.each do |email|
+      new_invitation(email).deliver_now
     end
+  end
+
+  def new_invitation(email)
+    @url = "http://0.0.0.0:3000/new"
+    mail(to: email, subject: "Välkommen till IT-sektionen!")
   end
 end
