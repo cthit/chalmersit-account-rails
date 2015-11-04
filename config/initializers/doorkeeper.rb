@@ -91,7 +91,6 @@ Doorkeeper.configure do
   # so that the user skips the authorization step.
   # For example if dealing with trusted a application.
   skip_authorization do |resource_owner, client|
-    p resource_owner, client
     #client.superapp? or resource_owner.admin?
     client.uid == Rails.application.secrets.chalmersit_appid# or resource_owner.admin?
   end

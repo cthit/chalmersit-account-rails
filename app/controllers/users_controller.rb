@@ -23,7 +23,6 @@ class UsersController < ApplicationController
 
   def autocomplete
     authorize @user
-    p build_query params[:term]
     @users = LdapUser.all(filter: "(|(uid=#{params[:term]}*)(nickname=#{params[:term]}*)(mail=#{params[:term]})(#{build_query params[:term]}))").take(10)
   end
 
