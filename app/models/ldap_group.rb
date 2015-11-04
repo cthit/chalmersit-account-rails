@@ -7,7 +7,7 @@ class LdapGroup < Activedap
 
   validates :displayName, :cn, :description, :gidNumber, presence: true
   validate :unique_gidnumber, on: :update
-  validate :members_exists, on: :update
+  validate :members_exists?, on: :update
 
   GROUP_BASE = 'ou=groups,dc=chalmers,dc=it'
 
@@ -116,13 +116,14 @@ class LdapGroup < Activedap
       end
     end
 
-    def members_exists
-      grouped = member(true).group_by{|m| LdapGroup.dn_is_group? m}
-      begin
-        LdapUser.find(grouped[false]) if grouped[false] && grouped[false].any?
-        LdapGroup.find(grouped[true]) if grouped[true] && grouped[true].any?
-      rescue ActiveLdap::EntryNotFound
-        errors.add(:no_member, "Some member doesn't exist")
+    def members_exists?
+      # Returns two arrays, the first containing the groups, the second containing users
+      partitioned = member(true).partition{|m| LdapGroup.dn_is_group? m}
+
+      partitioned[0].map! { |e| LdapGroup.exists? e  }
+      partitioned[1].map! { |e| LdapUser.exists? e }
+      unless partitioned.flatten.all?
+        errors.add(:no_member, "One or more members doesn't exist")
       end
     end
 end
