@@ -7,7 +7,6 @@ class UserMailer < ApplicationMailer
   end
 
   def new_invitation(email)
-    @url = "http://0.0.0.0:3000/new"
     mail(to: email, subject: "Välkommen till IT-sektionen!")
   end
 end
