@@ -5,7 +5,7 @@
     <ul class="side-nav">
       <li class="heading"><%= fa_icon 'cog', text: 'General' -%></li>
       <li><%= link_to admin_configurable_path do %><%= fa_icon 'check', text: 'Defaults' %><%- end -%></li>
-      <li><%= link_to '#' do -%><%= fa_icon 'envelope-o', text: 'Mass mail'-%><%- end -%></li>
+      <li><%= link_to admin_mail_path do -%><%= fa_icon 'envelope-o', text: 'Mass mail'-%><%- end -%></li>
       <li><%= link_to oauth_applications_path do %><%= fa_icon 'lock', text: 'Oauth apps' -%><%- end -%></li>
     </ul>
     </div>

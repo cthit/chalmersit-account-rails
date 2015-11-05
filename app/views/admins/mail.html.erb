@@ -1,0 +1,9 @@
+<% content_for :title, "Administrator" %>
+<%= form_tag send_invitations_path do %>
+  <div class="field">
+    <%= text_field_tag "emails", "Emails, split with ';'" %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Send" %>
+  </div>
+<% end %>

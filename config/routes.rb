@@ -25,10 +25,11 @@ Rails.application.routes.draw do
   resources :groups, only: [:index, :show]
   resource :admin, only: :show
 
+  get '/admin/mail' => 'admins#mail', as: :admin_mail
+  post '/admin/send_invitations' => 'admins#send_invitations', as: :send_invitations
   namespace :admin do
     resources :groups
   end
-
   get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me

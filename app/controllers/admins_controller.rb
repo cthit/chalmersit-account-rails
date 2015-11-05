@@ -14,4 +14,12 @@ class AdminsController < ApplicationController
 
   def index
   end
+
+  def mail
+  end
+  def send_invitations
+    @emails = params[:emails].split(';')
+    puts "sending mail\n"
+    UserMailer.send_invitations(@emails)
+  end
 end
