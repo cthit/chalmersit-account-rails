@@ -23,6 +23,9 @@ sv:
   site_title: -konto
   login: Logga in
   logout: Logga ut
+  new_invitation_body: Hej!
+  new_invitation_greeting: Välkommen till IT-programmet! Du kan registrera dig på våran hemsida
+  new_invitation_link: här
   mail:
     one: E-post
     other: E-postadresser
