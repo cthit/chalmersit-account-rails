@@ -23,6 +23,9 @@ en:
   site_title: -account
   login: Sign in
   logout: Sign out
+  new_invitation_body: Hello!
+  new_invitation_greeting: Welcome to the IT program! You can register on our website
+  new_invitation_link: here
   mail:
     one: E-mail
     other: E-mail addresses
