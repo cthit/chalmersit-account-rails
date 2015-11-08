@@ -6,13 +6,13 @@ class User < ActiveRecord::Base
   devise :ldap_authenticatable, :recoverable, :rememberable, :trackable
 
   validates :gn, :sn, :mail, :admissionYear, :nickname, presence: true
-  validates :password, :password_confirmation, presence: true, length: { in: 8..100 }, on: :update
-  validates :password, confirmation: true, on: :update
+  validates :password, :password_confirmation, presence: true, length: { in: 8..100 }, if: :validate_pwd?
   # As specified by ITU. Minimum of 6 because 2 for region and min 5 for subscriber number
   validates :telephonenumber, allow_blank: true, numericality: { only_integer: true }, length: {minimum: 6, maximum: 15}
-  validates :acceptedUserAgreement, acceptance: true, allow_nil: false, on: :update
+  #validates :acceptedUserAgreement, acceptance: true, allow_nil: false, on: :update
 
-  attr_accessor :password, :password_confirmation
+  attr_accessor :password_confirmation
+  before_save :save_ldap
 
   def ldap_user
     @ldap_user ||= LdapUser.find_cached(cid)
@@ -34,10 +34,41 @@ class User < ActiveRecord::Base
     ldap_user.send :mail, new_mail
   end
 
+  def password
+    @tmp_pwd
+  end
+
+  def password= pwd
+    @tmp_pwd = pwd
+
+    # Note that this uses Crypt by default instead of ssha which phpldapadmin uses
+    ldap_user.userPassword = ActiveLdap::UserPassword.crypt pwd
+    @encrypted_password_changed = true
+  end
+
+  # Needed beacuse: http://stackoverflow.com/a/30891441
+  def email_changed?
+    false
+  end
+  def encrypted_password_changed?
+    @encrypted_password_changed || false
+  end
+
   def method_missing(meth)
     ldap_user.send(meth)
   end
+
   def rememberable_value
     self.remember_created_at.to_s
+  end
+
+  def save_ldap
+    if valid?
+      ldap_user.save
+    end
+  end
+
+  def validate_pwd?
+    not self.password.nil? || @validate_password
   end
 end
