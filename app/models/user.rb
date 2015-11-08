@@ -14,8 +14,6 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   before_save :save_ldap
 
-  mount_uploader :profile_image, ProfileImageUploader
-
   def ldap_user
     @ldap_user ||= LdapUser.find_cached(cid)
   end
@@ -30,14 +28,6 @@ class User < ActiveRecord::Base
 
   def email
     method_missing :mail
-  end
-
-  def avatar
-    if profile_image.present?
-      profile_image
-    else
-      "default.jpg"
-    end
   end
 
   def email= new_mail

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108211557) do
+ActiveRecord::Schema.define(version: 20150119224502) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "name"
@@ -29,12 +29,6 @@ ActiveRecord::Schema.define(version: 20151108211557) do
   end
 
   add_index "configurables", ["name"], name: "index_configurables_on_name"
-
-  create_table "notification_services", force: :cascade do |t|
-    t.string   "push_client"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -115,18 +109,17 @@ ActiveRecord::Schema.define(version: 20151108211557) do
   add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
 
   create_table "users", force: :cascade do |t|
-    t.string   "cid",                                null: false
-    t.string   "reset_password_token"
+    t.string   "cid",                    limit: 255,             null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0, null: false
+    t.integer  "sign_in_count",                      default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_image"
   end
 
   add_index "users", ["cid"], name: "index_users_on_cid", unique: true

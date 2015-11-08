@@ -55,9 +55,7 @@ class LdapUser < Activedap
       nil
     end
   end
-  def avatar
-    db_user.avatar
-  end
+
   def push_services
     return nil if self.pushService.nil?
     @push_services ||= self.pushService(true).map do |s| # true = force return array of values
@@ -104,6 +102,12 @@ class LdapUser < Activedap
     Rails.cache.delete(uid)
   end
   private
+  def profile_image
+    #path here string
+    hashed_path = Digest::SHA1.hexdigest (Rails.application.secrets.image_salt + uid)
+    "profile_images/" + hashed_path + ".jpg"
+  end
+
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
   end

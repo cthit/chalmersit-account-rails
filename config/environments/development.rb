@@ -7,8 +7,6 @@ Rails.application.configure do
   config.cache_classes = false
 
   config.reload_classes_only_on_change = false
-  
-  config.active_record.raise_in_transactional_callbacks = true
 
   # Do not eager load code on boot.
   config.eager_load = false
