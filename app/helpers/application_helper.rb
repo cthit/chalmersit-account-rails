@@ -6,14 +6,18 @@ module ApplicationHelper
   end
 
   def is_me? user
-    current_user && current_user == user.db_user
+    current_user && current_user.cid == user.uid
   end
 
   def user_or_me user
     if is_me? user
       me_path
     else
-      user_path(user.uid)
+      if policy(user).show?
+        user_path(user.uid)
+      else
+        users_path
+      end
     end
   end
 end

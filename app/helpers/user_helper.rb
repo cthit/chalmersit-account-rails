@@ -1,18 +1,34 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail member_of preferredLanguage admissionYear telephonenumber display_name)
+    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name profile_image)
+  end
+
+  def priv_attrs
+    %w(uid preferredLanguage display_name)
+  end
+
+  # Returns true if I am able to view a privileged variable
+  def can_i_view? attr
+    if current_user.cid == @user.uid || current_user.admin?
+      return true
+    end
+    !priv_attrs.include?(attr)
+  end
+
+  def show_attr? attr
+    can_i_view?(attr) && @user.send(attr).present?
   end
 
   def attr_or_not_entered(user, a)
     value = user.send(a)
-
-    return content_tag(:em, t('not_entered'), class: 'not-entered') if value.nil?
 
     return t(value) if a == 'preferredLanguage'
 
     return push_service_image(value) if a == 'push_services' && value.any?
 
     return member_of(value) if a == 'member_of'
+
+    return image(value) if a == "profile_image"
 
     value
   end
@@ -46,7 +62,7 @@ module UserHelper
   end
 
   def whoose_profile user
-    if current_user && current_user == user.db_user
+    if current_user && current_user.cid == user.uid
       "your_profile"
     else
       "their_profile"
@@ -55,7 +71,7 @@ module UserHelper
 
   def years_until_current years_back
     current = Time.new.year
-    current - years_back..current
+    current - years_back+1..current
   end
 
   def active_on_equal(this, that)
@@ -63,6 +79,23 @@ module UserHelper
       "active"
     else
       ""
+    end
+  end
+
+  def searchable_fields
+    [ #Display, #param name
+     ['Nick', 'nickname'],
+     ['CID', 'uid'],
+     [t('activerecord.attributes.user.full_name'), 'name']
+    ]
+  end
+
+  def image(path)
+    file = Rails.root.join('public', 'images') + path
+    if File.exists?(file)
+      image_tag(image_path(path))
+    else
+      image_tag(image_path("default.jpg"))
     end
   end
 end

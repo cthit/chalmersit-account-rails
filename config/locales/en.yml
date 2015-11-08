@@ -23,7 +23,15 @@ en:
   site_title: -account
   login: Sign in
   logout: Sign out
-  mail: E-mail
+  new_invitation_body: Hello!
+  new_invitation_greeting: Welcome to the IT program! You can register on our website
+  new_invitation_link: here
+  mail:
+    one: E-mail
+    other: E-mail addresses
+  homepage:
+    one: Homepage
+    other: Homepages
   edit: Edit
   error: Error
   your_profile: Your profile
@@ -40,8 +48,11 @@ en:
   not_entered: Not entered
   remember_me: Remember me
   forgot_password: Forgot your password?
+  change_password: Change your password
+  new_password: New password
+  confirm_password: Confirm password
   create_user: New user
-  send_instructions: Send me reset password instructions
+  send_instructions: Reset my password
   info_changed: The changes were saved
   all_model: "All %{model}"
   non_member: No membership as of yet
@@ -49,6 +60,13 @@ en:
   administration: Administration
   my_applications: My applications
   menu: Menu
+  committee: Committee
+  society: Society
+  alumni: Alumni
+  next: Next
+  prev: Previous
+  unauthorized: "You are not authorized to perform this action."
+  unknown_user: "Who is that?"
   activerecord:
     models:
       user:
@@ -72,6 +90,7 @@ en:
         loginShell: Login shell
         telephonenumber: Telephone number
         notifyBy: Notify by
+        acceptedUserAgreement: User agreement
         push_services:
           one: Push notification
           other: Push notifications
@@ -79,13 +98,44 @@ en:
     edit:
       device_placeholder: Leave blank to send to all your devices
       token_placeholder: Your API-key
-      service: Aviseringstjänst
-      token: API-nyckel
+      service: Push service
+      token: API-key
       device: Enhet
     show:
       existential_crisis: That didn't look like you...
+    index:
+      unknown_type: I don't know how to found that for you...
+      looking_for: 'Who are you looking for?'
+      protip: 'Protip: You can use * as a wildcard operator'
+      all: All
+      search: Search
+      nothing_found: Could not find any people matching your query
+      incomplete_search: Incomplete search
+    dashboard:
+      hello: "Hello %{name}!"
+      welcome: Welcome to the IT student division's authentication system
+      my_membership: My memberships
+      my_apps: My applications
+      my_profile: My profile
+      show: Show
+    new:
+      register_user: Register new user
+      chalmers_account: Please log in with you Chalmers account below
+    error:
+      title: Something went wrong
+      unspecified: An unspecified error occured
+    register:
+      title: Register new IT-student
+      register: Register
+      user_agreement_desc: I accept that digIT stores information about me
   groups:
     index:
+      cn: Committee/Society
+      description: Description
+    show:
+      member:
+        one: Member
+        other: Members
   activemodel:
     models:
       ldap_group:
@@ -100,3 +150,18 @@ en:
               not_valid_format: has invalid format
             notifyBy:
               not_set: is set to an unspecified push service
+        chalmers_user:
+          attributes:
+            cid:
+              blank: "You must specify your Chalmers ID (CID)"
+              too_short: "A CID must be between 3-8 in length"
+              invalid: "That does not look like a valid CID"
+              already_registered: That CID has already been registered
+            password:
+              blank: "You must specify a password"
+              too_short: "A password must be ≥ 10 chars according to Chalmers policy"
+            base:
+              wrong_cid_or_pass: Wrong CID and/or password
+          failures:
+            register: Unable to register you
+            register_help: "Unable to verify that you are an IT-student.<p>If you are an IT-student (or has been), contact <span data-tooltip aria-haspopup='true' class='has-tip' title='Mail: digit@chalmers.it. <br />IRC: #digIT@irc.chalmers.it'>digIT</span> and we'll register an account manually.</p>"

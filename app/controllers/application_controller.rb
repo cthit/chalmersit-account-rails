@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+  include Pundit
+  before_filter :authenticate_user!
+
+  rescue_from DeviseLdapAuthenticatable::LdapException do |exception|
+    render :text => exception, :status => 500
+  end
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
@@ -24,8 +33,24 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = current_user.preferredLanguage if current_user && current_user.preferredLanguage && (I18n.available_locales.include? current_user.preferredLanguage.to_sym)
+    I18n.locale = current_user.preferredLanguage if current_user && current_user.preferredLanguage && I18n.available_locales.include?(current_user.preferredLanguage.to_sym)
+  end
+
+  def ensure_admin
+    authorize :admin, :index?
+  end
+
+  def doorkeeper_request?
+    doorkeeper_token.present?
   end
 
   helper_method :session_path, :new_session_path
+
+  private
+
+  def user_not_authorized
+    flash[:alert] = t('unauthorized')
+    redirect_to(request.referrer || unauthenticated_root_path)
+  end
+
 end

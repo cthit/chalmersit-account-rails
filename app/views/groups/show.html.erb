@@ -1,11 +1,41 @@
 <% content_for :title, @group.displayName %>
-<p><%= @group.description %></p>
-<ul class="side-nav">
-    <%= @group.members.each do |m| %>
-        <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
-                <i class="fi-torso"></i>
-                <%= "#{m.full_name} (#{m.uid})" %>
-            <% end %>
-        </li>
-    <% end %>
-</ul>
+<% content_for :labels do %>
+    <%= content_tag :span, t(@group.type.downcase), class: 'round success label' if @group.type %>
+<% end  %>
+<div class="row">
+    <div class="small-9 columns">
+        <%= content_tag :p, content_tag(:em, (@group.function_localised locale)) %>
+    </div>
+    <% if current_user && current_user.admin? %>
+        <div class="small-3 columns">
+            <%= link_to admin_group_path(@group) do %><%= fa_icon 'cog', text: '(Admin view)' %><%- end -%>
+        </div>
+    <%- end -%>
+</div>
+<div class="row">
+    <div class="large-6 columns">
+        <h5><%= fa_icon 'child', text: t('.member', count: @group.members.size) %></h5>
+        <ul class="side-nav no-padding">
+        <% @group.members.each do |m| %>
+            <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
+                    <i class="fi-torso"></i>
+                    <%= "#{m.name_and_nick}" %>
+                <% end %>
+            </li>
+        <% end %>
+        </ul>
+    </div>
+    <div class="large-6 columns">
+        <dl>
+            <dt><%= fa_icon 'info-circle', text: 'Info' %></dt>
+            <dd><%= @group.description_localised locale %></dd>
+        <% unless @group.homepage.nil? %>
+            <%= dd_homepages @group.homepage(true) %>
+        <% end %>
+        <% unless @group.mail.nil? %>
+            <dt><%= fa_icon('envelope', text: t('mail', count: @group.mail(true).size)) %></dt>
+            <dd><%= mail_to @group.mail %></dd>
+        <% end %>
+        </dl>
+    </div>
+</div>

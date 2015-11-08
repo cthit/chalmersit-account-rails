@@ -1,0 +1,151 @@
+en:
+  activerecord:
+    attributes:
+      doorkeeper/application:
+        name: 'Namn'
+        redirect_uri: 'Omdirigerings URI'
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'kan inte innehålla ett fragment.'
+              invalid_uri: 'måste vara ett giltigt URI.'
+              relative_uri: 'måste vara ett absolut URI.'
+              secured_uri: 'måste vara en HTTPS/SSL URI.'
+
+  mongoid:
+    attributes:
+      doorkeeper/application:
+        name: 'Namn'
+        redirect_uri: 'Omdirigerings URI'
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'kan inte innehålla ett fragment.'
+              invalid_uri: 'måste vara ett giltigt URI.'
+              relative_uri: 'måste vara ett absolut URI.'
+              secured_uri: 'måste vara en HTTPS/SSL URI.'
+
+  mongo_mapper:
+    attributes:
+      doorkeeper/application:
+        name: 'Namn'
+        redirect_uri: 'Omdirigerings URI'
+    errors:
+      models:
+        doorkeeper/application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'kan inte innehålla ett fragment.'
+              invalid_uri: 'måste vara ett giltigt URI.'
+              relative_uri: 'måste vara ett absolut URI.'
+              secured_uri: 'måste vara en HTTPS/SSL URI.'
+
+  doorkeeper:
+    applications:
+      confirmations:
+        destroy: 'Är du säker?'
+      buttons:
+        edit: 'Ändra'
+        destroy: 'Förstör'
+        submit: 'Skicka'
+        cancel: 'Avbryt'
+        authorize: 'Auktorisera'
+      form:
+        error: 'Whoops! Kontrollera formuläret för eventuella fel'
+      help:
+        redirect_uri: 'Använd en linje per URI'
+        native_redirect_uri: 'Använd %{native_redirect_uri} för lokala tester'
+      edit:
+        title: 'Ändra applikation'
+      index:
+        title: 'Dina applikationer'
+        new: 'Ny Applikation'
+        name: 'Namn'
+        callback_url: 'Callback URL'
+      new:
+        title: 'Ny Applikation'
+      show:
+        title: 'Applikation: %{name}'
+        application_id: 'Applikation Id'
+        secret: 'Secret'
+        callback_urls: 'Callback urls'
+        actions: 'Actions'
+
+    authorizations:
+      buttons:
+        authorize: 'Auktorisera'
+        deny: 'Neka'
+      error:
+        title: 'Ett fel har inträffat'
+      new:
+        title: 'Auktorisering krävs'
+        prompt: 'Ge %{client_name} tillstånd till att använda ditt konto?'
+        able_to: 'Denna applikation kommer att kunna'
+      show:
+        title: 'Auktoriserings kod'
+
+    authorized_applications:
+      confirmations:
+        revoke: 'Är du säker?'
+      buttons:
+        revoke: 'Upphäv'
+      index:
+        title: 'Dina auktoriserade applikationer'
+        application: 'Applikation'
+        created_at: 'Skapad'
+        date_format: '%Y-%m-%d %H:%M:%S'
+
+    errors:
+      messages:
+        # Common error messages
+        invalid_request: 'Begäran saknar en obligatorisk parameter, innehåller ett parametervärde som inte stöds, eller på annat sätt felaktigt.'
+        invalid_redirect_uri: 'Omdirigeringens URI:t inkluderat är inte giltigt.'
+        unauthorized_client: 'Klienten har inte behörighet att utföra denna begäran med denna metod.'
+        access_denied: 'Resursägaren eller auktoriserings servern förnekade begäran.'
+        invalid_scope: 'Det begärda \"scope\":et är ogiltigt, okänd, eller felaktig.'
+        server_error: 'Auktoriserings servern påträffade ett oväntat villkor som hindrade den från att uppfylla begäran.'
+        temporarily_unavailable: 'Auktoriserings servern kan för närvarande inte hantera förfrågan på grund av en tillfällig överbelastning eller underhåll av servern.'
+
+        #configuration error messages
+        credential_flow_not_configured: 'Resursägarens lösenords referens flöde misslyckades på grund av att Doorkeeper.configure.resource_owner_from_credentials är okonfigurerad.'
+        resource_owner_authenticator_not_configured: 'Resursägaren "find" misslyckades på grund av att Doorkeeper.configure.resource_owner_authenticator är okonfigurerat.'
+
+        # Access grant errors
+        unsupported_response_type: 'Auktoriserings servern stöder inte den här typen svar.'
+
+        # Access token errors
+        invalid_client: 'Klientautentisering misslyckades på grund av okänd klient, ingen klient autentisering inkluderat eller en autentiseringsmetod som inte stöds.'
+        invalid_grant: 'Det givna auktorisations bidraget är ogiltigt, löpt ut, återkallas, stämmer inte överens med omdirigerings URI:t som används i auktoriseringsbegäran, eller utfärdades till en annan klient.'
+        unsupported_grant_type: 'Auktoriserings bidragets typ stöds inte av auktoriserings servern.'
+
+        # Password Access token errors
+        invalid_resource_owner: 'De givna resursägarnas autentiseringsuppgifter är inte giltiga eller så kan inte resursägarna hittas'
+
+        invalid_token:
+          revoked: "Åtkomstnyckeln återkallades"
+          expired: "Åtkomstnyckeln har löpt ut"
+          unknown: "Åtkomstnyckeln är ogiltig"
+
+    flash:
+      applications:
+        create:
+          notice: 'Applikation skapad.'
+        destroy:
+          notice: 'Applikation borttagen.'
+        update:
+          notice: 'Applikation uppdaterad.'
+      authorized_applications:
+        destroy:
+          notice: 'Applikation upphävd.'
+
+    layouts:
+      admin:
+        nav:
+          oauth2_provider: 'digIT-oauth'
+          applications: 'Applikationer'
+      application:
+        title: 'OAuth auktorisering krävs'

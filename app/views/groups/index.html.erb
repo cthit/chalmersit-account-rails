@@ -1,18 +1,20 @@
 <% content_for :title, t("all_model", model:LdapGroup.model_name.human(count: 2).downcase) %>
+<% if current_user && current_user.admin? %>
+    <%= link_to admin_groups_path do %><%= fa_icon 'cog', text: '(Admin view)' %><%- end -%>
+    <br /><br />
+<%- end -%>
 <table>
     <thead>
         <tr>
-            <th>cn</th>
-            <th>displayName</th>
-            <th>desription</th>
+            <th><%= t('.cn') -%></th>
+            <th width="100%"><%= t('.description') -%></th>
         </tr>
     </thead>
     <tbody>
 <% @groups.each do |g| %>
     <tr>
-        <td><%= link_to g.cn, group_path(g) %></td>
-        <td><%= g.displayName %></td>
-        <td><%= g.description %></td>
+        <td><%= link_to g.displayName, group_path(g) %></td>
+        <td><%= g.description_localised locale %></td>
     </tr>
 <% end %>
     </tbody>

@@ -1,0 +1,5 @@
+<% content_for :title, "Edit #{@group.displayName} (admin-mode)"%>
+
+<div class="row">
+    <%= render 'admins/groups/form', url: admin_group_path(@group), method: :put %>
+</div>

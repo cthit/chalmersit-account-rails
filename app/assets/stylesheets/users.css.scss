@@ -8,3 +8,22 @@
 #error_explanation {
   margin-bottom: 2em;
 }
+
+#t, #q {
+    margin-bottom: 0;
+}
+
+#protip {
+    font-size: 0.9em;
+    margin-bottom: 5px;
+}
+
+.borderless {
+    border: 0;
+}
+
+@import "foundation/components/side-nav";
+.member-of-side-nav {
+    @include side-nav();
+    padding-top: 0;
+}

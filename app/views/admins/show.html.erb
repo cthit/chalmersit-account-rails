@@ -1,2 +1,26 @@
-<h1>Admins#show</h1>
-<p>Find me in app/views/admins/show.html.erb</p>
+<% content_for :title, "Administrator" %>
+<h5 class="subheader">Choose a task</h5>
+<div class="row">
+    <div class="columns small-12 medium-6 large-4">
+    <ul class="side-nav">
+      <li class="heading"><%= fa_icon 'cog', text: 'General' -%></li>
+      <li><%= link_to admin_configurable_path do %><%= fa_icon 'check', text: 'Defaults' %><%- end -%></li>
+      <li><%= link_to admin_mail_path do -%><%= fa_icon 'envelope-o', text: 'Mass mail'-%><%- end -%></li>
+      <li><%= link_to oauth_applications_path do %><%= fa_icon 'lock', text: 'Oauth apps' -%><%- end -%></li>
+    </ul>
+    </div>
+    <div class="columns small-12 medium-6 large-4">
+    <ul class="side-nav">
+        <li class="heading"><%= fa_icon 'users', text: 'User related' %> </li>
+      <li><%= link_to '#' do -%><%= fa_icon 'list', text: 'List users'-%><%- end -%></li>
+      <li><%= link_to '#' do -%><%= fa_icon 'user-plus', text: 'Add user'-%><%- end -%></li>
+    </ul>
+    </div>
+    <div class="columns small-12 large-4">
+    <ul class="side-nav">
+      <li class="heading"><%= fa_icon 'folder', text: 'Group related' %></li>
+      <li><%= link_to  admin_groups_path do %><%= fa_icon 'list', text: 'List groups' -%><%- end -%></li>
+      <li><%= link_to  new_admin_group_path do %><%= fa_icon 'plus', text: 'Add group' -%><%- end -%></li>
+    </ul>
+    </div>
+</div>

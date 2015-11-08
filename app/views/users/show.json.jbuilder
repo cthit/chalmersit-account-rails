@@ -1,8 +1,8 @@
-json.extract! @user, :uid, :full_name, :nickname, :mail,
-  :acceptedUserAgreement, :preferredLanguage, :admissionYear,
-  :telephonenumber, :display_name
+json.extract! @user, :uid, :display_name, :full_name, :nickname, :mail,
+  :accepted_user_agreement, :preferred_language, :admission_year,
+  :telephone_number, :given_name, :surname
 json.groups @user.member_of.map { |g| g.cn }
 json.admin @user.admin?
-if @show_restricted
+if policy(@user).admin?
   json.dn @user.dn.to_s
 end

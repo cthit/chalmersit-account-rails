@@ -1,20 +1,35 @@
-class LdapUser < ActiveLdap::Base
+class LdapUser < Activedap
   include ActiveModel::Dirty
   ldap_mapping dn_attribute: 'uid',
-               prefix: 'ou=it,ou=people'
+               prefix: 'ou=people',
+               classes: ['chalmersstudent', 'posixAccount']
 
   validates :mail, presence: true
-  validates :nickname, presence: true
+  validates :nickname, :gn, :sn, :admissionYear, presence: true
   validate :has_valid_display_format
   validate :has_valid_api_keys
 
+  after_save :invalidate_my_cache, :invalidate_all_cache
+
   define_attribute_methods :push_services
+  def self.find_cached uid
+    Rails.cache.fetch(uid) do
+        self.find(:first, uid)
+    end
+  end
+
+  def self.all_cached
+    @all ||= Rails.cache.fetch(LdapUser.all_users_cache_key) do
+        LdapUser.all(order: :asc, sort_by: "uid")
+    end
+  end
 
   # The groups the user is a member of
+  # FIXME: invalidate on member change...
   def member_of
-    @member_of ||= begin
+    @member_of ||= Rails.cache.fetch("#{uid}/memberof") do
       memberof = []
-      all = LdapGroup.all
+      all = LdapGroup.all_cached
 
       all.each do |g|
         if g.is_member?(self) then
@@ -71,18 +86,40 @@ class LdapUser < ActiveLdap::Base
     ["%{firstname} '%{nickname}' %{lastname}", "%{firstname} %{lastname}", "%{nickname}", "%{lastname}"]
   end
 
+  def cache_key
+    "#{uid}/#{db_user.updated_at.to_i}"
+  end
+
+  def self.all_users_cache_key
+    "all_ldap_users"
+  end
+
+  def invalidate_all_cache
+      Rails.cache.delete(LdapUser.all_users_cache_key)
+  end
+
+  def invalidate_my_cache
+    Rails.cache.delete(uid)
+  end
   private
+  def profile_image
+    #path here string
+    hashed_path = Digest::SHA1.hexdigest (Rails.application.secrets.image_salt + uid)
+    "profile_images/" + hashed_path + ".jpg"
+  end
 
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
   end
 
   def has_valid_api_keys
-    return unless push_services_changed?
+    #return unless push_services_changed?
 
-    push_services.each do |k, v|
-        send "validate_#{k}", v[:api], v[:device]
-    end
+    #push_services.each do |k, v|
+    #    send "validate_#{k}", v[:api], v[:device]
+    #end
+    # FIXME: rewrite...
+    true
   end
 
   def validate_pushover user, device

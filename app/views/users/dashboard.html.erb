@@ -1,0 +1,57 @@
+<% content_for :title, t('.hello', name: @user.gn) %>
+
+<h4 class="subheader"><%= t '.welcome' %></h4>
+<br />
+<div class="row">
+  <div class="row">
+    <div class="small-6 medium-4 columns">
+        <h3><small><%= fa_icon 'info-circle' %> <%= t '.my_profile' %></small></h3>
+        <ul class="member-of-side-nav">
+            <li>
+                <%= link_to me_path do %>
+                    <%= fa_icon 'user' %>
+                    <%= t('.show') %>
+                <% end %>
+            </li>
+            <% if policy(@user).edit? %>
+            <li>
+                <%= link_to edit_me_path do %>
+                    <%= fa_icon 'edit' %>
+                    <%= t 'edit'  %>
+                <% end %>
+            </li>
+            <% end %>
+        <% if @user.admin? %>
+            <li>
+                <%= link_to admin_path do %>
+                    <%= fa_icon 'cog' %>
+                    <%= t 'administration'  %>
+                <% end %>
+            </li>
+        <% end %>
+            <li>
+                <%= link_to destroy_user_session_path do %>
+                    <%= fa_icon 'sign-out' %>
+                    <%= t 'logout'  %>
+                <% end %>
+            </li>
+        </ul>
+
+    </div>
+    <div class="small-6 medium-4 columns">
+        <% unless @user.member_of.empty? %>
+          <h3><small><%= fa_icon 'folder' %> <%= t '.my_membership' %></small></h3>
+            <ul class="member-of-side-nav">
+              <% @user.member_of.each do |g| %>
+                <li><%= link_to g, group_path(g) %></li>
+              <% end %>
+            </ul>
+        <% end %>
+    </div>
+    <div class="small-12 medium-4 columns">
+        <h3><small><%= fa_icon 'cubes' %> <%= t 'my_applications' %></small></h3>
+        <ul class="member-of-side-nav">
+            <li><%= link_to "chalmers.it", "https://chalmers.it" %></li>
+        </ul>
+  </div>
+</div>

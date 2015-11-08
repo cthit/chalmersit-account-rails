@@ -1,0 +1,59 @@
+<%= f.label :mail do %>
+  <%= User.human_attribute_name(:mail) %>
+  <%= f.email_field :mail %>
+<% end %>
+
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.label :gn do %>
+      <%= User.human_attribute_name(:gn) %>
+      <%= f.text_field :gn %>
+    <% end %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.label :sn do %>
+      <%= User.human_attribute_name(:sn) %>
+      <%= f.text_field :sn %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 large-7 columns">
+    <%= f.label :nickname do %>
+      <%= User.human_attribute_name(:nickname) %>
+      <%= f.text_field :nickname %>
+    <% end %>
+  </div>
+  <div class="small-12 large-5 columns">
+    <%= f.label :telephonenumber do %>
+      <%= User.human_attribute_name(:telephonenumber) %>
+      <%= f.phone_field :telephonenumber, placeholder: '+46....' %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 medium-9 columns">
+    <%= f.label :cn do %>
+      <%= User.human_attribute_name(:cn) %>
+      <%= f.select :cn, options_for_select(LdapUser.display_formats, f.object.cn) %>
+    <% end %>
+  </div>
+  <div class="small-12 medium-3 columns">
+    <%= f.label :preferredLanguage do %>
+      <%= User.human_attribute_name(:preferredLanguage) %>
+      <%= f.select :preferredLanguage, options_for_select([[t('sv'), :sv], [t('en'), :en]], f.object.preferredLanguage) %>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 medium-12 columns">
+    <%= f.label :profile_image do %>
+      <%= User.human_attribute_name(:profile_image) %>
+      <br>
+      <%= attr_or_not_entered(@user, "profile_image").html_safe%>
+      <%= file_field :post, :profile_image %>
+    <% end %>
+  </div>
+</div>

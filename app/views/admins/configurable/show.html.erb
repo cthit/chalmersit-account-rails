@@ -1,0 +1,32 @@
+<% content_for :title, "Defaults" %>
+
+<%= form_tag(admin_configurable_path, :method => :put) do -%>
+ <%- @key_groups.keys.each do |kg| -%>
+    <fieldset>
+      <legend><%= kg.titlecase %></legend>
+  <%- @key_groups[kg].each do |key| -%>
+    <%- options = Configurable.defaults[key] -%>
+    <div class="configurable">
+      <%= label_tag key, options[:name] %>
+      <%- if options[:type] == 'boolean' %>
+        <%= hidden_field_tag key, "0" %>
+        <%= check_box_tag key, "1", Configurable.send(key) %>
+      <%- elsif options[:type] == 'password' -%>
+        <%= password_field_tag key, Configurable.send(key) %>
+      <%- elsif options[:type] == 'text' -%>
+        <%= text_area_tag key, Configurable.send(key) %>
+      <%- elsif options[:type] == 'list' -%>
+        <%= text_area_tag key, Configurable.serialized_value(key) -%>
+      <%- else -%>
+        <%= text_field_tag key, Configurable.send(key) %>
+      <%- end -%>
+    </div>
+  <%- end -%>
+    </fieldset>
+ <%- end -%>
+
+<ul class="button-group even-2">
+    <li><%= link_to admin_path, class: 'button small secondary' do %><%= fa_icon('angle-left') + ' ' + t('back') %><% end %></li>
+    <li><%= button_tag type: :submit, class: 'button small' do %><%= fa_icon('save') + ' ' + t('save') %><% end %></li>
+</ul>
+<%- end -%>

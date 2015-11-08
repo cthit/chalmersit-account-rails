@@ -4,15 +4,33 @@
 # If you want to be able to access a string config[:site_title], for example:
 #
 
+# the first word (everything before the first _) is the group
+# by which they are sorted in the view.
 mainsite_url:
     name: URL to main site (chalmers.it)
     type: string
     default: https://chalmers.it
-
 mainsite_login_uri:
     name: URI to main site login
     type: string
     default: /auth/account
+
+ldap_default_display_format:
+    name: Default display format (cn)
+    type: string
+    default: "%{nickname}"
+ldap_default_home_dir:
+    name: Default home directory
+    type: string
+    default: "/home/chalmersit/%{uid}"
+ldap_default_group_id:
+    name: Default group id
+    type: integer
+    default: 4500
+ldap_default_login_shell:
+    name: Default login shell
+    type: string
+    default: /bin/bash
 
 # site_title:
 #   name: Site Title

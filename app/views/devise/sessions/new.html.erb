@@ -1,12 +1,26 @@
 <% content_for :title, t('login') %>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <%= f.text_field :cid, autofocus: true, placeholder: 'CID' %>
-  <%= f.password_field :password, autocomplete: "off", placeholder: t('password') %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<div class="row collapse">
+  <div class="small-2 columns">
+      <span class="prefix">
+        <%= fa_icon 'user' %>
+      </span>
+  </div>
+  <%= f.input :cid, autofocus: true, placeholder: 'CID', label: false, wrapper_html: {class: "small-10 columns"} %>
+  <div class="small-2 columns">
+      <span class="prefix">
+        <%= fa_icon 'lock' %>
+      </span>
+  </div>
+  <%= f.input :password, autocomplete: "off", placeholder: t('password'), label: false, wrapper_html: {class: "small-10 columns"} %>
 
+</div>
   <% if devise_mapping.rememberable? -%>
-    <%= f.check_box :remember_me %>
-    <%= f.label :remember_me, t('remember_me') %>
+    <%= f.input :remember_me, as: :boolean, label: t('remember_me') %>
   <% end -%>
   <br>
-  <%= f.submit t('login'), class: 'login-btn small-12 columns button' %>
+  <%= button_tag class: 'login-btn small-12 columns button' do %>
+      <%= fa_icon 'sign-in' -%>
+      <%= t('login') -%>
+  <% end -%>
 <% end %>

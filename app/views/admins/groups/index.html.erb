@@ -1,0 +1,32 @@
+<% content_for :title, "All groups (admin-mode)" %>
+<ul class="button-group radius even-5">
+    <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= link_to new_admin_group_path, class: 'radius button tiny success' do -%><%= fa_icon 'plus', text: 'New group' -%><%- end -%></li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>GID</th>
+            <th width="70%">DN without base</th>
+            <th width="30%">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+<% @groups.each do |g| %>
+    <tr>
+        <td><%= link_to g.displayName, admin_group_path(g) %></td>
+        <td><%= g.gid_number %></td>
+        <td><%= abbrev_dn g.dn.rdns %></td>
+        <td>
+            <button href="#" data-dropdown="drop-<%= g.cn -%>" aria-controls="drop-<%= g.cn -%>" aria-expanded="false" class="button tiny expand dropdown no-margin">Action</button><br>
+            <ul id="drop-<%= g.cn -%>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+              <li><%= link_to admin_group_path(g) do %><%= fa_icon 'info-circle', text: 'View' -%><%- end -%></li>
+              <li><%= link_to edit_admin_group_path(g) do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
+              <li><%= link_to admin_group_path(g), method: :delete, data: {confirm: "Are you sure you want to delete '#{g.cn}'?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
+            </ul>
+        </td>
+    </tr>
+<% end %>
+    </tbody>
+</table>
