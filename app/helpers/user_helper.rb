@@ -1,6 +1,6 @@
 module UserHelper
   def user_attrs
-    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name profile_image)
+    %w(uid full_name nickname mail telephonenumber member_of admissionYear preferredLanguage display_name avatar)
   end
 
   def priv_attrs
@@ -28,7 +28,7 @@ module UserHelper
 
     return member_of(value) if a == 'member_of'
 
-    return image(value) if a == "profile_image"
+    return image(value) if a == "avatar"
 
     value
   end
@@ -91,11 +91,6 @@ module UserHelper
   end
 
   def image(path)
-    file = Rails.root.join('public', 'images') + path
-    if File.exists?(file)
-      image_tag(image_path(path))
-    else
-      image_tag(image_path("default.jpg"))
-    end
+    image_tag(image_path(path))
   end
 end

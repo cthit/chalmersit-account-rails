@@ -49,11 +49,11 @@
 </div>
 <div class="row">
   <div class="small-12 medium-12 columns">
-    <%= f.label :profile_image do %>
-      <%= User.human_attribute_name(:profile_image) %>
+    <%= f.label :avatar do %>
+      <%= User.human_attribute_name(:avatar) %>
       <br>
-      <%= attr_or_not_entered(@user, "profile_image").html_safe%>
-      <%= file_field :post, :profile_image %>
+      <%= attr_or_not_entered(@user, "avatar").html_safe%>
+      <%= f.file_field :profile_image %>
     <% end %>
   </div>
 </div>
