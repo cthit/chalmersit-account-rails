@@ -1,50 +1,29 @@
-<%= f.label :mail do %>
-  <%= User.human_attribute_name(:mail) %>
-  <%= f.email_field :mail %>
-<% end %>
+<%= f.input :mail, label: User.human_attribute_name(:mail) %>
 
 <div class="row">
   <div class="small-12 large-6 columns">
-    <%= f.label :gn do %>
-      <%= User.human_attribute_name(:gn) %>
-      <%= f.text_field :gn %>
-    <% end %>
+    <%= f.input :gn, label: User.human_attribute_name(:gn) %>
   </div>
   <div class="small-12 large-6 columns">
-    <%= f.label :sn do %>
-      <%= User.human_attribute_name(:sn) %>
-      <%= f.text_field :sn %>
-    <% end %>
+    <%= f.input :sn, label: User.human_attribute_name(:sn) %>
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 large-7 columns">
-    <%= f.label :nickname do %>
-      <%= User.human_attribute_name(:nickname) %>
-      <%= f.text_field :nickname %>
-    <% end %>
+    <%= f.input :nickname, label: User.human_attribute_name(:nickname) %>
   </div>
   <div class="small-12 large-5 columns">
-    <%= f.label :telephonenumber do %>
-      <%= User.human_attribute_name(:telephonenumber) %>
-      <%= f.phone_field :telephonenumber, placeholder: '+46....' %>
-    <% end %>
+    <%= f.input :telephonenumber, label: User.human_attribute_name(:telephonenumber), placeholder: '+46....' %>
   </div>
 </div>
 
 <div class="row">
   <div class="small-12 medium-9 columns">
-    <%= f.label :cn do %>
-      <%= User.human_attribute_name(:cn) %>
-      <%= f.select :cn, options_for_select(LdapUser.display_formats, f.object.cn) %>
-    <% end %>
+    <%= f.input :cn, collection: LdapUser.display_formats, label: User.human_attribute_name(:cn), include_blank: false %>
   </div>
   <div class="small-12 medium-3 columns">
-    <%= f.label :preferredLanguage do %>
-      <%= User.human_attribute_name(:preferredLanguage) %>
-      <%= f.select :preferredLanguage, options_for_select([[t('sv'), :sv], [t('en'), :en]], f.object.preferredLanguage) %>
-    <% end %>
+    <%= f.input :preferredLanguage, label: User.human_attribute_name(:preferredLanguage), collection: [[t('sv'), :sv], [t('en'), :en]], allow_blank: false %>
   </div>
 </div>
 <div class="row">
