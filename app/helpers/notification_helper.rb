@@ -1,10 +1,10 @@
 module NotificationHelper
   # Notifies all subscribers of a given application, with application_id
-  # Expects 'tokens' of format; [{:message: "Message", title: "Title", :url_title: "http://google.se"}]
+  # Expects 'tokens' of format; [{message: "Message", title: "Title", url: "http://google.se" , url_title: "google"}]
   def notify_subscibers(app_id, tokens)
     subscriptions = Subscription.where(:application_id => app_id)
-    subscriptions.each do |sub|
-      sub.publish(tokens)
+    subscriptions.each do |subscription|
+      subscription.publish(tokens)
     end
   end
   def services

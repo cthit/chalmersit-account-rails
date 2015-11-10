@@ -2,7 +2,7 @@ class ServiceData < ActiveRecord::Base
   belongs_to :user
   belongs_to :subscription
 
-  def send(tokens)
+  def notify(tokens)
     push_client.split(";").each do |client|
       if client == "pushover"
         users = []
@@ -10,6 +10,8 @@ class ServiceData < ActiveRecord::Base
           users.push({:user => get_service_key("pushover"), device: device})
         end
         Chalmersit::Pushover.notify(users, tokens)
+      elsif client == "mail"
+        UserMailer.send_notification(LdapUser.find(User.find(user_id).cid).mail, tokens).deliver_now
       else
         puts "not yet implemented"
       end

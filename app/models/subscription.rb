@@ -5,6 +5,6 @@ class Subscription < ActiveRecord::Base
   belongs_to :service_data
 
   def publish(tokens)
-    service_data.send(tokens)
+    service_data.notify(tokens)
   end
 end
