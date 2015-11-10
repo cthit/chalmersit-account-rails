@@ -19,8 +19,7 @@ class ProfileImageUploader < CarrierWave::Uploader::Base
 
   # Override the filename of the uploaded files:
   def filename
-    extension = File.extname(original_filename)
-    filename = Digest::SHA1.hexdigest Rails.application.secrets.image_salt + File.basename(original_filename, extension)
+    filename = Digest::SHA1.hexdigest Rails.application.secrets.image_salt + model
     filename + ".jpg"
   end
 

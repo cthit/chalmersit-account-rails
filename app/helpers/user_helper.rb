@@ -91,11 +91,6 @@ module UserHelper
   end
 
   def image(path)
-    file = Rails.root.join('public', 'images') + path
-    if File.exists?(file)
-      image_tag(image_path(path))
-    else
-      image_tag(image_path("default.jpg"))
-    end
+    image_tag(image_path(path))
   end
 end

@@ -47,6 +47,19 @@ class LdapUser < Activedap
   def full_name
     @full_name ||= "#{gn} #{sn}"
   end
+  def avatar_upload=(file)
+    uploader = ProfileImageUploader.new(self.uid)
+    uploader.store!(file)
+    self.avatar=uploader.identifier
+  end
+
+  def profile_image
+    if avatar.present?
+      "profile_images/"+avatar
+    else
+      "default.jpg"
+    end
+  end
 
   def display_name
     begin
@@ -102,12 +115,6 @@ class LdapUser < Activedap
     Rails.cache.delete(uid)
   end
   private
-  def profile_image
-    #path here string
-    hashed_path = Digest::SHA1.hexdigest (Rails.application.secrets.image_salt + uid)
-    "profile_images/" + hashed_path + ".jpg"
-  end
-
   def has_valid_display_format
     errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
   end

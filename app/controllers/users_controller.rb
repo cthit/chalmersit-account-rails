@@ -128,16 +128,7 @@ class UsersController < ApplicationController
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
     if @user.update_attributes(ldap_user_params)
-      begin
-        if params[:post].present? && params[:post][:profile_image].present?
-          uploader = ProfileImageUploader.new
-          params[:post][:profile_image].original_filename = current_user.cid + File.extname(params[:post][:profile_image].original_filename)
-          uploader.store!(params[:post][:profile_image])
-        end
-        redirect_to me_path, notice: I18n.translate('info_changed')
-      rescue CarrierWave::IntegrityError
-        render :edit
-      end
+      redirect_to me_path, notice: I18n.translate('info_changed')
     else
       render :edit
     end
@@ -156,7 +147,7 @@ class UsersController < ApplicationController
     def ldap_user_params
       push_service_attrs = [:device, :api]
       params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
-                                        :telephonenumber, :preferredLanguage,
+                                        :telephonenumber, :preferredLanguage, :avatar_upload,
                                         { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
 
