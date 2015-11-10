@@ -3,14 +3,16 @@ class ServiceData < ActiveRecord::Base
   belongs_to :subscription
 
   def send(tokens)
-    if push_client == :pushover
-      users = []
-      devices.split(";").each do |device|
-        users.push({:user => get_service_key("pushover"), device: device})
+    push_client.split(";").each do |client|
+      if client == "pushover"
+        users = []
+        devices.split(";").each do |device|
+          users.push({:user => get_service_key("pushover"), device: device})
+        end
+        Chalmersit::Pushover.notify(users, tokens)
+      else
+        puts "not yet implemented"
       end
-      Chalmersit::Pushover.notify(users, tokens)
-    else
-      puts "not yet implemented"
     end
   end
 
