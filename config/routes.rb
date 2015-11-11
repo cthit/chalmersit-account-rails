@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post '/admin/send_invitations' => 'admins#send_invitations', as: :send_invitations
   namespace :admin do
     resources :groups
+    resources :applications
   end
   get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
