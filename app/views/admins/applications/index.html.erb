@@ -1,0 +1,33 @@
+<% content_for :title, "All applications (admin-mode)" %>
+<ul class="button-group radius even-5">
+    <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= link_to new_admin_application_path, class: 'radius button tiny success' do -%><%= fa_icon 'plus', text: 'New application' -%><%- end -%></li>
+</ul>
+<table>
+    <thead>
+        <tr>
+            <th>Avatar</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+<% @applications.each do |a| %>
+    <tr>
+        <td><%= image_tag a.avatar %></td>
+        <td><%= a.id %></td>
+        <td><%= link_to a.name, admin_application_path(a) %></td>
+        <td><%= a.description %></td>
+        <td>
+            <button href="#" data-dropdown="drop-<%= a.name -%>" aria-controls="drop-<%= a.name -%>" aria-expanded="false" class="button tiny expand dropdown no-margin">Action</button><br>
+            <ul id="drop-<%= a.name -%>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+              <li><%= link_to admin_application_path(a) do %><%= fa_icon 'info-circle', text: 'View' -%><%- end -%></li>
+              <li><%= link_to edit_admin_application_path(a) do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
+              <li><%= link_to admin_application_path(a), method: :delete, data: {confirm: "Are you sure you want to delete '#{a.name}'?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
+            </ul>
+        </td>
+    </tr>
+<% end %>
+    </tbody>
+</table>

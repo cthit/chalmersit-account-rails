@@ -1,0 +1,5 @@
+<% content_for :title, "Edit #{@application.name} (admin-mode)"%>
+
+<div class="row">
+    <%= render 'admins/applications/form', url: admin_application_path(@application), method: :put %>
+</div>
