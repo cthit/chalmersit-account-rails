@@ -26,10 +26,12 @@ class ApplicationsController < ApplicationController
   def push_to_subscribers
     tokens = token_builder(request.headers)
     notify_subscibers(@application, tokens)
+    redirect_to applications_path
   end
 private
   def token_builder(headers)
-    [message: headers['HTTP_PUSH_MESSAGE'], title: headers['HTTP_PUSH_TITLE'], url: headers['HTTP_PUSH_URL'], url_title: headers['HTTP_PUSH_URL_TITLE']]
+    puts headers['HTTP_PUSH_MESSAGE']
+    {:message => headers['HTTP_PUSH_MESSAGE'], :title => headers['HTTP_PUSH_TITLE'], :url => headers['HTTP_PUSH_URL'], :url_title => headers['HTTP_PUSH_URL_TITLE']}
   end
   def subscription_exists?
     subscription_exists(current_user.id, @application.id)
