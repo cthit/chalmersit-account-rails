@@ -1,6 +1,6 @@
 class AdminsController < ApplicationController
   include ConfigurableEngine::ConfigurablesController
-  include NotificationHelper
+  include SubscriptionHelper
   before_filter :ensure_admin
   after_action :verify_authorized
 
