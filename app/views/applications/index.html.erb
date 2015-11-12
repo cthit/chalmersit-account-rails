@@ -3,7 +3,7 @@
     <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: t('.back') -%><%- end -%></li>
 </ul>
 <% @applications.each do |a| %>
-  <div class="col s12 m6 l6">
+  <div class="col small-12 medium-6 large-6">
     <div class="card">
       <div class="card-image">
         <%= link_to image_tag(a.avatar), application_path(a) %>
