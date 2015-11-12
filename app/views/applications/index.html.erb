@@ -1,7 +1,6 @@
 <% content_for :title, "All applications" %>
 <ul class="button-group radius even-5">
-    <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
-    <li><%= link_to new_admin_application_path, class: 'radius button tiny success' do -%><%= fa_icon 'plus', text: 'New application' -%><%- end -%></li>
+    <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: t('.back') -%><%- end -%></li>
 </ul>
 <% @applications.each do |a| %>
   <div class="col s12 m6 l6">

@@ -69,7 +69,6 @@ en:
   unknown_user: "Who is that?"
   subscription_added: Subscription Added
   subscription_removed: Subscription removed.
-  subscribe: Subscribe
   activerecord:
     models:
       user:
@@ -139,6 +138,12 @@ en:
       member:
         one: Member
         other: Members
+  applications:
+    index:
+      back: Back
+    show:
+      subscribe: Subscribe
+      unsubscribe: Unsubscribe
   activemodel:
     models:
       ldap_group:

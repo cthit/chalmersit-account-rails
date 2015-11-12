@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   resources :applications, only: [:show, :index]
   get '/applications/new_subscription/:id' => 'applications#new_subscription', as: :new_subscription
+  get '/applications/remove_subscription/:id' => 'applications#remove_subscription', as: :remove_subscription
   # new = login to chalmers
   get '/new' => 'users#new', as: :new_me
 

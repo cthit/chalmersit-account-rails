@@ -1,18 +1,29 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show, :new_subscription]
+  before_action :set_application, except: [:index]
+  helper_method :subscription_exists?
   include SubscriptionHelper
 
   def index
     @applications = Application.all
-    render 'applications/index'
   end
   def show
-    render 'applications/show'
   end
   def new_subscription
+    if !subscription_exists?
       add_subscription(current_user.id, @application.id)
       flash[:notice] = t('subscription_added')
-      render 'applications/show'
+    end
+    redirect_to application_path(@application)
+  end
+  def remove_subscription
+    if subscription_exists?
+      delete_subscription(current_user.id, @application.id)
+      flash[:notice] = t('subscription_removed')
+    end
+    redirect_to application_path(@application)
+  end
+  def subscription_exists?
+    subscription_exists(current_user.id, @application.id)
   end
 private
   def set_application

@@ -17,6 +17,18 @@ module SubscriptionHelper
       subscription.service_data_id = servicedata.id
       subscription.save!
   end
+
+  def delete_subscription(user_id, app_id)
+    subscription = Subscription.where(user_id: user_id, application_id: app_id).first
+    servicedata = ServiceData.where(user_id: user_id, subscription_id: subscription.id)
+    subscription.delete
+    servicedata.delete_all
+  end
+
+  def subscription_exists(user_id, app_id)
+    Subscription.where(user_id: user_id, application_id: app_id).exists?
+  end
+
   def services
     [:pushbullet, :pushover, :mail]
   end

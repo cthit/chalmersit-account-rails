@@ -69,7 +69,6 @@ sv:
   unknown_user: Vem är det?
   subscription_added: Prenumeration tillagd!
   subscription_removed: Prenumeration borttagen.
-  subscribe: Prenumerera
   activerecord:
     models:
       user: Användare
@@ -136,6 +135,12 @@ sv:
       member:
         one: Medlem
         other: Medlemmar
+  applications:
+    index:
+      back: Bakåt
+    show:
+      subscribe: Prenumerera
+      unsubscribe: Avprenumerera
   activemodel:
     models:
       ldap_group:
