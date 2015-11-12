@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
 
+  resources :applications
+  
   # new = login to chalmers
   get '/new' => 'users#new', as: :new_me
 

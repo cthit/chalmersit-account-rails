@@ -1,0 +1,32 @@
+<% content_for :title, "#{@application.name} (admin-mode)"%>
+
+<ul class="button-group radius even-5">
+    <li><%= link_to admin_applications_path, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= link_to edit_admin_application_path(@application), class: "button tiny success" do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
+    <li><%= link_to admin_application_path(@application), class: "button tiny alert", method: :delete, data: {confirm: "Are you sure?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
+    <li class="separator"></li>
+    <li><%= link_to group_path(@application), class: "button tiny" do %><%= fa_icon 'info-circle', text: 'Normal view' -%><%- end -%></li>
+</ul>
+<div class="row">
+<h3 class="subheader">Attributes</h3>
+<table>
+    <thead>
+        <th>Attribute</th>
+        <th width="100%">Value</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td><%= @application.name %></td>
+        </tr>
+        <tr>
+          <td>Avatar</td>
+          <td><%= image_tag @application.avatar %></td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td><%= @application.description %></td>
+        </tr>
+    </tbody>
+</table>
+</div>
