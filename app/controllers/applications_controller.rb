@@ -29,4 +29,9 @@ private
   def set_application
     @application = Application.find(params[:id])
   end
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      Application.exists?(auth_token: token)
+    end
+  end
 end
