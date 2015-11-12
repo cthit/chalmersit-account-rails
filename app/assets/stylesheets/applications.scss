@@ -1,4 +1,11 @@
 // Place all the styles related to the Applications controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-@import "materialize";
+@import "materialize/components/prefixer";
+@import "materialize/components/mixins";
+@import "materialize/components/color";
+@import "materialize/components/variables";
+@import "materialize/components/global";
+@import "materialize/components/cards";
+@import "materialize/components/grid";
+@import "materialize/components/typography";
