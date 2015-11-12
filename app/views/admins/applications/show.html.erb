@@ -5,7 +5,7 @@
     <li><%= link_to edit_admin_application_path(@application), class: "button tiny success" do %><%= fa_icon 'edit', text: 'Edit' -%><%- end -%></li>
     <li><%= link_to admin_application_path(@application), class: "button tiny alert", method: :delete, data: {confirm: "Are you sure?"} do %><%= fa_icon 'remove', text: 'Delete' -%><%- end -%></li>
     <li class="separator"></li>
-    <li><%= link_to group_path(@application), class: "button tiny" do %><%= fa_icon 'info-circle', text: 'Normal view' -%><%- end -%></li>
+    <li><%= link_to application_path(@application), class: "button tiny" do %><%= fa_icon 'info-circle', text: 'Normal view' -%><%- end -%></li>
 </ul>
 <div class="row">
 <h3 class="subheader">Attributes</h3>
