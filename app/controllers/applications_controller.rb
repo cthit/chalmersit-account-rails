@@ -1,5 +1,6 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, only: [:show]
+  before_action :set_application, only: [:show, :new_subscription]
+  include SubscriptionHelper
 
   def index
     @applications = Application.all
@@ -7,6 +8,11 @@ class ApplicationsController < ApplicationController
   end
   def show
     render 'applications/show'
+  end
+  def new_subscription
+      add_subscription(current_user.id, @application.id)
+      flash[:notice] = t('subscription_added')
+      render 'applications/show'
   end
 private
   def set_application

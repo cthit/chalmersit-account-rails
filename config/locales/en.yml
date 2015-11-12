@@ -67,6 +67,9 @@ en:
   prev: Previous
   unauthorized: "You are not authorized to perform this action."
   unknown_user: "Who is that?"
+  subscription_added: Subscription Added
+  subscription_removed: Subscription removed.
+  subscribe: Subscribe
   activerecord:
     models:
       user:

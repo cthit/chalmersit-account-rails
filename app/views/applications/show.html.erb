@@ -2,6 +2,8 @@
 
 <ul class="button-group radius even-5">
     <li><%= link_to applications_path, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li class="separator"></li>
+    <li><%= link_to new_subscription_path(@application), class: "button tiny success" do %><%= fa_icon 'envelope', text: t('subscribe') -%><%- end -%></li>
 </ul>
 <div class="row">
 <h3 class="subheader">Attributes</h3>
