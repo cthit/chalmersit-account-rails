@@ -1,6 +1,6 @@
 class ApplicationsController < ApplicationController
-  before_action :set_application, except: [:index]
-  before_filter :restrict_access, only: [:push_to_subscribers]
+  before_action :set_application, except: [:index, :push_to_subscribers]
+  before_action :restrict_access, only: [:push_to_subscribers]
   helper_method :subscription_exists?
   include SubscriptionHelper
 
@@ -30,7 +30,6 @@ class ApplicationsController < ApplicationController
   end
 private
   def token_builder(headers)
-    puts headers['HTTP_PUSH_MESSAGE']
     {:message => headers['HTTP_PUSH_MESSAGE'], :title => headers['HTTP_PUSH_TITLE'], :url => headers['HTTP_PUSH_URL'], :url_title => headers['HTTP_PUSH_URL_TITLE']}
   end
   def subscription_exists?
@@ -41,7 +40,12 @@ private
   end
   def restrict_access
     authenticate_or_request_with_http_token do |token, options|
-      Application.exists?(auth_token: token)
+      if Application.exists?(auth_token: token)
+        @application = Application.where(auth_token: token).first
+        true
+      else
+        false
+      end
     end
   end
 end
