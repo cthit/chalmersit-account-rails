@@ -19,7 +19,7 @@ class ApplicationsController < ApplicationController
   def remove_subscription
     if subscription_exists?
       delete_subscription(current_user.id, @application.id)
-      flash[:notice] = t('subscription_removed')
+      flash[:alert] = t('subscription_removed')
     end
     redirect_to application_path(@application)
   end
