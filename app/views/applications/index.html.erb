@@ -3,13 +3,13 @@
     <li><%= link_to :back, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: t('.back') -%><%- end -%></li>
 </ul>
 <% @applications.each do |a| %>
-  <div class="col small-12 medium-6 large-6">
+  <div class="columns small-12 medium-6 large-6">
     <div class="card">
-      <div class="card-image">
-        <%= link_to image_tag(a.avatar), application_path(a) %>
+      <%= link_to image_tag(a.avatar), application_path(a) %>
+      <div class="card-divider">
+        <h4><%= link_to a.name, application_path(a) %></h4>
       </div>
-      <div class="card-content">
-        <span class="card-title"><%= link_to a.name, application_path(a) %></span>
+      <div class="card-section">
         <p><%= a.description %></p>
       </div>
     </div>

@@ -88,6 +88,3 @@ gem 'digest'
 gem 'carrierwave'
 # Gem for converting images
 gem 'mini_magick'
-
-# Gem for materialize
-gem 'materialize-sass'
