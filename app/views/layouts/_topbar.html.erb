@@ -80,6 +80,13 @@
             <% end %>
         </li>
     <% end %>
+    <% if Pundit.policy(current_user, LdapUser).index? %>
+        <li class="hide-on-small <%= "active" if on_pages? applications_path %>"><%= link_to applications_path do %>
+                <%= fa_icon 'envelope' %>
+                <%= t("all_model", model:Application.model_name.human(count: 2).downcase) %>
+            <% end %>
+        </li>
+    <% end %>
     <li class="divider"></li>
  <% end %>
 <% end %>
