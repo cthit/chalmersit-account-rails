@@ -49,9 +49,9 @@
         <% end %>
     </div>
     <div class="small-12 medium-4 columns">
-        <h3><small><%= fa_icon 'cubes' %> <%= t '.my_subscriptions' %></small></h3>
+        <h3><small><%= fa_icon 'cubes' %> <%= t 'my_subscriptions' %></small></h3>
         <ul class="member-of-side-nav">
-          <% @applications.each do |a| %>
+          <% current_user.subscribed_applications.each do |a| %>
             <li><%= link_to a.name, application_path(a)%></li>
           <% end %>
         </ul>
