@@ -59,6 +59,7 @@ en:
   admin_override: digIT-override!
   administration: Administration
   my_applications: My applications
+  my_subscriptions: My Subscriptions
   menu: Menu
   committee: Committee
   society: Society
@@ -74,6 +75,12 @@ en:
       user:
         one: User
         other: Users
+      subscription:
+        one: Subscription
+        other: Subscriptions
+      application:
+        one: Application
+        other: Applications
     attributes:
       user:
         mail: E-mail
@@ -120,7 +127,6 @@ en:
       my_apps: My applications
       my_profile: My profile
       show: Show
-      my_subscriptions: My Subscriptions
     new:
       register_user: Register new user
       chalmers_account: Please log in with you Chalmers account below

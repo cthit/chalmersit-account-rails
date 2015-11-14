@@ -59,6 +59,7 @@ sv:
   admin_override: digIT-override!
   administration: Administration
   my_applications: Mina applikationer
+  my_subscriptions: Mina Prenumerationer
   menu: Meny
   committee: Kommitté
   society: Förening
@@ -72,6 +73,12 @@ sv:
   activerecord:
     models:
       user: Användare
+      subscription:
+        one: Prenumeration
+        other: Prenumerationer
+      application:
+        one: Applikation
+        other: Applikationer
     attributes:
       user:
         mail: E-post
@@ -117,7 +124,6 @@ sv:
       my_membership: Mina medlemskap
       my_profile: Min profil
       show: Visa
-      my_subscriptions: Mina Prenumerationer
     new:
       register_user: Registrera ny användare
       chalmers_account: Logga in med ditt Chalmerskonto nedan
