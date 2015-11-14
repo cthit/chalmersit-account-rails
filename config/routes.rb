@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users, only: [:index, :show] do
+  resources :users, only: [:index, :show, :edit] do
     collection do
       get :autocomplete
     end
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   end
   get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
-  get '/me/edit' => 'users#edit', as: :edit_me
+  get '/me/edit' => 'users#edit_me', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
 
   # new = login to chalmers

@@ -119,7 +119,21 @@ class UsersController < ApplicationController
   end
 
   def edit
+    if @user.admin?
+      @user = LdapUser.find_cached(params[:id])
+      if @user.nil?
+        redirect_to users_path, notice: t('unknown_user')
+      else
+        authorize @user unless doorkeeper_request?
+      end
+    else
+      error.add(:unauthorized)
+    end
+  end
+
+  def edit_me
     authorize @user
+    render :edit
   end
 
   def update

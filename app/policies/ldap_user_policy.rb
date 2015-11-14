@@ -49,6 +49,10 @@ class LdapUserPolicy < ApplicationPolicy
     user && user.admin?
   end
 
+  def edit_me?
+    update?
+  end
+
   class Scope
     attr_reader :user, :scope
 
