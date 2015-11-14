@@ -48,16 +48,18 @@
     <li class="divider"></li>
 <% if signed_in? %>
     <li class="has-dropdown">
-        <a href="#"><%= fa_icon 'cubes' %> <%= t('my_applications') %></a>
+        <a href="#"><%= fa_icon 'cubes' %> <%= t('my_subscriptions') %></a>
       <ul class="dropdown">
-       <li>
-        <%= link_to "#" do %>
-            <%= fa_icon 'bookmark-o', text: 'bookIT' %>
-        <% end %>
-       </li>
-       <li>
-        <%= link_to "#" do %>
-            <%= fa_icon 'play', text: 'playIT' %>
+        <% if signed_in? %>
+          <% current_user.subscribed_applications.each do |a| %>
+            <li>
+            <%= link_to application_path(a) do %>
+              <%= fa_icon 'envelope-square', text: a.name %>
+            <% end %>
+            </li>
+          <% end %>
+        <% else %>
+
         <% end %>
        </li>
       </ul>
