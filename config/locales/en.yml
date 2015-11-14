@@ -120,6 +120,7 @@ en:
       my_apps: My applications
       my_profile: My profile
       show: Show
+      my_subscriptions: My Subscriptions
     new:
       register_user: Register new user
       chalmers_account: Please log in with you Chalmers account below

@@ -117,6 +117,7 @@ sv:
       my_membership: Mina medlemskap
       my_profile: Min profil
       show: Visa
+      my_subscriptions: Mina Prenumerationer
     new:
       register_user: Registrera ny användare
       chalmers_account: Logga in med ditt Chalmerskonto nedan

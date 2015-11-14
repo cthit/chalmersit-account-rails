@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
   before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
   before_filter :find_model, except: [:show, :new, :lookup, :create]
+  before_filter :set_subscribed_applications, only: [:dashboard]
   include UserHelper
   require 'will_paginate/array'
 
@@ -148,6 +149,14 @@ class UsersController < ApplicationController
   end
 
   private
+    def set_subscribed_applications
+      subscriptions = Subscription.where(user_id: current_user.id)
+      @applications = []
+      subscriptions.each do |single_sub|
+        @applications.push(Application.where(id: single_sub.application_id).first)
+      end
+    end
+
     def find_model
       @db_user = current_user || User.find(doorkeeper_token.resource_owner_id)
       @user = @db_user.ldap_user
