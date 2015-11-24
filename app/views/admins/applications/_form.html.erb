@@ -1,0 +1,32 @@
+<h3 class="subheader">Attributes</h3>
+<%= simple_form_for @application, url: url, method: method, defaults: {input_html: {class:"no-margin"} }, :html => {:multipart => true} do |f| %>
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.label :name do %>
+      <%= "Name" %>
+      <%= f.text_field :name %>
+    <% end %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.label :description do %>
+      <%= "Description" %>
+      <%= f.text_field :description %>
+    <% end %>
+  </div>
+</div>
+</div>
+<div class="row">
+  <div class="small-12 medium-12 columns">
+    <%= f.label :avatar do %>
+      <%= "Avatar" %>
+      <br>
+      <%= image_tag @application.avatar %>
+      <%= f.file_field :avatar %>
+    <% end %>
+  </div>
+</div>
+<ul class="button-group even-2">
+    <li><%= link_to :back, class: 'button small secondary' do %><%= fa_icon('angle-left') + ' ' + t('back') %><% end %></li>
+    <li><%= button_tag type: :submit, class: 'button small' do %><%= fa_icon('save') + ' ' + t('save') %><% end %></li>
+</ul>
+<% end -%>

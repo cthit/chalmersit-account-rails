@@ -1,0 +1,33 @@
+<% content_for :title, "#{@application.name}"%>
+
+<ul class="button-group radius even-1">
+    <li><%= link_to applications_path, class: "button tiny secondary" do %><%= fa_icon 'angle-left', text: t('back') -%><%- end -%></li>
+    <% if subscription_exists? %>
+      <li><%= link_to remove_subscription_path(@application), class: "button tiny alert" do %><%= fa_icon 'close', text: t('.unsubscribe') -%><%- end -%></li>
+    <% else %>
+      <li><%= link_to new_subscription_path(@application), class: "button tiny success" do %><%= fa_icon 'envelope', text: t('.subscribe') -%><%- end -%></li>
+    <% end %>
+</ul>
+<div class="row">
+<h3 class="subheader">Attributes</h3>
+<table>
+    <thead>
+        <th>Attribute</th>
+        <th width="100%">Value</th>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Name</td>
+            <td><%= @application.name %></td>
+        </tr>
+        <tr>
+          <td>Avatar</td>
+          <td><%= image_tag @application.avatar %></td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td><%= @application.description %></td>
+        </tr>
+    </tbody>
+</table>
+</div>

@@ -59,6 +59,7 @@ sv:
   admin_override: digIT-override!
   administration: Administration
   my_applications: Mina applikationer
+  my_subscriptions: Mina Prenumerationer
   menu: Meny
   committee: Kommitté
   society: Förening
@@ -67,9 +68,17 @@ sv:
   prev: Föregående
   unauthorized: Du har inte behörighet att utföra den här åtgärden.
   unknown_user: Vem är det?
+  subscription_added: Prenumeration tillagd!
+  subscription_removed: Prenumeration borttagen.
   activerecord:
     models:
       user: Användare
+      subscription:
+        one: Prenumeration
+        other: Prenumerationer
+      application:
+        one: Applikation
+        other: Applikationer
     attributes:
       user:
         mail: E-post
@@ -133,6 +142,12 @@ sv:
       member:
         one: Medlem
         other: Medlemmar
+  applications:
+    index:
+      back: Bakåt
+    show:
+      subscribe: Prenumerera
+      unsubscribe: Avprenumerera
   activemodel:
     models:
       ldap_group:

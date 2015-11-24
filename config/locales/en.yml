@@ -59,6 +59,7 @@ en:
   admin_override: digIT-override!
   administration: Administration
   my_applications: My applications
+  my_subscriptions: My Subscriptions
   menu: Menu
   committee: Committee
   society: Society
@@ -67,11 +68,19 @@ en:
   prev: Previous
   unauthorized: "You are not authorized to perform this action."
   unknown_user: "Who is that?"
+  subscription_added: Subscription Added
+  subscription_removed: Subscription removed.
   activerecord:
     models:
       user:
         one: User
         other: Users
+      subscription:
+        one: Subscription
+        other: Subscriptions
+      application:
+        one: Application
+        other: Applications
     attributes:
       user:
         mail: E-mail
@@ -136,6 +145,12 @@ en:
       member:
         one: Member
         other: Members
+  applications:
+    index:
+      back: Back
+    show:
+      subscribe: Subscribe
+      unsubscribe: Unsubscribe
   activemodel:
     models:
       ldap_group:

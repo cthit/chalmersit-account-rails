@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   include ConfigurableEngine::ConfigurablesController
+  include SubscriptionHelper
   before_filter :ensure_admin
   after_action :verify_authorized
 
@@ -19,7 +20,6 @@ class AdminsController < ApplicationController
   end
   def send_invitations
     @emails = params[:emails].split(';')
-    puts "sending mail\n"
     UserMailer.send_invitations(@emails)
   end
 end

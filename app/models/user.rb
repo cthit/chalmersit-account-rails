@@ -18,6 +18,15 @@ class User < ActiveRecord::Base
     @ldap_user ||= LdapUser.find_cached(cid)
   end
 
+  def subscribed_applications
+    subscriptions = Subscription.where(user_id: id)
+    applications = []
+    subscriptions.each do |single_sub|
+      applications.push(Application.where(id: single_sub.application_id).first)
+    end
+    applications
+  end
+
   def ldap_user= lu
     @ldap_user = lu
   end
