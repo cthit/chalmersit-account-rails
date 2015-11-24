@@ -127,6 +127,9 @@ class UsersController < ApplicationController
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
+    if params[:ldap_user][:remove_avatar].present?
+      @user.remove_avatar
+    end
     if @user.update_attributes(ldap_user_params)
       redirect_to me_path, notice: I18n.translate('info_changed')
     else

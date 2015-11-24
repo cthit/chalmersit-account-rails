@@ -52,6 +52,17 @@ class LdapUser < Activedap
     uploader.store!(file)
     self.avatar=uploader.identifier
   end
+  def remove_avatar
+    path = Rails.root.join('public', 'images', profile_image)
+    puts "checking if avatar exists\n\n"
+    if File.exists?(path)
+      puts "deleting avatar\n\n"
+      File.delete(path)
+    end
+    puts "unsetting avatar\n\n"
+    self.avatar = nil
+    self.save!
+  end
 
   def profile_image
     if avatar.present?
