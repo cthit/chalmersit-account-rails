@@ -54,12 +54,9 @@ class LdapUser < Activedap
   end
   def remove_avatar
     path = Rails.root.join('public', 'images', profile_image)
-    puts "checking if avatar exists\n\n"
     if File.exists?(path)
-      puts "deleting avatar\n\n"
       File.delete(path)
     end
-    puts "unsetting avatar\n\n"
     self.avatar = nil
     self.save!
   end
