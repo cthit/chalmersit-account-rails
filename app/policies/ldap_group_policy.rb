@@ -8,7 +8,12 @@ class LdapGroupPolicy < ApplicationPolicy
   def show?
     true
   end
-
+  def edit?
+    user
+  end
+  def update?
+    edit?
+  end
   class Scope
     attr_reader :user, :scope
 
@@ -22,4 +27,3 @@ class LdapGroupPolicy < ApplicationPolicy
     end
   end
 end
-
