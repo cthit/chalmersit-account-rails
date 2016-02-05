@@ -16,7 +16,7 @@
   .card ul {
     margin-bottom: 0;
   }
-  .card img {
+  .card .card_img{
     width: 100%;
   }
   .card-divider {
@@ -26,3 +26,11 @@
   .card-section {
     padding: 1rem;
   }
+.application_img {
+  width: auto;
+  float:left;
+  margin: 0 10px 5px 0;
+}
+.single_app {
+  padding: 10px;
+}

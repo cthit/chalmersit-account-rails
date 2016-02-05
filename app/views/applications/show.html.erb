@@ -8,26 +8,9 @@
       <li><%= link_to new_subscription_path(@application), class: "button tiny success" do %><%= fa_icon 'envelope', text: t('.subscribe') -%><%- end -%></li>
     <% end %>
 </ul>
-<div class="row">
-<h3 class="subheader">Attributes</h3>
-<table>
-    <thead>
-        <th>Attribute</th>
-        <th width="100%">Value</th>
-    </thead>
-    <tbody>
-        <tr>
-            <td>Name</td>
-            <td><%= @application.name %></td>
-        </tr>
-        <tr>
-          <td>Avatar</td>
-          <td><%= image_tag @application.avatar %></td>
-        </tr>
-        <tr>
-          <td>Description</td>
-          <td><%= @application.description %></td>
-        </tr>
-    </tbody>
-</table>
+<div class="row card single_app">
+  <%= image_tag @application.avatar, :class => "application_img" %>
+  <p style="text-align:justify">
+    <%= @application.description %>
+  </p>
 </div>

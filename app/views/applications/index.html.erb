@@ -5,7 +5,7 @@
 <% @applications.each do |a| %>
   <div class="columns small-12 medium-6 large-6">
     <div class="card">
-      <%= link_to image_tag(a.avatar), application_path(a) %>
+      <%= link_to image_tag(a.avatar, :class => "card_img"), application_path(a) %>
       <div class="card-divider">
         <h4><%= link_to a.name, application_path(a) %></h4>
       </div>
