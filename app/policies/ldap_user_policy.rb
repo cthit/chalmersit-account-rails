@@ -29,6 +29,9 @@ class LdapUserPolicy < ApplicationPolicy
     user.admin? || (user.uid == record.uid)
   end
 
+  def remove_avatar?
+    update?
+  end
   def edit?
     update?
   end
@@ -62,4 +65,3 @@ class LdapUserPolicy < ApplicationPolicy
     end
   end
 end
-

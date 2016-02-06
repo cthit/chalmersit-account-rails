@@ -35,10 +35,9 @@
       <%= f.file_field :avatar_upload %>
     <% end %>
     <div class="small-8 medium-8 large-8 columns">
-      <label>
-        <%= f.check_box :remove_avatar %>
-        Remove avatar
-      </label>
+      <%if !@user.avatar.nil? %>
+        <%= link_to remove_avatar_path(@user), class: "button tiny alert", method: :get, :data => {:confirm =>  t('confirm')} do %><%= fa_icon 'remove', text: t('.remove_avatar') -%><%- end -%>
+      <% end %>
     </div>
   </div>
 

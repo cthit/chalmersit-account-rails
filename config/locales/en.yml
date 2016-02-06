@@ -41,6 +41,7 @@ en:
   save: Save
   sv: Swedish
   en: English
+  confirm: Are you sure?
   notification:
     one: Notification
     other: Notifications
@@ -110,6 +111,8 @@ en:
       service: Push service
       token: API-key
       device: Enhet
+    form:
+      remove_avatar: Remove avatar
     show:
       existential_crisis: That didn't look like you...
     index:

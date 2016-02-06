@@ -41,6 +41,7 @@ sv:
   save: Spara
   sv: svenska
   en: engelska
+  confirm: Är du säker?
   notification:
     one: Avisering
     other: Aviseringar
@@ -108,6 +109,8 @@ sv:
       service: Aviseringstjänst
       token: API-nyckel
       device: Enhet
+    form:
+      remove_avatar: Ta bort avatar
     show:
       existential_crisis: Det där såg inte ut som dig...
     index:
