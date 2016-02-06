@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
+  get '/users/:id/edit' => 'users#edit_user', as: :edit_user
+  patch '/users/:id/update' => 'users#update_user', as: :update_user
   get '/users/:id/remove_avatar' => 'users#remove_avatar', as: :remove_avatar
 
   get '/applications/new_subscription/:id' => 'applications#new_subscription', as: :new_subscription

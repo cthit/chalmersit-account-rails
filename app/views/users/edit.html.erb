@@ -11,7 +11,7 @@
   </div>
 <% end %>
 
-<%= simple_form_for(@user, :html => {:multipart => true}, url: update_me_path) do |f| %>
+<%= simple_form_for(@user, :html => {:multipart => true}, url: update_user_path(@user)) do |f| %>
     <%= render partial: 'form', locals: {f: f} %>
 
   <fieldset>

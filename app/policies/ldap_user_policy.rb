@@ -29,6 +29,13 @@ class LdapUserPolicy < ApplicationPolicy
     user.admin? || (user.uid == record.uid)
   end
 
+  def update_user?
+    edit_user?
+  end
+  def edit_user?
+    user && user.admin?
+  end
+
   def remove_avatar?
     update?
   end

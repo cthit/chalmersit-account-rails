@@ -1,7 +1,9 @@
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
+  before_filter :ensure_admin
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
-  before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:new, :lookup, :create]
-  before_filter :find_model, except: [:show, :new, :lookup, :create]
+  before_filter :authenticate_user!, unless: :doorkeeper_request?, except: [:lookup]
+  before_filter :find_model, except: [:show,:lookup]
   include UserHelper
   require 'will_paginate/array'
 
@@ -50,20 +52,6 @@ class UsersController < ApplicationController
     render :index
   end
 
-  def me
-    authorize @user unless doorkeeper_request?
-    render :show
-  end
-  def remove_avatar
-    @user = LdapUser.find_cached(params[:id])
-    authorize @user
-    if !@user.avatar.nil?
-      @user.remove_avatar
-      redirect_to user_path(@user), notice: I18n.translate('info_changed')
-    else
-      redirect_to user_path(@user)
-    end
-  end
   def show
     @user = LdapUser.find_cached(params[:id])
     if @user.nil?
@@ -71,11 +59,6 @@ class UsersController < ApplicationController
     else
       authorize @user unless doorkeeper_request?
     end
-  end
-
-  def new
-    @chuser = ChalmersUser.new
-    render :new, layout: 'small_box'
   end
 
   def lookup
@@ -98,62 +81,24 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
-    # TODO: do some sanity checks here so that curl-posts aren't allowd, thereby circumventing Chalmers-checks...
-    lu               = LdapUser.new(user_register_params)
-    lu.cn            = Configurable.ldap_default_display_format
-    lu.loginshell    = Configurable.ldap_default_login_shell
-    lu.homedirectory = Configurable.ldap_default_home_dir % {uid: lu.uid}
-    lu.gidnumber     = Configurable.ldap_default_group_id
-    lu.uidnumber     = next_uid
-    @user = User.new(cid: lu.uid, ldap_user: lu)
-
-    @user.password              = params[:user][:password]
-    @user.password_confirmation = params[:user][:password_confirmation]
-
-    if @user.valid?
-      pw = encrypt_pw @user.password
-      @user.ldap_user.userPassword = pw
-      @user.password = pw
-      @user.password_confirmation = pw
-
-      @user.save!
-      @user.ldap_user.save!
-      sign_in(@user)
-      @user = @user.ldap_user
-      render :dashboard
-    else
-      render :register
-    end
-  end
-
   def edit
     authorize @user
   end
+
   def update
     authorize @user
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
+    if params[:ldap_user][:remove_avatar].present?
+      begin
+        @user.remove_avatar
+      rescue Exception
+        render  :edit
+      end
+    end
     if @user.update_attributes(ldap_user_params)
       redirect_to me_path, notice: I18n.translate('info_changed')
-    else
-      render :edit
-    end
-  end
-  def edit_user
-    @user = LdapUser.find_cached(params[:id])
-    authorize @user
-    render 'users/edit'
-  end
-  def update_user
-    @user = LdapUser.find_cached(params[:id])
-    authorize @user
-    # @user.update_attributes(ldap_user_params)
-    # if @user.valid? && @user.save
-    # use this ^ to validate with Rails before LDAP validates
-    if @user.update_attributes(ldap_user_params)
-      redirect_to user_path(@user), notice: I18n.translate('info_changed')
     else
       render :edit
     end
