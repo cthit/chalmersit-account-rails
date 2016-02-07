@@ -161,7 +161,6 @@ class UsersController < ApplicationController
       end
     rescue => e
       if e.message == "Constraint Violation: some attributes not unique"
-        puts "Email not unique"
         flash[:alert] = t('not_unique_email')
         redirect_to(request.referrer || unauthenticated_root_path)
       end
