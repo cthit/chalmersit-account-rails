@@ -1,6 +1,5 @@
 class GroupsController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
-  before_action :verify_member_of, only: [:update, :edit]
   after_action :verify_authorized
 
   def index
@@ -35,11 +34,6 @@ class GroupsController < ApplicationController
     end
   end
 private
-  def verify_member_of
-    if !current_user.member_of.include?(LdapGroup.find_cached(params[:id]))
-      user_not_authorized
-    end
-  end
   def ldap_group_params
     params.require(:ldap_group).permit(:container, :displayName,:groupLogo, :type,
                                        description:[], mail:[], homepage:[], function: [])
