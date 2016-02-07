@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_filter :ensure_admin
-  before_action :set_user
+  before_action :set_user, except: [:new, :create]
 
   def edit
     authorize @user
@@ -20,21 +20,41 @@ class Admin::UsersController < ApplicationController
   end
 
   def new
-    @user = LdapUser.new(gidNumber: next_gid)
-    # User first user since a valid DN is required...
-    @user.member = LdapUser.first.dn
+    @user = User.new
     render 'admins/users/new'
   end
 
   def create
-    container = ldap_user_params['container']
-    filtered = filter_empty ldap_user_params
+    # TODO: do some sanity checks here so that curl-posts aren't allowd, thereby circumventing Chalmers-checks...
+    lu               = LdapUser.new(user_register_params)
+    lu.cn            = Configurable.ldap_default_display_format
+    lu.loginshell    = Configurable.ldap_default_login_shell
+    lu.homedirectory = Configurable.ldap_default_home_dir % {uid: lu.uid}
+    lu.gidnumber     = Configurable.ldap_default_group_id
+    lu.uidnumber     = next_uid
+    @user = User.new(cid: lu.uid, ldap_user: lu)
 
-    @user = LdapUser.new(filtered)
-    if @user.save
-      render 'admins/users/show'
-    else
+    @user.password              = params[:user][:password]
+    @user.password_confirmation = params[:user][:password_confirmation]
+
+    if @user.valid?
+      pw = encrypt_pw @user.password
+      @user.ldap_user.userPassword = pw
+      @user.password = pw
+      @user.password_confirmation = pw
+      @user.errors.add(:lol, "you have been spooked b j")
+      p @user.errors
+
+      begin
+        @user.save!
+        @user.ldap_user.save!
+      rescue Exception => e
+        p e
+        p @user.errors
+      end
       render 'admins/users/new'
+    else
+      render 'users/show'
     end
   end
 
@@ -66,14 +86,12 @@ class Admin::UsersController < ApplicationController
                                    :cn, :preferredLanguage)
     end
 
-    def next_gid
-      LdapUser.all(limit: 1, sort_by: :gidNumber, order: :desc).first[:gidNumber]+1
+    # Return the next available uid number
+    def next_uid
+       LdapUser.all(limit: 1, sort_by: :uidnumber, order: :desc).first[:uidnumber]+1
     end
 
-    def filter_empty ldap_params
-      arrayvals = ldap_params.user_by{|k, v| v.kind_of?(Array)}
-      pairs     = arrayvals[true].map { |k, vs| [k, vs.reject(&:blank?)] }
-      new_h     = Hash[pairs.select { |k, vs| vs.present? }]
-      new_h.reverse_merge(Hash[arrayvals[false]])
+    def encrypt_pw pw, salt=nil
+      ActiveLdap::UserPassword.ssha pw, salt
     end
 end

@@ -1,0 +1,65 @@
+<% content_for :title, "Register new user" %>
+
+<% if @user.errors.any? %>
+  <div id="error_explanation" data-alert class="alert-box warning">
+    <h3><%= t('error') %></h3>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= simple_form_for(@user, url: admin_users_path) do |f| %>
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.input :uid %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.input :preferredLanguage %>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.input :gn, :label => "Given name" %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.input :sn, :label => "Last name" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.input :nickname %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.input :admissionYear, collection: 2001..Date.today.year %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.input :mail, as: :email %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.input :telephonenumber, as: :tel %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns">
+    <%= f.input :acceptedUserAgreement, as: :boolean, label: "User agreement" %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 large-6 columns">
+    <%= f.input :password %>
+  </div>
+  <div class="small-12 large-6 columns">
+    <%= f.input :password_confirmation %>
+  </div>
+</div>
+
+<%= button_tag type: :submit, class: 'expand button small' do %><%= fa_icon('user-plus') + ' Register' %><% end %>
+<% end %>
