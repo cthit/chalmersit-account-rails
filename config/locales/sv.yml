@@ -71,6 +71,7 @@ sv:
   unknown_user: Vem är det?
   subscription_added: Prenumeration tillagd!
   subscription_removed: Prenumeration borttagen.
+  not_unique_email: Den givna mailadressen är upptagen
   activerecord:
     models:
       user: Användare
