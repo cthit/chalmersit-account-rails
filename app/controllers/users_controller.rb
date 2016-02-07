@@ -141,23 +141,6 @@ class UsersController < ApplicationController
       render :edit
     end
   end
-  def edit_user
-    @user = LdapUser.find_cached(params[:id])
-    authorize @user
-    render 'users/edit'
-  end
-  def update_user
-    @user = LdapUser.find_cached(params[:id])
-    authorize @user
-    # @user.update_attributes(ldap_user_params)
-    # if @user.valid? && @user.save
-    # use this ^ to validate with Rails before LDAP validates
-    if @user.update_attributes(ldap_user_params)
-      redirect_to user_path(@user), notice: I18n.translate('info_changed')
-    else
-      render :edit
-    end
-  end
 
   def dashboard
     authorize @user

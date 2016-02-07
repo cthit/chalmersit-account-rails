@@ -2,7 +2,7 @@
 <% if @user.admin? %>
     <% content_for :labels do  %>
     <span class="admin-label" style="margin-bottom: 2px;">Admin</span>
-    <%= link_to edit_user_path(@user) do %><%= fa_icon 'cog', text: 'Ändra' %><%- end -%>
+    <%= link_to admin_edit_user_path(@user) do %><%= fa_icon 'cog', text: 'Ändra' %><%- end -%>
     <% end %>
 <% end %>
 <section class="user-details">
