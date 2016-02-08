@@ -64,7 +64,7 @@ class Admin::GroupsController < ApplicationController
 
     def ldap_group_params
       params.require(:ldap_group).permit(:container, :cn, :gidNumber, :displayName,:groupLogo, :type,
-                                         description:[], mail:[], homepage:[], member:[], function:[])
+                                         description:[], mail:[], homepage:[], member:[], function:[], position:[])
     end
 
     def next_gid
