@@ -131,10 +131,12 @@ class LdapGroup < Activedap
       # False is the position, true groups
       grouped = position(true).group_by{|g| LdapGroup.dn_is_group? g}
       @positions = []
-      #Positions has the following format: Position;cid so here we simply split up the values.
-      grouped[false].each do |pos|
-        pos = pos.split(";")
-        @positions.push([pos[0], LdapUser.find(pos[1])])
+      if !grouped[false].nil?
+        #Positions has the following format: Position;cid so here we simply split up the values.
+        grouped[false].each do |pos|
+          pos = pos.split(";")
+          @positions.push([pos[0], LdapUser.find(pos[1])])
+        end
       end
       groups = grouped[true] || []
 
