@@ -1,0 +1,53 @@
+<h3 class="subheader">Attributes</h3>
+<%= simple_form_for @group, url: url, method: method, defaults: {input_html: {class:"no-margin"} } do |f| %>
+    <fieldset>
+        <legend><%= fa_icon 'comments-o', text: 'Contact' %></legend>
+        <dl>
+            <table width="100%">
+                <thead>
+                    <th width="100%"><span data-tooltip aria-haspopup="true" class="has-tip" title="A mail address were you can contact the group">Mail</span></th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <% (append_if_empty @group.mail(true)).each do |m| %>
+                        <tr class="mail-type">
+                            <td>
+                                <%= f.input_field :mail, multiple: true, value: m, label: false, placeholder: 'name@example.org' -%>
+                            </td>
+                            <td>
+                                <%= remove_link '.mail-type', text: '', classes:'radius button tiny alert no-margin' %>
+                            </td>
+                        </tr>
+                <% end %>
+                    <tr>
+                        <td></td>
+                        <td><%= add_more_link '.mail-type', classes:'radius button tiny success no-margin' %></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table width="100%">
+                <thead>
+                    <th width="100%"><span data-tooltip aria-haspopup="true" class="has-tip" title="Some kind of homepage that represents the group. E.g. github.com/cthit etc.">Homepage</span></th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <% (append_if_empty @group.homepage(true)).each do |h| %>
+                    <tr class="homepage-type">
+                        <td><%= f.input_field :homepage, multiple: true, value: h, label: false, placeholder: 'https://www.example.org' -%></td>
+                        <td><%= remove_link '.homepage-type', text: '', classes:'radius button tiny alert no-margin' %></td>
+                    </tr>
+                    <% end %>
+                    <tr>
+                        <td></td>
+                        <td><%= add_more_link '.homepage-type', classes:'radius button tiny success no-margin' %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </dl>
+    </fieldset>
+<ul class="button-group even-2">
+    <li><%= link_to :back, class: "button small secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
+    <li><%= button_tag class: "button small success" do %><%= fa_icon 'save', text: 'Save' -%><%- end -%></li>
+</ul>
+<% end -%>

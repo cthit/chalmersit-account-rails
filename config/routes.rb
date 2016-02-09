@@ -22,7 +22,8 @@ Rails.application.routes.draw do
       get :autocomplete
     end
   end
-  resources :groups, only: [:index, :show]
+  resources :groups, only: [:index, :show, :edit, :update]
+  patch '/groups/:id' => 'groups#update', as: :update_group
   resource :admin, only: :show
 
   get '/admin/mail' => 'admins#mail', as: :admin_mail

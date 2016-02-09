@@ -13,4 +13,24 @@ class GroupsController < ApplicationController
     @group = LdapGroup.find_cached(params[:id])
     authorize @group
   end
+  def edit
+    @group = LdapGroup.find_cached(params[:id])
+    authorize @group
+  end
+
+  def update
+    @group = LdapGroup.find_cached(params[:id])
+    authorize @group
+
+    if @group.update_attributes(ldap_group_params)
+      @group.invalidate_my_cache
+      render 'groups/show'
+    else
+      render 'groups/edit'
+    end
+  end
+private
+  def ldap_group_params
+    params.require(:ldap_group).permit( mail:[], homepage:[])
+  end
 end
