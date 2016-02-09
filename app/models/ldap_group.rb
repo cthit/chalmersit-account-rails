@@ -13,7 +13,7 @@ class LdapGroup < Activedap
 
   attr_accessor :container
   def members_without_pos
-    @members_without_pos ||= Rails.cache.fetch("#{cn}/members") do
+    @members_without_pos ||= Rails.cache.fetch("#{cn}/members_wo_pos") do
       #Gets groups positions into @positions
       positions
 
