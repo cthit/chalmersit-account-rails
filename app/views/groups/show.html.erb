@@ -17,11 +17,11 @@
         <h5><%= fa_icon 'child', text: t('.member', count: @group.members.size) %></h5>
         <ul class="side-nav no-padding">
         <% @group.members.each do |m| %>
-            <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
-                    <i class="fi-torso"></i>
-                    <%= "#{m.name_and_nick}" %>
-                <% end %>
-            </li>
+          <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
+                  <i class="fi-torso"></i>
+                  <h6 style="display:inline;"><%= "#{@group.pos_of_member m.dn}"%></h6><%="#{m.name_and_nick}" %>
+              <% end %>
+          </li>
         <% end %>
         </ul>
     </div>

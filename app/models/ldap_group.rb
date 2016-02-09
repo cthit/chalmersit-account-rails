@@ -13,9 +13,34 @@ class LdapGroup < Activedap
 
   attr_accessor :container
 
+  #Gets post of member
+  def pos_of_member dn
+    Rails.cache.fetch("#{cn}/#{dn}/pos") do
+      uid = dn.rdns.first["uid"]
+      post = positions.find{|u| u.split(";")[1] == uid}
+      unless post.nil?
+        return post.split(";")[0] + ": "
+      end
+      ""
+    end
+  end
+
   def members
     @members ||= Rails.cache.fetch("#{cn}/members") do
       LdapUser.find(members_as_dn)
+    end
+  end
+
+  # Returns array of positions one layer deep ["POST;CID", "POST;CID", "POST;CID"]
+  def positions
+    Rails.cache.fetch("#{cn}/positions") do
+      positions = position(true)
+      member(true).each do |m|
+        if LdapGroup.dn_is_group? m
+          positions += (LdapGroup.find(m).position(true))
+        end
+      end
+      positions
     end
   end
 
