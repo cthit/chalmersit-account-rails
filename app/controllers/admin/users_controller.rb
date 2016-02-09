@@ -42,16 +42,10 @@ class Admin::UsersController < ApplicationController
       @user.ldap_user.userPassword = pw
       @user.password = pw
       @user.password_confirmation = pw
-      @user.errors.add(:lol, "you have been spooked b j")
-      p @user.errors
 
-      begin
-        @user.save!
-        @user.ldap_user.save!
-      rescue Exception => e
-        p e
-        p @user.errors
-      end
+      @user.save!
+      @user.ldap_user.save!
+      
       render 'admins/users/new'
     else
       render 'users/show'
