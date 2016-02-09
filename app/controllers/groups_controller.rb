@@ -31,6 +31,6 @@ class GroupsController < ApplicationController
   end
 private
   def ldap_group_params
-    params.require(:ldap_group).permit( mail:[], homepage:[])
+    params.require(:ldap_group).permit( mail:[], homepage:[], position:[])
   end
 end

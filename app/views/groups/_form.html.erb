@@ -46,6 +46,39 @@
             </table>
         </dl>
     </fieldset>
+<fieldset>
+  <legend><%= fa_icon 'angle-double-down', text: 'Positions' %></legend>
+  <dl>
+    <%= content_tag :table do %>
+      <thead>
+        <th width="100%">Position;CID</th>
+        <th>Action</th>
+      </thead>
+      <tbody>
+        <%= f.error :no_member %>
+        <%- @group.position(true).each do |pos| -%>
+          <tr class="position-type">
+            <td><%= f.input_field :position, placeholder: 'Position;CID',multiple: true, value: pos, label: false -%></td>
+            <td><%= remove_link '.position-type', classes: 'radius button tiny alert no-margin' -%></td>
+          </tr>
+        <%- end -%>
+        <%- if @group.position(true).empty? -%>
+          <tr class="position-type">
+            <td><%= f.input_field :position, placeholder: 'Position;CID',multiple: true, label: false -%></td>
+            <td><%= remove_link '.position-type', classes: 'radius button tiny alert no-margin' -%></td>
+          </tr>
+        <%- end -%>
+        <tr>
+          <td></td>
+          <td>
+            <%= add_more_link '.position-type', classes:'radius button tiny success no-margin' %>
+          </td>
+        </tr>
+      </tbody>
+    <%- end -%>
+  </dl>
+</fieldset>
+
 <ul class="button-group even-2">
     <li><%= link_to :back, class: "button small secondary" do %><%= fa_icon 'angle-left', text: 'Back' -%><%- end -%></li>
     <li><%= button_tag class: "button small success" do %><%= fa_icon 'save', text: 'Save' -%><%- end -%></li>
