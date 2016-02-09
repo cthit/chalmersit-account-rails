@@ -13,10 +13,10 @@ class LdapGroup < Activedap
 
   attr_accessor :container
   def members_without_pos
-    @positions ||= Rails.cache.fetch("#{cn}/position") do
-      position_as_dn
-    end
     @members_without_pos ||= Rails.cache.fetch("#{cn}/members") do
+      #Gets groups positions into @positions
+      positions
+
       hasPos = false
       user = LdapUser.find(members_as_dn)
       user_without_pos = []
@@ -39,11 +39,14 @@ class LdapGroup < Activedap
       LdapUser.find(members_as_dn)
     end
   end
+
+  # Returns [["Position", userObj], ["Position", userObj], ["Position", userObj]]
   def positions
-    @positions ||= Rails.cache.fetch("#{cn}/position") do
-      get_positions
+    @positions ||= Rails.cache.fetch("#{cn}/positions") do
+      @positions ||= recursive_positions().uniq
     end
   end
+
   def self.all_cached
     @all ||= Rails.cache.fetch(all_groups_cache_key) do
       self.find(:all)
@@ -59,12 +62,6 @@ class LdapGroup < Activedap
   # Will only return user dn:s
   def members_as_dn
     @members_dn ||= recursive_members().uniq
-  end
-
-  # Checks "one level" deep recursion
-  # Returns [["Postion", userObj], ["Postion", userObj], ["Postion", userObj]]
-  def get_positions
-    @positions ||= recursive_positions().uniq
   end
 
   def self.dn_is_group?(dn)
@@ -127,31 +124,32 @@ class LdapGroup < Activedap
       @users
     end
 
-    # Concat positions of group one layer deep
+    # Gets positions of group one layer deep
     def recursive_positions()
       return @positions if @positions.present?
       # False is the position, true groups
       grouped = position(true).group_by{|g| LdapGroup.dn_is_group? g}
       @positions = []
-      if !grouped[false].nil?
-        #Positions has the following format: Position;cid so here we simply split up the values.
-        grouped[false].each do |pos|
+
+      # for each actual position we find
+      actual_positions = grouped[false] || []
+      #Positions has the following format: Position;cid so here we simply split up the values.
+      actual_positions.each do |pos|
+        pos = pos.split(";")
+        @positions.push([pos[0], LdapUser.find(pos[1])])
+      end
+
+      # for each group dn we find
+      groups = grouped[true] || []
+      #For every group, extracts its value and get its positions.
+      groups.each do |g_dn|
+        positions = LdapGroup.find(g_dn).position || []
+        positions.each do |pos|
           pos = pos.split(";")
           @positions.push([pos[0], LdapUser.find(pos[1])])
         end
       end
-      groups = grouped[true] || []
-
-      #For every group, extracts its value and get its positions.
-      groups.each do |g_dn|
-        positions = LdapGroup.find(g_dn).position
-        if !positions.nil?
-          positions.each do |pos|
-            pos = pos.split(";")
-            @positions.push([pos[0], LdapUser.find(pos[1])])
-          end
-        end
-      end
+      #return
       @positions
     end
     def localise_field field, locale
