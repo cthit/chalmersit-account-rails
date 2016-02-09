@@ -76,4 +76,10 @@ class User < ActiveRecord::Base
       ldap_user.save
     end
   end
+  def validate_pwd?
+    if new_record?
+      return false
+    end
+    not self.password.nil? || @validate_password
+  end
 end

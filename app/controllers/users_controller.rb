@@ -54,7 +54,16 @@ class UsersController < ApplicationController
     authorize @user unless doorkeeper_request?
     render :show
   end
-
+  def remove_avatar
+    @user = LdapUser.find_cached(params[:id])
+    authorize @user
+    if !@user.avatar.nil?
+      @user.remove_avatar
+      redirect_to user_path(@user), notice: I18n.translate('info_changed')
+    else
+      redirect_to user_path(@user)
+    end
+  end
   def show
     @user = LdapUser.find_cached(params[:id])
     if @user.nil?
@@ -121,19 +130,11 @@ class UsersController < ApplicationController
   def edit
     authorize @user
   end
-
   def update
     authorize @user
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
-    if params[:ldap_user][:remove_avatar].present?
-      begin
-        @user.remove_avatar
-      rescue Exception
-        render  :edit
-      end
-    end
     if @user.update_attributes(ldap_user_params)
       redirect_to me_path, notice: I18n.translate('info_changed')
     else

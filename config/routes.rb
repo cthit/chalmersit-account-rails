@@ -30,11 +30,14 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :groups
     resources :applications
+    resources :users
   end
+  patch '/admin/users/:id/update' => 'admin/users#update', as: :admin_update_user
   get '/search' => 'users#search', as: :search
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
+  get '/users/:id/remove_avatar' => 'users#remove_avatar', as: :remove_avatar
 
   get '/applications/new_subscription/:id' => 'applications#new_subscription', as: :new_subscription
   get '/applications/remove_subscription/:id' => 'applications#remove_subscription', as: :remove_subscription

@@ -10,9 +10,13 @@
     </ul>
   </div>
 <% end %>
-
-<%= simple_form_for(@user, :html => {:multipart => true}, url: update_me_path) do |f| %>
-    <%= render partial: 'form', locals: {f: f} %>
+<% if current_user.admin? %>
+  <% url = admin_update_user_path(@user) %>
+<% else %>
+  <% url = update_me_path %>
+<% end %>
+  <%= simple_form_for(@user, :html => {:multipart => true}, url: url) do |f| %>
+    <%= render partial: '/users/form', locals: {f: f} %>
 
   <fieldset>
     <legend><%= t('notification', count: 2) %></legend>
