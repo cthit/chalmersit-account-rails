@@ -1,58 +1,6 @@
 <h3 class="subheader">Attributes</h3>
 <%= simple_form_for @group, url: url, method: method, defaults: {input_html: {class:"no-margin"} } do |f| %>
     <fieldset>
-        <legend><%= fa_icon 'info', text: 'Committee/Society' %></legend>
-        <table style="width: 100%;">
-            <colgroup>
-                <col span="1" style="width: 20%;" />
-                <col span="1" style="width: 80%;" />
-            </colgroup>
-            <tbody>
-                <tr>
-                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="How to 'print' the group on news posts etc.">Display name</span></td>
-                    <td><%= f.input_field :displayName, label: false -%></td>
-                </tr>
-                <tr>
-                    <td><span data-tooltip aria-haspopup="true" class="has-tip" title="Whether the group is a Committee or a Society.">Type</span></td>
-                    <td><%= f.input :type, collection: ['Committee', 'Society', 'Alumni'], selected: @group.type, label: false -%></td>
-                </tr>
-            </tbody>
-        </table>
-        <table width="100%">
-            <thead>
-                <th width="100%"><span data-tooltip aria-haspopup="true" class="has-tip" title="A short description of the groups function.">Function</span></th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-            <% (append_if_empty @group.function(true)).each do |func| %>
-                <tr class="function-type">
-                    <td><%= f.input_field :function, multiple: true, value: func, label: false -%></td>
-                    <td><%= remove_link '.function-type', text: '', classes:'radius button tiny alert no-margin' %></td>
-                </tr>
-            <% end %>
-            <tr><td></td><td><%= add_more_link '.function-type', classes:'radius button tiny success no-margin' %></td></tr>
-            </tbody>
-        </table>
-        <table width="100%">
-            <thead>
-                <th width="100%"><span data-tooltip aria-haspopup="true" class="has-tip" title="A description of the group">Description</span></th>
-                <th>Action</th>
-            </thead>
-            <tbody>
-                <% (append_if_empty @group.description(true)).each do |d| %>
-                    <tr class="desc-type">
-                        <td><%= f.input_field :description, multiple: true, value: d, as: :text, label: false -%></td>
-                        <td><%= remove_link '.desc-type', text: '', classes:'radius button tiny alert no-margin' %></td>
-                    </tr>
-                <% end %>
-                <tr>
-                    <td></td><td><%= add_more_link '.desc-type', classes:'radius button tiny success no-margin' %></td></tr>
-                </tr>
-            </tbody>
-        </table>
-    </fieldset>
-
-    <fieldset>
         <legend><%= fa_icon 'comments-o', text: 'Contact' %></legend>
         <dl>
             <table width="100%">

@@ -21,10 +21,6 @@ class GroupsController < ApplicationController
   def update
     @group = LdapGroup.find_cached(params[:id])
     authorize @group
-    if @group.base != ldap_group_params['container']
-      @group.connection.modify_rdn @group.dn, "cn=#{@group.cn}",
-        true, ldap_group_params['container']
-    end
 
     if @group.update_attributes(ldap_group_params)
       @group.invalidate_my_cache
@@ -35,7 +31,6 @@ class GroupsController < ApplicationController
   end
 private
   def ldap_group_params
-    params.require(:ldap_group).permit(:container, :displayName,:groupLogo, :type,
-                                       description:[], mail:[], homepage:[], function: [])
+    params.require(:ldap_group).permit( mail:[], homepage:[])
   end
 end
