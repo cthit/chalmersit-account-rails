@@ -166,15 +166,21 @@
     <tbody>
         <%= f.error :no_member %>
         <%- @group.position(true).each do |pos| -%>
-            <tr class="member-type">
+            <tr class="position-type">
                 <td><%= f.input_field :position, placeholder: 'Position;CID',multiple: true, value: pos, label: false -%></td>
-                <td><%= remove_link '.member-type', classes: 'radius button tiny alert no-margin' -%></td>
+                <td><%= remove_link '.position-type', classes: 'radius button tiny alert no-margin' -%></td>
             </tr>
+        <%- end -%>
+        <%- if @group.position(true).empty? -%>
+          <tr class="position-type">
+              <td><%= f.input_field :position, placeholder: 'Position;CID',multiple: true, label: false -%></td>
+              <td><%= remove_link '.position-type', classes: 'radius button tiny alert no-margin' -%></td>
+          </tr>
         <%- end -%>
         <tr>
             <td></td>
             <td>
-                <%= add_more_link '.member-type', classes:'radius button tiny success no-margin' %>
+                <%= add_more_link '.position-type', classes:'radius button tiny success no-margin' %>
             </td>
         </tr>
     </tbody>
