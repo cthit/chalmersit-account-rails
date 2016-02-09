@@ -16,19 +16,12 @@
     <div class="large-6 columns">
         <h5><%= fa_icon 'child', text: t('.member', count: @group.members.size) %></h5>
         <ul class="side-nav no-padding">
-        <% @group.positions.each do |pos|%>
-          <li class="<%= "active" if is_me? pos[1] %>"><%= link_to user_or_me pos[1] do %>
+        <% @group.members.each do |m| %>
+          <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
                   <i class="fi-torso"></i>
-                  <h6 style="display:inline;"><%= "#{pos[0]}: "%></h6><%="#{pos[1].name_and_nick}" %>
+                  <h6 style="display:inline;"><%= "#{@group.pos_of_member m.dn}"%></h6><%="#{m.name_and_nick}" %>
               <% end %>
           </li>
-        <% end %>
-        <% @group.members_without_pos.each do |m| %>
-            <li class="<%= "active" if is_me? m %>"><%= link_to user_or_me m do %>
-                    <i class="fi-torso"></i>
-                    <h6 style="display:inline;"><%= "Ledamot: "%></h6><%= "#{m.name_and_nick}" %>
-                <% end %>
-            </li>
         <% end %>
         </ul>
     </div>
