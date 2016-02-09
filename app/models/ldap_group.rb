@@ -60,7 +60,9 @@ class LdapGroup < Activedap
   def members_as_dn
     @members_dn ||= recursive_members().uniq
   end
-  # Will only return user dn:s
+
+  # Checks "one level" deep recursion
+  # Returns [["Postion", userObj], ["Postion", userObj], ["Postion", userObj]]
   def get_positions
     @positions ||= recursive_positions().uniq
   end
@@ -140,7 +142,7 @@ class LdapGroup < Activedap
       end
       groups = grouped[true] || []
 
-      #For every group, extracts their value and get its positions.
+      #For every group, extracts its value and get its positions.
       groups.each do |g_dn|
         positions = LdapGroup.find(g_dn).position
         if !positions.nil?
