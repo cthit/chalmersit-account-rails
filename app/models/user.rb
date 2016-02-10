@@ -6,12 +6,11 @@ class User < ActiveRecord::Base
   devise :ldap_authenticatable, :recoverable, :rememberable, :trackable
 
   validates :gn, :sn, :mail, :admissionYear, :nickname, presence: true
-  #validates :password, :password_confirmation, presence: true, length: { in: 8..100 }, on: :update
+  validates :password, presence: true, length: { in: 8..100,:message => "too_short_pass" }, :confirmation => {value: true, :message => "not_same_pass"}
   # As specified by ITU. Minimum of 6 because 2 for region and min 5 for subscriber number
   validates :telephonenumber, allow_blank: true, numericality: { only_integer: true }, length: {minimum: 6, maximum: 15}
   #validates :acceptedUserAgreement, acceptance: true, allow_nil: false, on: :update
 
-  attr_accessor :password_confirmation
   before_save :save_ldap
 
   def ldap_user
@@ -49,7 +48,6 @@ class User < ActiveRecord::Base
 
   def password= pwd
     @tmp_pwd = pwd
-
     # Note that this uses Crypt by default instead of ssha which phpldapadmin uses
     ldap_user.userPassword = ActiveLdap::UserPassword.crypt pwd
     @encrypted_password_changed = true

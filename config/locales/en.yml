@@ -74,6 +74,7 @@ en:
   not_unique_email: The email is already taken
   not_same_pass: The new passwords don't match
   not_old_pass: Old password is not correct
+  too_short_pass: Password is too short, atleast 8 characters please
   activerecord:
     models:
       user:

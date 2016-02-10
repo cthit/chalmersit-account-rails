@@ -3,9 +3,19 @@
 <% if @user.errors.any? %>
   <div id="error_explanation" data-alert class="alert-box warning">
     <h3><%= t('error') %></h3>
-    <ul>
+    <ul style="list-style-type:none">
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<% if @user.db_user.errors.any? %>
+  <div id="error_explanation" data-alert class="alert-box warning">
+    <h3><%= t('error') %></h3>
+    <ul style="list-style-type:none">
+    <% @user.db_user.errors.messages.each do |msg| %>
+      <li><%= t(msg[1]).first %></li>
     <% end %>
     </ul>
   </div>

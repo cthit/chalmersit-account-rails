@@ -133,29 +133,21 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-
-    if ActiveLdap::UserPassword.valid? params[:ldap_user][:old_password], @user.userPassword
-      if params[:ldap_user][:password] == params[:ldap_user][:password_confirmation]
-        @user.db_user.password              = params[:ldap_user][:password]
-        @user.db_user.password_confirmation = params[:ldap_user][:password_confirmation]
-        pw = encrypt_pw @user.db_user.password
-        @user.userPassword = pw
-        @user.db_user.password = pw
-        @user.db_user.password_confirmation = pw
-      else
-        flash[:alert] = t('not_same_pass')
+    if params[:ldap_user][:old_password].present? && !ActiveLdap::UserPassword.valid?(params[:ldap_user][:old_password], @user.userPassword)
+        flash[:alert] = t('not_old_pass')
         redirect_to(request.referrer || unauthenticated_root_path) and return
-      end
-    else
-      flash[:alert] = t('not_old_pass')
-      redirect_to(request.referrer || unauthenticated_root_path) and return
     end
+
 
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
     begin
-      response= @user.update_attributes(ldap_user_params)
+      if params[:ldap_user][:old_password].present?
+        response = @user.update_attributes(ldap_user_params) && @user.db_user.update_attributes(update_pass_user_params)
+      else
+        response = @user.update_attributes(ldap_user_params)
+      end
       if response
         redirect_to user_path(@user), notice: I18n.translate('info_changed')
       else
@@ -185,7 +177,9 @@ class UsersController < ApplicationController
                                         :telephonenumber, :preferredLanguage, :avatar_upload,
                                         { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
-
+    def update_pass_user_params
+      params.require(:ldap_user).permit(:password, :password_confirmation)
+    end
     def user_register_params
       params.require(:user).permit(:uid, :password, :password_confirmation,
                                    :gn, :sn, :mail, :telephonenumber,

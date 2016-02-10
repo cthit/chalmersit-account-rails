@@ -74,6 +74,7 @@ sv:
   not_unique_email: Den givna mailadressen är upptagen
   not_same_pass: De nya lösenorden stämmer inte överens
   not_old_pass: Det gamla lösenordet är fel
+  too_short_pass: Lösenordet är för kort, minst 8 karaktärer krävs
   activerecord:
     models:
       user: Användare
