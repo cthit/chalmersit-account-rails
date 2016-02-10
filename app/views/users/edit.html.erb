@@ -10,10 +10,10 @@
     </ul>
   </div>
 <% end %>
-<% if current_user.admin? %>
-  <% url = admin_update_user_path(@user) %>
-<% else %>
+<% if @user.uid.equal? current_user.uid %>
   <% url = update_me_path %>
+<% elsif current_user.admin? %>
+  <% url = admin_update_user_path(@user) %>
 <% end %>
   <%= simple_form_for(@user, :html => {:multipart => true}, url: url) do |f| %>
     <%= render partial: '/users/form', locals: {f: f} %>
