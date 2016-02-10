@@ -133,6 +133,24 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
+
+    if ActiveLdap::UserPassword.valid? params[:ldap_user][:old_password], @user.userPassword
+      if params[:ldap_user][:password] == params[:ldap_user][:password_confirmation]
+        @user.db_user.password              = params[:ldap_user][:password]
+        @user.db_user.password_confirmation = params[:ldap_user][:password_confirmation]
+        pw = encrypt_pw @user.db_user.password
+        @user.userPassword = pw
+        @user.db_user.password = pw
+        @user.db_user.password_confirmation = pw
+      else
+        flash[:alert] = t('not_same_pass')
+        redirect_to(request.referrer || unauthenticated_root_path) and return
+      end
+    else
+      flash[:alert] = t('not_old_pass')
+      redirect_to(request.referrer || unauthenticated_root_path) and return
+    end
+
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
