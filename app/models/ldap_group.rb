@@ -18,10 +18,8 @@ class LdapGroup < Activedap
     Rails.cache.fetch("#{cn}/#{dn}/pos") do
       uid = dn.rdns.first["uid"]
       post = positions.find{|u| u.split(";")[1] == uid}
-      unless post.nil?
-        return post.split(";")[0] + ": "
-      end
-      ""
+      return "" if post.nil?
+      post.split(";").first + ": "
     end
   end
 
