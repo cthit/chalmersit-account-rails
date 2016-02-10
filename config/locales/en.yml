@@ -71,6 +71,7 @@ en:
   unknown_user: "Who is that?"
   subscription_added: Subscription Added
   subscription_removed: Subscription removed.
+  not_unique_email: The email is already taken
   activerecord:
     models:
       user:

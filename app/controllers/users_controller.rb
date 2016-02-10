@@ -130,15 +130,24 @@ class UsersController < ApplicationController
   def edit
     authorize @user
   end
+
   def update
     authorize @user
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
-    if @user.update_attributes(ldap_user_params)
-      redirect_to me_path, notice: I18n.translate('info_changed')
-    else
-      render :edit
+    begin
+      response= @user.update_attributes(ldap_user_params)
+      if response
+        redirect_to user_path(@user), notice: I18n.translate('info_changed')
+      else
+        render :edit
+      end
+    rescue => e
+      if e.message == "Constraint Violation: some attributes not unique"
+        flash[:alert] = t('not_unique_email')
+        redirect_to(request.referrer || unauthenticated_root_path)
+      end
     end
   end
 
