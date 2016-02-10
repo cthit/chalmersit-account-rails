@@ -73,7 +73,7 @@ sv:
   subscription_removed: Prenumeration borttagen.
   not_unique_email: Den givna mailadressen är upptagen
   not_same_pass: De nya lösenorden stämmer inte överens
-  not_old_pass: Det gammla lösenordet är fel
+  not_old_pass: Det gamla lösenordet är fel
   activerecord:
     models:
       user: Användare

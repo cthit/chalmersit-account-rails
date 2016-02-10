@@ -72,7 +72,7 @@ en:
   subscription_added: Subscription Added
   subscription_removed: Subscription removed.
   not_unique_email: The email is already taken
-  not_same_pass: The new passwords dont match
+  not_same_pass: The new passwords don't match
   not_old_pass: Old password is not correct
   activerecord:
     models:
