@@ -12,7 +12,7 @@ module SubscriptionHelper
     # Create a subscription to tie the user and the app.
       subscription = Subscription.create(user_id: user_id, application_id: app_id)
     # Create a service data to specify the notification service.
-      servicedata = ServiceData.create(user_id: user_id, subscription_id: subscription.id, push_client: "mail")
+      servicedata = ServiceData.create(user_id: user_id, push_client: "mail")
     # Add servicedata to the subscription.
       subscription.service_data_id = servicedata.id
       subscription.save!
@@ -20,7 +20,7 @@ module SubscriptionHelper
 
   def delete_subscription(user_id, app_id)
     subscription = Subscription.where(user_id: user_id, application_id: app_id).first
-    servicedata = ServiceData.where(user_id: user_id, subscription_id: subscription.id)
+    servicedata = ServiceData.where(user_id: user_id)
     subscription.delete
     servicedata.delete_all
   end

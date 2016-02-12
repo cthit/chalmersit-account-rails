@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   get '/applications/new_subscription/:id' => 'applications#new_subscription', as: :new_subscription
   get '/applications/remove_subscription/:id' => 'applications#remove_subscription', as: :remove_subscription
-  match '/applications/push_to_subscribers' => 'applications#push_to_subscribers', via: :get
+  match '/applications/push_to_subscribers/:id' => 'applications#push_to_subscribers', via: :get
   resources :applications, only: [:show, :index]
   # new = login to chalmers
   get '/new' => 'users#new', as: :new_me

@@ -1,6 +1,5 @@
 class ServiceData < ActiveRecord::Base
   belongs_to :user
-  belongs_to :subscription
 
   def notify(tokens)
     push_client.split(";").each do |client|
