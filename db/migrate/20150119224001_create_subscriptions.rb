@@ -10,6 +10,5 @@ class CreateSubscriptions < ActiveRecord::Migration
     end
     add_foreign_key :subscriptions, :users
     add_foreign_key :subscriptions, :applications
-    add_foreign_key :subscriptions, :service_data
   end
 end
