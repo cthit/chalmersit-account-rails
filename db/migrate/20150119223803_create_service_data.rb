@@ -4,11 +4,11 @@ class CreateServiceData < ActiveRecord::Migration
       t.references :user, index: true
       t.string :send_to
       t.string :device
-      t.references :notification_service, index: true
+      t.references :subscribable_types, index: true
 
       t.timestamps null: false
     end
     add_foreign_key :service_data, :users
-    add_foreign_key :service_data, :notification_services
+    add_foreign_key :service_data, :subscribable_types
   end
 end
