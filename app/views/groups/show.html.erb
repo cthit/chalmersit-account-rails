@@ -6,7 +6,7 @@
     <div class="small-9 columns">
         <%= content_tag :p, content_tag(:em, (@group.function_localised locale)) %>
     </div>
-    <% if current_user.member_of.include?(@group) %>
+    <% if current_user.non_recursive_member_of.include?(@group) %>
     <div class="small-3 columns">
         <%= link_to edit_group_path(@group) do %><%= fa_icon 'edit', text: t('edit') %><%- end -%>
     </div>

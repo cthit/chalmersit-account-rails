@@ -40,6 +40,20 @@ class LdapUser < Activedap
     end
   end
 
+  def non_recursive_member_of
+    @non_recursive_member_of ||= Rails.cache.fetch("#{uid}/non_recursive_member_ofmemberof") do
+      memberof = []
+      all = LdapGroup.all_cached
+
+      all.each do |g|
+        if g.member(true).include? self.dn.to_s then
+          memberof << g
+        end
+      end
+      memberof
+    end
+  end
+
   def name_and_nick
     @name_and_nick ||= "#{gn} '#{nickname}' #{sn}"
   end

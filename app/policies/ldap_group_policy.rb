@@ -9,7 +9,7 @@ class LdapGroupPolicy < ApplicationPolicy
     true
   end
   def edit?
-    user && user.member_of.include?(record)
+    user && user.non_recursive_member_of.include?(record)
   end
   def update?
     edit?
