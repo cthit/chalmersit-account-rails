@@ -9,6 +9,5 @@ class CreateServiceData < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_foreign_key :service_data, :users
-    add_foreign_key :service_data, :subscribable_types
   end
 end
