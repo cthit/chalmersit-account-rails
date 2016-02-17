@@ -1,6 +1,7 @@
 json.cache! 'all_users_json', expires_in: 10.minutes do
   json.array!(@users) do |u|
     json.extract! u, :uid, :display_name
+    json.avatar image_url(u.profile_image)
     if policy(u).show?
       json.extract! u, :full_name, :nickname, :mail,
         :accepted_user_agreement, :preferred_language, :admission_year,
