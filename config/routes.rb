@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   resource :admin, only: :show
 
   get '/admin/mail' => 'admins#mail', as: :admin_mail
-  post '/admin/send_invitations' => 'admins#send_invitations', as: :send_invitations
+  post '/admin/send-invitations' => 'admins#send_invitations', as: :send_invitations
   namespace :admin do
     resources :groups
     resources :applications
@@ -38,11 +38,11 @@ Rails.application.routes.draw do
   get '/me' => 'users#me', as: :me
   get '/me/edit' => 'users#edit', as: :edit_me
   patch '/me' => 'users#update', as: :update_me
-  get '/users/:id/remove_avatar' => 'users#remove_avatar', as: :remove_avatar
+  get '/users/:id/remove-avatar' => 'users#remove_avatar', as: :remove_avatar
 
-  get '/applications/new_subscription/:id' => 'applications#new_subscription', as: :new_subscription
-  get '/applications/remove_subscription/:id' => 'applications#remove_subscription', as: :remove_subscription
-  match '/applications/push_to_subscribers/:id' => 'applications#push_to_subscribers', via: :get
+  get '/applications/new-subscription/:id' => 'applications#new_subscription', as: :new_subscription
+  get '/applications/remove-subscription/:id' => 'applications#remove_subscription', as: :remove_subscription
+  match '/applications/push-to-subscribers/:id' => 'applications#push_to_subscribers', via: :get
   resources :applications, only: [:show, :index]
   # new = login to chalmers
   get '/new' => 'users#new', as: :new_me
