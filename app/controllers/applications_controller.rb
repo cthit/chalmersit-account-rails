@@ -2,6 +2,7 @@ class ApplicationsController < ApplicationController
   before_action :set_application, except: [:index, :push_to_subscribers]
   before_action :restrict_access, only: [:push_to_subscribers]
   helper_method :subscription_exists?
+  skip_before_filter :authenticate_user!, :only => [:push_to_subscribers]
   include SubscriptionHelper
 
   def index
