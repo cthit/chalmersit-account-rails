@@ -133,11 +133,11 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    if params[:ldap_user][:password] < 7
+    if params[:ldap_user][:password].length < 7
       flash[:alert] = t('too_short_pass')
       redirect_to(request.referrer || unauthenticated_root_path) and return
     end
-    if params[:ldap_user][:password] > 100
+    if params[:ldap_user][:password].length > 100
       flash[:alert] = t('too_long_pass')
       redirect_to(request.referrer || unauthenticated_root_path) and return
     end
