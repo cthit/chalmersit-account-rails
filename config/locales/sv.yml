@@ -75,6 +75,7 @@ sv:
   not_same_pass: De nya lösenorden stämmer inte överens
   not_old_pass: Det gamla lösenordet är fel
   too_short_pass: Lösenordet är för kort, minst 8 karaktärer krävs
+  too_long_pass: Lösenordet är för långt, maximum är 100 karaktärer
   activerecord:
     models:
       user: Användare
@@ -115,6 +116,9 @@ sv:
       device: Enhet
     form:
       remove_avatar: Ta bort avatar
+      new_pass: Nya lösenordet
+      pass_conf: Upprepa nya lösenordet
+      old_pass: Gamla lösenordet
     show:
       existential_crisis: Det där såg inte ut som dig...
     index:

@@ -75,6 +75,7 @@ en:
   not_same_pass: The new passwords don't match
   not_old_pass: Old password is not correct
   too_short_pass: Password is too short, atleast 8 characters please
+  too_long_pass: Password is too long, 100 characters maximum
   activerecord:
     models:
       user:
@@ -117,6 +118,9 @@ en:
       device: Enhet
     form:
       remove_avatar: Remove avatar
+      new_pass: New password
+      pass_conf: Repeat new password
+      old_pass: Old password
     show:
       existential_crisis: That didn't look like you...
     index:
