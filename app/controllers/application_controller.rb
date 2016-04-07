@@ -33,7 +33,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = current_user.preferredLanguage if current_user && current_user.preferredLanguage && I18n.available_locales.include?(current_user.preferredLanguage.to_sym)
+    if current_user && current_user.preferredLanguage && I18n.available_locales.include?(current_user.preferredLanguage.to_sym)
+      I18n.locale = current_user.preferredLanguage
+    else
+      I18n.locale = "en"
+    end
   end
 
   def ensure_admin
