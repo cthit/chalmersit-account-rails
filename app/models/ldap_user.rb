@@ -138,7 +138,9 @@ class LdapUser < Activedap
   end
   private
   def has_valid_display_format
-    errors.add(:display_name, :not_valid_format) unless LdapUser.display_formats.include? cn
+    unless LdapUser.display_formats.include? cn
+      self.cn = "%{nickname}"
+    end
   end
 
   def has_valid_api_keys
