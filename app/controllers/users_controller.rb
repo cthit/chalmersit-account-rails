@@ -133,24 +133,25 @@ class UsersController < ApplicationController
 
   def update
     authorize @user
-    if params[:ldap_user][:password].length < 7
-      flash[:alert] = t('too_short_pass')
-      redirect_to(request.referrer || unauthenticated_root_path) and return
-    end
-    if params[:ldap_user][:password].length > 100
-      flash[:alert] = t('too_long_pass')
-      redirect_to(request.referrer || unauthenticated_root_path) and return
-    end
-
-    if params[:ldap_user][:password] != params[:ldap_user][:password_confirmation]
-      flash[:alert] = t('not_same_pass')
-      redirect_to(request.referrer || unauthenticated_root_path) and return
-    end
-    if params[:ldap_user][:old_password].present? && !ActiveLdap::UserPassword.valid?(params[:ldap_user][:old_password], @user.userPassword)
-        flash[:alert] = t('not_old_pass')
+    if params[:ldap_user][:password].present?
+      if params[:ldap_user][:password].length < 7
+        flash[:alert] = t('too_short_pass')
         redirect_to(request.referrer || unauthenticated_root_path) and return
-    end
+      end
+      if params[:ldap_user][:password].length > 100
+        flash[:alert] = t('too_long_pass')
+        redirect_to(request.referrer || unauthenticated_root_path) and return
+      end
 
+      if params[:ldap_user][:password] != params[:ldap_user][:password_confirmation]
+        flash[:alert] = t('not_same_pass')
+        redirect_to(request.referrer || unauthenticated_root_path) and return
+      end
+      if params[:ldap_user][:old_password].present? && !ActiveLdap::UserPassword.valid?(params[:ldap_user][:old_password], @user.userPassword)
+          flash[:alert] = t('not_old_pass')
+          redirect_to(request.referrer || unauthenticated_root_path) and return
+      end
+    end
     # @user.update_attributes(ldap_user_params)
     # if @user.valid? && @user.save
     # use this ^ to validate with Rails before LDAP validates
