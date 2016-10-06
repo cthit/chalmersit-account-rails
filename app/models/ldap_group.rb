@@ -19,7 +19,7 @@ class LdapGroup < Activedap
       uid = dn.rdns.first["uid"]
       post = positions.find{|u| u.split(";")[1] == uid}
       return "" if post.nil?
-      post.split(";").first + ": "
+      post.split(";").first
     end
   end
 
