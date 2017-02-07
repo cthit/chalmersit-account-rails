@@ -1,2 +1,2 @@
 json.extract! @group, :cn, :displayName, :description, :mail,
-  :homepage, :type, :function, :groupLogo
+  :homepage, :type, :function, :groupLogo, :positions
