@@ -1,6 +1,7 @@
 class GroupsController < ApplicationController
   before_filter :doorkeeper_authorize!, if: :doorkeeper_request?
-  after_action :verify_authorized
+  before_filter :authenticate_user!, unless: :doorkeeper_request?
+  after_action :verify_authorized, unless: :doorkeeper_request?
 
   def index
     @groups = policy_scope(LdapGroup)
@@ -11,7 +12,7 @@ class GroupsController < ApplicationController
 
   def show
     @group = LdapGroup.find_cached(params[:id])
-    authorize @group
+    authorize @group unless doorkeeper_request?
   end
   def edit
     @group = LdapGroup.find_cached(params[:id])
