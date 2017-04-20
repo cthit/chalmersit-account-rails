@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
     if params[:return_to]
       params[:return_to]
     else
-      root_url
+      unauthenticated_root_path
     end
   end
 
