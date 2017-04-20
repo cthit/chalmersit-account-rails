@@ -57,4 +57,13 @@ class ApplicationController < ActionController::Base
     redirect_to(request.referrer || unauthenticated_root_path)
   end
 
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    if params[:return_to]
+      params[:return_to]
+    else
+      root_url
+    end
+  end
+
 end
