@@ -97,6 +97,7 @@ en:
         sn: Last name
         cn: Display format
         display_name: Display format
+        christmas_nickname: Christmas Nickname
         member_of: Member of
         preferredLanguage: Language
         admissionYear: Admission year

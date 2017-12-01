@@ -19,6 +19,12 @@
 </div>
 
 <div class="row">
+  <div class="small-12 large-7 columns">
+    <%= f.input :christmas_nickname, label: User.human_attribute_name(:christmas_nickname) %>
+  </div>
+</div>
+
+<div class="row">
   <div class="small-12 medium-9 columns">
     <%= f.input :cn, collection: LdapUser.display_formats, label: User.human_attribute_name(:cn), include_blank: false %>
   </div>

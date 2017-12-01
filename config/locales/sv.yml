@@ -90,6 +90,7 @@ sv:
         mail: E-post
         uid: CID
         nickname: Nick
+        christmas_nickname: Julnick
         full_name: Namn
         gn: Förnamn
         sn: Efternamn
