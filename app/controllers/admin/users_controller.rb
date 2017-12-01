@@ -45,7 +45,7 @@ class Admin::UsersController < ApplicationController
 
       @user.save!
       @user.ldap_user.save!
-      
+
       render 'admins/users/new'
     else
       render 'users/show'
@@ -68,7 +68,7 @@ class Admin::UsersController < ApplicationController
 
     def ldap_user_params
       push_service_attrs = [:device, :api]
-      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn,
+      params.require(:ldap_user).permit(:nickname, :mail, :cn, :gn, :sn, :christmas_nickname,
                                         :telephonenumber, :preferredLanguage, :avatar_upload,
                                         { push_services: [{ pushbullet: push_service_attrs }, { pushover: push_service_attrs }] })
     end
