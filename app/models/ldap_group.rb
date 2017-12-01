@@ -118,8 +118,15 @@ class LdapGroup < Activedap
       @users = grouped[false] || []
       groups = grouped[true] || []
 
+      cached_groups = {}
+
       groups.each do |g_dn|
-        group_users = LdapGroup.find(g_dn).member.group_by{|g| LdapGroup.dn_is_group? g}[false]
+        key = dn.rdns.first.values.first
+
+        group = cached_groups[key] || LdapGroup.find(g_dn)
+        cached_groups[key] = group
+
+        group_users = group.member.group_by{ |g| LdapGroup.dn_is_group? g }[false]
         @users.push(*group_users)
       end
       @users
