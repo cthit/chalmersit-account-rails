@@ -109,6 +109,18 @@ class LdapUser < Activedap
     self.pushService = ps
   end
 
+  def seasonal_nickname
+    today = Time.now
+    dec1 = Date.new today.year, 12, 1
+    dec31 = Date.new today.year, 12, 31
+
+    if today > dec1 && today < dec31 && !christmasNickname.empty?
+      christmasNickname
+    else
+      nickname
+    end
+  end
+
   def db_user
     @db_user ||= User.find_or_create_by(cid: uid)
   end
