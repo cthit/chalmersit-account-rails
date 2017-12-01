@@ -114,7 +114,7 @@ class LdapUser < Activedap
     dec1 = Date.new today.year, 12, 1
     dec31 = Date.new today.year, 12, 31
 
-    if today > dec1 && today < dec31 && !christmasNickname.empty?
+    if today > dec1 && today < dec31 && !christmasNickname.nil?
       christmasNickname
     else
       nickname
