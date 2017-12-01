@@ -23,9 +23,15 @@ class LdapGroup < Activedap
     end
   end
 
+  def find_member_safe(dn)
+    LdapUser.find(dn)
+  rescue
+    nil
+  end
+
   def members
     @members ||= Rails.cache.fetch("#{cn}/members") do
-      LdapUser.find(members_as_dn)
+      members_as_dn.map { |dn| find_member_safe dn }.compact
     end
   end
 
