@@ -1,0 +1,27 @@
+version: '2.2'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: asspass
+      MYSQL_DATABASE: development
+  web:
+    build: .
+    #command: rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - .:/myapp
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  ldap:
+    container_name: openldap
+    image: osixia/openldap:1.1.10
+    environment:
+      LDAP_DOMAIN: chalmers.it
+      LDAP_TLS: "false"
+    volumes:
+      - ./misc/ldap:/var/lib/ldap
+      - ./misc/slapd.d:/etc/ldap/slapd.d
+    ports:
+      - "389"
