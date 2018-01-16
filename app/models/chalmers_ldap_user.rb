@@ -3,9 +3,9 @@ class ChalmersLdapUser < ActiveLdap::Base
   ldap_mapping dn_attribute: 'uid',
                prefix: 'ou=people'
 
-  GROUP_BASE = 'cn=pr_ch_tkite,ou=groups,dc=chalmers,dc=se'
+  GROUP_BASE = 'cn=s_passer_prog_tkite,ou=groups,dc=chalmers,dc=se'
 
   def it?
-    @it ||= search(filter: "member=#{dn}", scope: :base, attributes: ['memberOf'], base: GROUP_BASE).any?
+    @it ||= search(filter: "memberUid=#{uid}", scope: :base, attributes: ['dn'], base: GROUP_BASE).any?
   end
 end
