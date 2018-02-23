@@ -14,127 +14,122 @@
 ActiveRecord::Schema.define(version: 20151112204527) do
 
   create_table "applications", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.text     "description"
-    t.string   "avatar"
-    t.string   "auth_token"
+    t.string   "name",        limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.text     "description", limit: 65535
+    t.string   "avatar",      limit: 255
+    t.string   "auth_token",  limit: 255
   end
 
-  add_index "applications", ["name"], name: "index_applications_on_name"
+  add_index "applications", ["name"], name: "index_applications_on_name", using: :btree
 
   create_table "configurables", force: :cascade do |t|
-    t.string   "name"
-    t.string   "value"
+    t.string   "name",       limit: 255
+    t.string   "value",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "configurables", ["name"], name: "index_configurables_on_name"
-
-  create_table "notification_services", force: :cascade do |t|
-    t.string   "push_client"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
+  add_index "configurables", ["name"], name: "index_configurables_on_name", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
-    t.integer  "resource_owner_id", null: false
-    t.integer  "application_id",    null: false
-    t.string   "token",             null: false
-    t.integer  "expires_in",        null: false
-    t.text     "redirect_uri",      null: false
-    t.datetime "created_at",        null: false
+    t.integer  "resource_owner_id", limit: 4,     null: false
+    t.integer  "application_id",    limit: 4,     null: false
+    t.string   "token",             limit: 255,   null: false
+    t.integer  "expires_in",        limit: 4,     null: false
+    t.text     "redirect_uri",      limit: 65535, null: false
+    t.datetime "created_at",                      null: false
     t.datetime "revoked_at"
-    t.string   "scopes"
+    t.string   "scopes",            limit: 255
   end
 
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true
+  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: :cascade do |t|
-    t.integer  "resource_owner_id"
-    t.integer  "application_id"
-    t.string   "token",             null: false
-    t.string   "refresh_token"
-    t.integer  "expires_in"
+    t.integer  "resource_owner_id", limit: 4
+    t.integer  "application_id",    limit: 4
+    t.string   "token",             limit: 255, null: false
+    t.string   "refresh_token",     limit: 255
+    t.integer  "expires_in",        limit: 4
     t.datetime "revoked_at"
-    t.datetime "created_at",        null: false
-    t.string   "scopes"
+    t.datetime "created_at",                    null: false
+    t.string   "scopes",            limit: 255
   end
 
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id"
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true
+  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
-    t.string   "name",                      null: false
-    t.string   "uid",                       null: false
-    t.string   "secret",                    null: false
-    t.text     "redirect_uri",              null: false
-    t.string   "scopes",       default: "", null: false
+    t.string   "name",         limit: 255,                null: false
+    t.string   "uid",          limit: 255,                null: false
+    t.string   "secret",       limit: 255,                null: false
+    t.text     "redirect_uri", limit: 65535,              null: false
+    t.string   "scopes",       limit: 255,   default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true
+  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "service_data", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "send_to"
-    t.string   "device"
-    t.integer  "subscription_id"
-    t.integer  "notification_service_id"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-    t.string   "push_client"
-    t.string   "devices"
+    t.integer  "user_id",               limit: 4
+    t.string   "send_to",               limit: 255
+    t.string   "device",                limit: 255
+    t.integer  "subscribable_types_id", limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "push_client",           limit: 255
+    t.string   "devices",               limit: 255
   end
 
-  add_index "service_data", ["notification_service_id"], name: "index_service_data_on_notification_service_id"
-  add_index "service_data", ["subscription_id"], name: "index_service_data_on_subscription_id"
-  add_index "service_data", ["user_id"], name: "index_service_data_on_user_id"
+  add_index "service_data", ["subscribable_types_id"], name: "index_service_data_on_subscribable_types_id", using: :btree
+  add_index "service_data", ["user_id"], name: "index_service_data_on_user_id", using: :btree
 
   create_table "subscribable_types", force: :cascade do |t|
-    t.integer  "application_id"
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "application_id", limit: 4
+    t.string   "name",           limit: 255
+    t.text     "description",    limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
-  add_index "subscribable_types", ["application_id"], name: "index_subscribable_types_on_application_id"
-  add_index "subscribable_types", ["name"], name: "index_subscribable_types_on_name"
+  add_index "subscribable_types", ["application_id"], name: "index_subscribable_types_on_application_id", using: :btree
+  add_index "subscribable_types", ["name"], name: "index_subscribable_types_on_name", using: :btree
 
   create_table "subscriptions", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "category"
-    t.integer  "application_id"
-    t.integer  "service_data_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "user_id",         limit: 4
+    t.string   "category",        limit: 255
+    t.integer  "application_id",  limit: 4
+    t.integer  "service_data_id", limit: 4
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "subscriptions", ["application_id"], name: "index_subscriptions_on_application_id"
-  add_index "subscriptions", ["service_data_id"], name: "index_subscriptions_on_service_data_id"
-  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id"
+  add_index "subscriptions", ["application_id"], name: "index_subscriptions_on_application_id", using: :btree
+  add_index "subscriptions", ["service_data_id"], name: "index_subscriptions_on_service_data_id", using: :btree
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "cid",                                null: false
-    t.string   "reset_password_token"
+    t.string   "cid",                    limit: 255,             null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0, null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "profile_image"
   end
 
-  add_index "users", ["cid"], name: "index_users_on_cid", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["cid"], name: "index_users_on_cid", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "service_data", "users"
+  add_foreign_key "subscribable_types", "applications"
+  add_foreign_key "subscriptions", "applications"
+  add_foreign_key "subscriptions", "users"
 end
