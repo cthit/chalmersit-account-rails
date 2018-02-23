@@ -6,6 +6,7 @@ class LdapUser < Activedap
 
   validates :mail, presence: true
   validates :nickname, :gn, :sn, :admissionYear, presence: true
+  validates :mail, :nickname, :gn, :sn, length: { maximum: 100 }
   validate :has_valid_display_format
   validate :has_valid_api_keys
 
