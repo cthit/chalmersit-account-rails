@@ -9,14 +9,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    #command: rails s -p 3000 -b '0.0.0.0'
-    #image: .:/app
     volumes:
       - .:/app
     ports:
       - "3000:3000"
     depends_on:
       - db
+    command: sh wait-for-db.sh db asspass 
   ldap:
     container_name: openldap
     image: osixia/openldap:1.1.10
