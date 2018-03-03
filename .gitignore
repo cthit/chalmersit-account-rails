@@ -45,3 +45,5 @@ bin/*
 
 .kitchen/
 .kitchen.local.yml
+
+/misc
