@@ -46,4 +46,9 @@ WORKDIR /packagefiles
 RUN bundle install
 
 WORKDIR /app
-CMD bundle exec rake db:create db:migrate && rails s -p 3000 -b '0.0.0.0'
+
+CMD bundle exec rake db:create db:migrate \
+&& bundle exec rake rails:update:bin \
+# Removes server.pid to make the container realize that we restarted it
+&& rm tmp/pids/server.pid \ 
+&& rails s -p 3000 -b '0.0.0.0'
