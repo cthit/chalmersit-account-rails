@@ -18,10 +18,6 @@ class ChalmersUser
     unless password.present?
       errors.add(:password, :blank)
     end
-    unless password.size > 10
-      # Chalmers password policy specifies a minimum length of 10
-      errors.add(:password, :too_short)
-    end
 
     if errors.empty?
       begin
