@@ -112,10 +112,13 @@ class LdapUser < Activedap
 
   def seasonal_nickname
     today = Time.now
-    dec1 = Date.new today.year, 12, 1
-    dec31 = Date.new today.year, 12, 31
+    first_day_of_christmas = Date.new today.year, 12, 1
+    christmas = Date.new(today.year, 12, 24)
+    last_day_of_christmas = christmas + 20.days
 
-    if today > dec1 && today < dec31 && !christmasNickname.nil?
+    christmas_time = (first_day_of_christmas..last_day_of_christmas)
+
+    if christmas_time.include? today && christmasNickname.present?
       christmasNickname
     else
       nickname
