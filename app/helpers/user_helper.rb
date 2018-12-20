@@ -24,11 +24,11 @@ module UserHelper
 
     return t(value) if a == 'preferredLanguage'
 
-    return push_service_image(value) if a == 'push_services' && value.any?
+    return push_service_image(value).html_safe if a == 'push_services' && value.any?
 
     return member_of(value) if a == 'member_of'
 
-    return image(value) if a == "profile_image"
+    return image(value).html_safe if a == "profile_image"
 
     value
   end
