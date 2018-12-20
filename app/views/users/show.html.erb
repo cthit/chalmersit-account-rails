@@ -15,7 +15,7 @@
               <strong><%= User.human_attribute_name(a) %></strong>
             </td>
             <td width="100%">
-              <%= attr_or_not_entered(@user, a).html_safe %><br>
+              <%= attr_or_not_entered(@user, a) %><br>
             </td>
           </tr>
         <% end %>
